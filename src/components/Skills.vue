@@ -196,8 +196,6 @@ $cibg3: #2a2a2a;
             gap: 3rem;
           }
 
-
-          
           .skill-item {
             width: 120px;
             height: 120px;
