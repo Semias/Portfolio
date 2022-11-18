@@ -31,21 +31,24 @@ export default {
     style: String,
   },
   
-  // created() {
-  //   window.addEventListener("scroll", this.handleScroll);
-  // },
-  // destroyed() {
-  //   window.removeEventListener("scroll", this.handleScroll);
-  // },
-  // methods: {
-    // handleScroll(event) {
-    //   console.log(window.scrollY);
-    // },
-    // setWidth(element, [datawidth], classname) {
-    //   const child = element.querySelector(classname)
-    //   child.style.width = datawidth ? `${child.dataset.width}%` : `0%`;
-    // }
-  // },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      addClass(scrollbars, show);
+    },
+    addClass(element, classname) {
+      element.classList.add(classname);
+    },
+    setWidth(element, [datawidth], classname) {
+      const child = element.querySelector(classname)
+      child.style.width = datawidth ? `${child.dataset.width}%` : `0%`;
+    }
+  },
 }
 
 
