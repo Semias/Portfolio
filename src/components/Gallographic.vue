@@ -3,7 +3,13 @@
   <section class="section-row-gallery" id="gallographic">
     <div class="section-container-gallery">
       <div class="section-column-gallery">
-        <h1>{{ headline }}</h1>
+        <h1
+          v-motion
+          :initial="{ opacity: 0, y: 100 }"
+          :visibleOnce="{ opacity: 1, y: 0, scale: 1 }"
+          :variants="{ custom: { scale: 2 } }"
+          :delay="300"
+        >{{ headline }}</h1>
         <GallographicGallery/>
         <div class="gallery-links">
           <div class="gallery-links-text"><a href="https://semias.github.io" title="Link zur Seite von Gallographic" target="blank">semias.github.io</a></div>
@@ -29,7 +35,10 @@ export default {
 }
 </script>
 
+
+
 <style lang="scss" scoped>
+@import "./src/assets/include-media";
 
 $ciprime: #42B883;
 $cibg1: #303030;
@@ -37,18 +46,32 @@ $cibg2: #202020;
 $cibg3: #2a2a2a;
   .section-row-gallery {
     background-color: $cibg2;
-    padding: 5rem 0;
+    padding: 8rem 0 3rem;
     .section-container-gallery {
         max-width: 1500px;
         margin: 0 auto;
+        padding: 0 1rem;
       .section-column-gallery {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 90px;
 
+        @include media("<=sm") {
+          gap: 50px
+        }
+
         h1 {
           font-size: 3.8rem;
+          color: $ciprime;
+
+          @include media("<=sm") {
+            font-size: 3.4rem;
+          }
+
+          @include media("<=xs") {
+            font-size: 3rem;
+          }
         }
 
         .gallery-links {
@@ -70,6 +93,10 @@ $cibg3: #2a2a2a;
               transition: 0.3s;
               -webkit-transition: 0.3s;
               -moz-transition: 0.3s;
+
+              @include media("<=sm") {
+                font-size: 1.5rem;
+              }
 
 
               &:hover,
