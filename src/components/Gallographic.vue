@@ -12,7 +12,7 @@
         >{{ headline }}</h1>
         <GallographicGallery/>
         <div class="gallery-links">
-          <div class="gallery-links-text"><a href="https://semias.github.io" title="Link zur Seite von Gallographic" target="blank">semias.github.io</a></div>
+          <div class="gallery-links-text"><a href="https://gallographic.netlify.app/" title="Link zur Seite von Gallographic" target="blank">gallographic.netlify.app</a></div>
           <div class="gallery-links-qrcode"><img src="../assets/images/gallographic/qr-gallographic-white.svg" alt="QR Code Gallographic"></div>
         </div>
       </div>
