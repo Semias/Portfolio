@@ -13,7 +13,7 @@
         <GallographicGallery/>
         <div class="gallery-links">
           <div class="gallery-links-text"><a href="https://semias.github.io" title="Link zur Seite von Gallographic" target="blank">semias.github.io</a></div>
-          <div class="gallery-links-qrcode"><img src="../assets/images/gallographic/qrcode.svg" alt="QR Code Gallographic"></div>
+          <div class="gallery-links-qrcode"><img src="../assets/images/gallographic/qr-gallographic-white.svg" alt="QR Code Gallographic"></div>
         </div>
       </div>
     </div>
@@ -46,7 +46,7 @@ $cibg2: #202020;
 $cibg3: #2a2a2a;
   .section-row-gallery {
     background-color: $cibg2;
-    padding: 8rem 0 3rem;
+    padding: 8rem 0 6rem;
     .section-container-gallery {
         max-width: 1500px;
         margin: 0 auto;
@@ -103,6 +103,16 @@ $cibg3: #2a2a2a;
               &:focus {
                 text-decoration-color: transparent;
               }
+            }
+          }
+
+          .gallery-links-qrcode {
+            width: 180px;
+            height: 180px;
+
+            img {
+              height: 100%;
+              width: auto;
             }
           }
         }

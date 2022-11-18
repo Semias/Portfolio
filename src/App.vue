@@ -19,6 +19,8 @@
   <Skills headline="Skills"/>
   <Gallographic headline="Noch nicht genug?"/>
 
+  <footer>made with <span><a href="https://vuejs.org/" target="blank" title="Öffnet externen Link zur Seite https://vuejs.org/"><img src="./assets/images/skills/vue.svg" alt=""></a></span></footer>
+
 </template>
 
 <script>
@@ -139,12 +141,16 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
   
   .section-row-about {
     width: 100%;
-    height: 900px;
+    height: 1000px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+
+    @include media("<=xs") {
+        height: 800px;
+    }
     
     &::before {
       content: "";
@@ -254,6 +260,33 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
 
         }
 
+      }
+    }
+  }
+
+  footer {
+    font-size: 1rem;
+    font-family: "Jetbrains Mono";
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 0.5rem;
+    gap: 0.8rem;
+
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 20px;
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 100%;
+        }
       }
     }
   }
