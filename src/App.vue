@@ -1,85 +1,91 @@
 <template>
-
   <section class="section-row-about">
     <div class="section-container-about">
       <div class="section-column-about">
         <div class="about-picture" v-motion-fade>
           <figure>
-            <img src="./assets/images/about-me.png" alt="picture of stefan gall">
+            <img
+              src="./assets/images/about-me.png"
+              alt="picture of stefan gall"
+            />
           </figure>
         </div>
         <div class="about-me-title">
-          <h1 v-motion-fade>{{person}}</h1>
-          <h2 v-motion-fade>{{job}}</h2>
+          <h1 v-motion-fade>{{ person }}</h1>
+          <h2 v-motion-fade>{{ job }}</h2>
         </div>
-        <Sociallinks/>
+        <Sociallinks />
       </div>
     </div>
   </section>
-  <Skills headline="Skills"/>
-  <Gallographic headline="Noch nicht genug?"/>
+  <Skills headline="Skills" />
+  <Gallographic headline="Noch nicht genug?" />
 
-  <footer>made with <span><a href="https://vuejs.org/" target="blank" title="Öffnet externen Link zur Seite https://vuejs.org/"><img src="./assets/images/skills/vue.svg" alt=""></a></span></footer>
-
+  <footer>
+    made with
+    <span
+      ><a
+        href="https://vuejs.org/"
+        target="blank"
+        title="Öffnet externen Link zur Seite https://vuejs.org/"
+        ><img src="./assets/images/skills/vue.svg" alt="" /></a
+    ></span>
+  </footer>
 </template>
 
 <script>
-import { isContinueStatement } from '@babel/types';
-import Sociallinks from './components/Social-links.vue'
-import Gallographic from './components/Gallographic.vue'
-import Skills from './components/Skills.vue'
+import { isContinueStatement } from "@babel/types";
+import Sociallinks from "./components/Social-links.vue";
+import Gallographic from "./components/Gallographic.vue";
+import Skills from "./components/Skills.vue";
 // import { directive as motion } from '@vueuse/motion'
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Sociallinks,
     Gallographic,
-    Skills
+    Skills,
   },
   data() {
     return {
       person: "Stefan Gall",
       job: "Frontend Developer",
-    }
+    };
   },
   // directives: {
   //   motion: motion(),
   // },
-
-}
+};
 </script>
 
 <style lang="scss">
-
-
 @import "../src/assets/include-media";
 
-$ciprime: #42B883;
+$ciprime: #42b883;
 $cibg1: #303030;
 $cibg2: #202020;
 $cibg3: #2a2a2a;
 
-
 @font-face {
   font-family: "Jetbrains Mono";
-  src: url('./assets/fonts/jetbrains/JetBrainsMono[wght].ttf');
+  src: url("./assets/fonts/jetbrains/JetBrainsMono[wght].ttf");
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url('./assets/fonts/roboto/Roboto-Regular.ttf');
+  src: url("./assets/fonts/roboto/Roboto-Regular.ttf");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url('./assets/fonts/roboto/Roboto-Medium.ttf');
+  src: url("./assets/fonts/roboto/Roboto-Medium.ttf");
   font-weight: 500;
 }
 @font-face {
   font-family: "Roboto";
-  src: url('./assets/fonts/roboto/Roboto-Bold.ttf');
+  src: url("./assets/fonts/roboto/Roboto-Bold.ttf");
   font-weight: 700;
 }
 
@@ -91,17 +97,20 @@ $cibg3: #2a2a2a;
   font-size: 16px;
 }
 
-body::-webkit-scrollbar-track, html::-webkit-scrollbar-track {
-    background-color: white;
+body::-webkit-scrollbar-track,
+html::-webkit-scrollbar-track {
+  background-color: white;
 }
 
-body::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb {
-    background-color: $ciprime;
-    border-radius: none;
+body::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb {
+  background-color: $ciprime;
+  border-radius: none;
 }
 
-body::-webkit-scrollbar, html::-webkit-scrollbar {
-    width: 10px;
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  width: 10px;
 }
 
 #app {
@@ -138,7 +147,7 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
   //section {
   //  padding: 3rem 0;
   //}
-  
+
   .section-row-about {
     width: 100%;
     height: 1000px;
@@ -146,12 +155,12 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
     position: relative;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 
     @include media("<=xs") {
-        height: 800px;
+      height: 800px;
     }
-    
+
     &::before {
       content: "";
       background: url(./assets/images/left-ci.svg) center center no-repeat;
@@ -162,8 +171,6 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
       top: 220px;
       left: -350px;
       animation: rotate 60s infinite linear;
-
-
     }
 
     &::after {
@@ -180,7 +187,6 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
       @include media("<=xl") {
         right: -200px;
       }
-
     }
 
     .section-container-about {
@@ -188,7 +194,6 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
       padding: 0 1rem;
       margin: 0 auto;
       z-index: 1;
-
 
       .section-column-about {
         display: flex;
@@ -204,7 +209,7 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
           justify-content: center;
           align-items: center;
           overflow: hidden;
-          box-shadow: 0 0 26px rgba(0,0,0,0.4);
+          box-shadow: 0 0 26px rgba(0, 0, 0, 0.4);
 
           @include media("<=xs") {
             width: 300px;
@@ -235,14 +240,13 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
             font-family: "Roboto";
             color: $ciprime;
 
-          @include media("<=sm") {
-            font-size: 3.4rem;
-          }
+            @include media("<=sm") {
+              font-size: 3.4rem;
+            }
 
-          @include media("<=xs") {
-            font-size: 3rem;
-          }
-
+            @include media("<=xs") {
+              font-size: 3rem;
+            }
           }
 
           h2 {
@@ -257,9 +261,7 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
               font-size: 1.5rem;
             }
           }
-
         }
-
       }
     }
   }
@@ -272,7 +274,6 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
     gap: 5px;
     padding: 0.5rem;
     gap: 0.8rem;
-
 
     span {
       display: flex;
