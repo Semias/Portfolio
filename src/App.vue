@@ -132,7 +132,7 @@ html::-webkit-scrollbar {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background-color: var(--cibg1);
+  background-color: $cibg1;
   font-weight: 400;
   overflow: hidden;
 
