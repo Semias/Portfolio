@@ -2,6 +2,7 @@
   <section class="section-row-about">
     <div class="section-container-about">
       <div class="section-column-about">
+        <!-- <button type="button">light switcher</button> -->
         <div class="about-picture" v-motion-fade>
           <figure>
             <img
@@ -53,14 +54,26 @@ export default {
       job: "Frontend Developer",
     };
   },
-  // directives: {
-  //   motion: motion(),
-  // },
+  mounted() {},
 };
 </script>
 
 <style lang="scss">
 @import "../src/assets/include-media";
+
+:root {
+  --ciprime: #42b883;
+
+  --text-dark: #000;
+  --cibg1-dark: #303030;
+  --cibg2-dark: #202020;
+  --cibg3-dark: #2a2a2a;
+
+  --text-light: #ffffff;
+  --cibg1-light: #f3f3f3;
+  --cibg2-light: #e6e6e6;
+  --cibg3-light: #cccccc;
+}
 
 $ciprime: #42b883;
 $cibg1: #303030;
@@ -119,7 +132,7 @@ html::-webkit-scrollbar {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background-color: $cibg1;
+  background-color: var(--cibg1);
   font-weight: 400;
   overflow: hidden;
 
@@ -142,6 +155,20 @@ html::-webkit-scrollbar {
     100% {
       transform: translateY(0);
     }
+  }
+
+  &[color-scheme="dark"] {
+    --text: var(--text-dark);
+    --cibg1: var(--cibg1-dark);
+    --cibg2: var(--cibg2-dark);
+    --cibg3: var(--cibg3-dark);
+  }
+
+  &[color-scheme="light"] {
+    --text: var(--text-light);
+    --cibg1: var(--cibg1-light);
+    --cibg2: var(--cibg2-light);
+    --cibg3: var(--cibg3-light);
   }
 
   //section {
