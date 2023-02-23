@@ -53,8 +53,9 @@ $ciprime: #42b883;
 $cibg1: #303030;
 $cibg2: #202020;
 $cibg3: #2a2a2a;
+
 .section-row-gallery {
-  background-color: $cibg2;
+  background-color: var(--cibg3);
   padding: 8rem 0 6rem;
   .section-container-gallery {
     max-width: 1500px;
@@ -84,7 +85,7 @@ $cibg3: #2a2a2a;
       }
 
       .gallery-links {
-        color: white;
+        color: var(--text);
         display: flex;
         justify-content: center;
         align-items: center;

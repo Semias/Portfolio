@@ -1,6 +1,6 @@
 <template>
   <div class="social-links">
-    <button type="button" class="github" v-motion-fade>
+    <button type="button" class="github" v-motion-fade tabindex="-1">
       <a
         href="https://github.com/Semias"
         target="blank"
@@ -10,7 +10,7 @@
       </a>
     </button>
 
-    <button type="button" class="linkedin" v-motion-fade>
+    <button type="button" class="linkedin" v-motion-fade tabindex="-1">
       <a
         href="https://www.linkedin.com/in/stefan-g-2329481b8?jobid=1234&lipi=urn%3Ali%3Apage%3Ad_jobs_easyapply_pdfgenresume%3Bb1yZB%2BNVQ1m7kwXBYstFYQ%3D%3D&licu=urn%3Ali%3Acontrol%3Ad_jobs_easyapply_pdfgenresume-v02_profile"
         target="blank"
@@ -41,14 +41,16 @@ export default {};
 
     a {
       text-decoration: none;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--text);
+      opacity: 0.7;
       transition: 0.3s;
       -webkit-transition: 0.3s;
       -moz-transition: 0.3s;
 
       &:hover,
       &:focus {
-        color: white;
+        color: var(--text);
+        opacity: 1;
       }
 
       i {

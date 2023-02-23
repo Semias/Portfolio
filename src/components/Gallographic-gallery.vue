@@ -2,6 +2,7 @@
   <div class="gallery-teaser-container">
     <div
       class="gallery-teaser-image gallery-teaser-1"
+      tabindex="0"
       v-motion
       :initial="{
         opacity: 0,
@@ -21,6 +22,7 @@
     </div>
     <div
       class="gallery-teaser-image gallery-teaser-2"
+      tabindex="0"
       v-motion
       :initial="{
         opacity: 0,
@@ -40,6 +42,7 @@
     </div>
     <div
       class="gallery-teaser-image gallery-teaser-3"
+      tabindex="0"
       v-motion
       :initial="{
         opacity: 0,
@@ -59,6 +62,7 @@
     </div>
     <div
       class="gallery-teaser-image gallery-teaser-4"
+      tabindex="0"
       v-motion
       :initial="{
         opacity: 0,

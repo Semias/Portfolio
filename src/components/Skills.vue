@@ -14,6 +14,7 @@
         <div class="skills-container-items">
           <div
             class="skill-item"
+            tabindex="0"
             v-motion
             :initial="{
               opacity: 0,
@@ -31,6 +32,7 @@
           </div>
           <div
             class="skill-item"
+            tabindex="0"
             v-motion
             :initial="{
               opacity: 0,
@@ -48,6 +50,7 @@
           </div>
           <div
             class="skill-item"
+            tabindex="0"
             v-motion
             :initial="{
               opacity: 0,
@@ -65,6 +68,7 @@
           </div>
           <div
             class="skill-item"
+            tabindex="0"
             v-motion
             :initial="{
               opacity: 0,
@@ -82,6 +86,7 @@
           </div>
           <div
             class="skill-item"
+            tabindex="0"
             v-motion
             :initial="{
               opacity: 0,
@@ -102,6 +107,7 @@
           </div>
           <div
             class="skill-item"
+            tabindex="0"
             v-motion
             :initial="{
               opacity: 0,
@@ -146,7 +152,7 @@ $cibg1: #303030;
 $cibg2: #202020;
 $cibg3: #2a2a2a;
 .section-row-skills {
-  background-color: $cibg3;
+  background-color: var(--cibg2);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   padding: 8rem 0 14rem;
 

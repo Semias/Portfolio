@@ -2,7 +2,20 @@
   <section class="section-row-about">
     <div class="section-container-about">
       <div class="section-column-about">
-        <!-- <button type="button">light switcher</button> -->
+        <button
+          alt="switch color scheme"
+          title="switch color scheme"
+          type="button"
+          @click="
+            switchTheme();
+            switcherClass();
+          "
+          class="button-theme-switcher"
+          v-bind:class="{ dark: switcherIsDark }"
+        >
+          <i class="icon-sun"></i>
+          <i class="icon-brightness-contrast"></i>
+        </button>
         <div class="about-picture" v-motion-fade>
           <figure>
             <img
@@ -29,13 +42,12 @@
         href="https://vuejs.org/"
         target="blank"
         title="Öffnet externen Link zur Seite https://vuejs.org/"
-        ><img src="./assets/images/skills/vue.svg" alt="" /></a
+        ><img src="./assets/images/skills/vue.svg" alt="vue.js logo" /></a
     ></span>
   </footer>
 </template>
 
 <script>
-import { isContinueStatement } from "@babel/types";
 import Sociallinks from "./components/Social-links.vue";
 import Gallographic from "./components/Gallographic.vue";
 import Skills from "./components/Skills.vue";
@@ -52,9 +64,48 @@ export default {
     return {
       person: "Stefan Gall",
       job: "Frontend Developer",
+      isDarkMode: true, //Set to True = Dark Mode, False = Light Mode
+      switcherIsDark: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.checkAndSetSystemTheme();
+  },
+  methods: {
+    checkAndSetSystemTheme() {
+      let darkMode = window.matchMedia("(prefers-color-scheme: dark)");
+      if (localStorage.getItem("theme") === "dark-theme") {
+        this.isDarkMode = true;
+        app.setAttribute("color-scheme", "dark");
+      } else if (localStorage.getItem("theme") === "light-theme") {
+        this.switcherIsDark = !this.switcherIsDark;
+        this.isDarkMode = false;
+        app.setAttribute("color-scheme", "light");
+      } else if (!localStorage.getItem("theme") && darkMode.matches) {
+        this.isDarkMode = true;
+        app.setAttribute("color-scheme", "dark");
+      } else if (!localStorage.getItem("theme") && !darkMode.matches) {
+        this.switcherIsDark = !this.switcherIsDark;
+        this.isDarkMode = false;
+        app.setAttribute("color-scheme", "light");
+      }
+    },
+    switchTheme() {
+      if (this.isDarkMode) {
+        app.setAttribute("color-scheme", "light");
+        localStorage.setItem("theme", "light-theme");
+        this.isDarkMode = false;
+      } else {
+        app.setAttribute("color-scheme", "dark");
+        localStorage.setItem("theme", "dark-theme");
+        this.isDarkMode = true;
+      }
+    },
+
+    switcherClass() {
+      this.switcherIsDark = !this.switcherIsDark;
+    },
+  },
 };
 </script>
 
@@ -66,8 +117,8 @@ export default {
 
   --text-dark: #000;
   --cibg1-dark: #303030;
-  --cibg2-dark: #202020;
-  --cibg3-dark: #2a2a2a;
+  --cibg2-dark: #2a2a2a;
+  --cibg3-dark: #252525;
 
   --text-light: #ffffff;
   --cibg1-light: #f3f3f3;
@@ -132,7 +183,7 @@ html::-webkit-scrollbar {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  background-color: $cibg1;
+  background-color: var(--cibg1);
   font-weight: 400;
   overflow: hidden;
 
@@ -158,26 +209,26 @@ html::-webkit-scrollbar {
   }
 
   &[color-scheme="dark"] {
-    --text: var(--text-dark);
+    --text: var(--text-light);
     --cibg1: var(--cibg1-dark);
     --cibg2: var(--cibg2-dark);
     --cibg3: var(--cibg3-dark);
   }
 
   &[color-scheme="light"] {
-    --text: var(--text-light);
+    --text: var(--text-dark);
     --cibg1: var(--cibg1-light);
     --cibg2: var(--cibg2-light);
     --cibg3: var(--cibg3-light);
-  }
 
-  //section {
-  //  padding: 3rem 0;
-  //}
+    .gallery-links-qrcode {
+      filter: invert(1);
+    }
+  }
 
   .section-row-about {
     width: 100%;
-    height: 1000px;
+    height: 880px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -185,7 +236,7 @@ html::-webkit-scrollbar {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 
     @include media("<=xs") {
-      height: 800px;
+      height: 670px;
     }
 
     &::before {
@@ -228,6 +279,61 @@ html::-webkit-scrollbar {
         align-items: center;
         flex-direction: column;
 
+        .button-theme-switcher {
+          all: unset;
+          margin-bottom: 3rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 1rem;
+          background-color: var(--cibg1);
+          filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3)) brightness(1.2);
+          border-radius: 50%;
+          color: black;
+          cursor: pointer;
+          transition: 0.3s;
+          -moz-transition: 0.3s;
+          -webkit-transition: 0.3s;
+
+          @include media("<=xs") {
+            margin-bottom: 1.5rem;
+          }
+
+          &:hover,
+          &:focus {
+            i {
+              transform: rotate(90deg);
+            }
+          }
+
+          &:focus {
+            outline: 5px solid black;
+          }
+
+          &.dark {
+            background-color: white;
+
+            .icon-sun {
+              display: none;
+            }
+            .icon-brightness-contrast {
+              display: flex;
+            }
+          }
+
+          .icon-brightness-contrast {
+            display: none;
+          }
+
+          i {
+            font-size: 1.5rem;
+            color: var(--text);
+            transition: 0.3s;
+            -moz-transition: 0.3s;
+            -webkit-transition: 0.3s;
+          }
+        }
+
         .about-picture {
           width: 350px;
           height: 350px;
@@ -262,10 +368,14 @@ html::-webkit-scrollbar {
           margin: 3rem 0;
           gap: 1rem;
 
+          @include media("<=xs") {
+            margin: 1.5rem 0;
+          }
+
           h1 {
             font-size: 3.8rem;
             font-family: "Roboto";
-            color: $ciprime;
+            color: var(--ciprime);
 
             @include media("<=sm") {
               font-size: 3.4rem;
@@ -279,6 +389,7 @@ html::-webkit-scrollbar {
           h2 {
             font-size: 1.9rem;
             font-family: "Jetbrains Mono";
+            color: var(--text);
 
             @include media("<=sm") {
               font-size: 1.7rem;
@@ -301,6 +412,7 @@ html::-webkit-scrollbar {
     gap: 5px;
     padding: 0.5rem;
     gap: 0.8rem;
+    color: var(--text);
 
     span {
       display: flex;
@@ -314,6 +426,7 @@ html::-webkit-scrollbar {
         align-items: center;
         width: 100%;
         height: 100%;
+
         img {
           width: 100%;
           height: auto;
