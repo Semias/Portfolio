@@ -155,6 +155,9 @@ $cibg3: #2a2a2a;
   background-color: var(--cibg2);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   padding: 8rem 0 14rem;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
 
   @include media("<=xs") {
     padding: 6rem 0;

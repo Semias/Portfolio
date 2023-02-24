@@ -57,6 +57,9 @@ $cibg3: #2a2a2a;
 .section-row-gallery {
   background-color: var(--cibg3);
   padding: 8rem 0 6rem;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
   .section-container-gallery {
     max-width: 1500px;
     margin: 0 auto;
