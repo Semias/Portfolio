@@ -186,6 +186,9 @@ html::-webkit-scrollbar {
   background-color: var(--cibg1);
   font-weight: 400;
   overflow: hidden;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
 
   @keyframes rotate {
     from {
