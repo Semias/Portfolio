@@ -32,7 +32,7 @@
       </div>
     </div>
   </section>
-  <Skills headline="Skills" />
+  <Skills headline="Tech Stack" />
   <Gallographic headline="Noch nicht genug?" />
 
   <footer>
