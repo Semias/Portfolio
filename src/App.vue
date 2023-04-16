@@ -33,7 +33,7 @@
     </div>
   </section>
   <Skills headline="Tech Stack" />
-  <Gallographic headline="Noch nicht genug?" />
+  <Gallographic headline="Gallery Project" />
 
   <footer>
     made with
