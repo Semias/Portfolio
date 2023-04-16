@@ -13,6 +13,7 @@
         </h1>
         <div class="skills-container-items">
           <div
+            title="HTML"
             class="skill-item"
             tabindex="0"
             v-motion
@@ -31,6 +32,7 @@
             <img src="../assets/images/skills/html.svg" alt="HTML" />
           </div>
           <div
+            title="CSS"
             class="skill-item"
             tabindex="0"
             v-motion
@@ -49,6 +51,7 @@
             <img src="../assets/images/skills/css.svg" alt="css" />
           </div>
           <div
+            title="Sass"
             class="skill-item"
             tabindex="0"
             v-motion
@@ -64,9 +67,10 @@
               },
             }"
           >
-            <img src="../assets/images/skills/bootstrap.svg" alt="Bootstrap" />
+            <img src="../assets/images/skills/sass.svg" alt="sass" />
           </div>
           <div
+            title="Bootstrap"
             class="skill-item"
             tabindex="0"
             v-motion
@@ -82,9 +86,10 @@
               },
             }"
           >
-            <img src="../assets/images/skills/sass.svg" alt="sass" />
+            <img src="../assets/images/skills/bootstrap.svg" alt="Bootstrap" />
           </div>
           <div
+            title="Tailwind"
             class="skill-item"
             tabindex="0"
             v-motion
@@ -100,12 +105,10 @@
               },
             }"
           >
-            <img
-              src="../assets/images/skills/javascript.svg"
-              alt="Javascript"
-            />
+            <img src="../assets/images/skills/tailwind.svg" alt="Tailwind" />
           </div>
           <div
+            title="Javascript"
             class="skill-item"
             tabindex="0"
             v-motion
@@ -121,9 +124,71 @@
               },
             }"
           >
+            <img
+              src="../assets/images/skills/javascript.svg"
+              alt="Javascript"
+            />
+          </div>
+          <div
+            title="Typescript"
+            class="skill-item"
+            tabindex="0"
+            v-motion
+            :initial="{
+              opacity: 0,
+              x: -20,
+            }"
+            :visibleOnce="{
+              opacity: 1,
+              x: 0,
+              transition: {
+                delay: 1350,
+              },
+            }"
+          >
+            <img
+              src="../assets/images/skills/typescript.svg"
+              alt="Typescript"
+            />
+          </div>
+          <div
+            title="Angular"
+            class="skill-item"
+            tabindex="0"
+            v-motion
+            :initial="{
+              opacity: 0,
+              x: -20,
+            }"
+            :visibleOnce="{
+              opacity: 1,
+              x: 0,
+              transition: {
+                delay: 1500,
+              },
+            }"
+          >
+            <img src="../assets/images/skills/angular.svg" alt="Angular" />
+          </div>
+          <div
+            title="Vue.js"
+            class="skill-item"
+            tabindex="0"
+            v-motion
+            :initial="{
+              opacity: 0,
+              x: -20,
+            }"
+            :visibleOnce="{
+              opacity: 1,
+              x: 0,
+              transition: {
+                delay: 1650,
+              },
+            }"
+          >
             <img src="../assets/images/skills/vue.svg" alt="Vue.js" />
           </div>
-          <!-- <div class="skill-item"><img src="../assets/images/skills/java.svg" alt="Java"></div> -->
         </div>
       </div>
     </div>
@@ -193,8 +258,10 @@ $cibg3: #2a2a2a;
       .skills-container-items {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: center;
         padding: 0 1rem;
+        gap: 3rem;
+        column-gap: 5rem;
 
         @include media("<=xl") {
           justify-content: center;
@@ -225,8 +292,8 @@ $cibg3: #2a2a2a;
           filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.3));
 
           @include media("<=xs") {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
           }
 
           img {
