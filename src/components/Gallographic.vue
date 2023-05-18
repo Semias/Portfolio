@@ -110,7 +110,9 @@
 
             img {
               height: 100%;
-              width: auto;
+              width: 100%;
+              object-fit: cover;
+              object-position: center;
             }
           }
         }

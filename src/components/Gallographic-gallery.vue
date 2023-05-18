@@ -128,7 +128,9 @@
 
       img {
         height: 100%;
-        width: auto;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
         transition: 0.5s;
         -webkit-transition: 0.5s;
         -moz-transition: 0.5s;
