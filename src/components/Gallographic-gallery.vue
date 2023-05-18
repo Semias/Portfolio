@@ -15,7 +15,7 @@
         },
       }"
     >
-      <img src="../assets/images/gallographic/teaser01.jpg" alt="gallery teaser picture 1" />
+      <img src="../assets/images/gallographic/teaser01.webp" alt="gallery teaser picture 1" />
     </div>
     <div
       class="gallery-teaser-image gallery-teaser-2"
@@ -32,7 +32,7 @@
         },
       }"
     >
-      <img src="../assets/images/gallographic/teaser02.jpg" alt="gallery teaser picture 2" />
+      <img src="../assets/images/gallographic/teaser02.webp" alt="gallery teaser picture 2" />
     </div>
     <div
       class="gallery-teaser-image gallery-teaser-3"
@@ -49,7 +49,7 @@
         },
       }"
     >
-      <img src="../assets/images/gallographic/teaser03.jpg" alt="gallery teaser picture 3" />
+      <img src="../assets/images/gallographic/teaser03.webp" alt="gallery teaser picture 3" />
     </div>
     <div
       class="gallery-teaser-image gallery-teaser-4"
@@ -66,7 +66,7 @@
         },
       }"
     >
-      <img src="../assets/images/gallographic/teaser04.jpg" alt="gallery teaser picture 4" />
+      <img src="../assets/images/gallographic/teaser04.webp" alt="gallery teaser picture 4" />
     </div>
   </div>
 </template>
