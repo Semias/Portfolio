@@ -1,25 +1,24 @@
 @font-face {
-  font-family: 'Gallographic';
-  src:  url('fonts/Gallographic.eot?20wd4u');
-  src:  url('fonts/Gallographic.eot?20wd4u#iefix') format('embedded-opentype'),
-    url('fonts/Gallographic.ttf?20wd4u') format('truetype'),
-    url('fonts/Gallographic.woff?20wd4u') format('woff'),
-    url('fonts/Gallographic.svg?20wd4u#Gallographic') format('svg');
+  font-family: "Gallographic";
+  src: url("fonts/Gallographic.eot?20wd4u");
+  src: url("fonts/Gallographic.eot?20wd4u#iefix") format("embedded-opentype"), url("fonts/Gallographic.ttf?20wd4u") format("truetype"), url("fonts/Gallographic.woff?20wd4u") format("woff"), url("fonts/Gallographic.svg?20wd4u#Gallographic") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
+  font-display: swap;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'Gallographic' !important;
+  font-family: "Gallographic" !important;
   speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  
+
   /* Enable Ligatures ================ */
   letter-spacing: 0;
   -webkit-font-feature-settings: "liga";

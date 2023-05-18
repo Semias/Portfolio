@@ -127,23 +127,27 @@
   @font-face {
     font-family: "Jetbrains Mono";
     src: url("./assets/fonts/jetbrains/JetBrainsMono[wght].ttf");
+    font-display: swap;
   }
 
   @font-face {
     font-family: "Roboto";
     src: url("./assets/fonts/roboto/Roboto-Regular.ttf");
     font-weight: 400;
+    font-display: swap;
   }
 
   @font-face {
     font-family: "Roboto";
     src: url("./assets/fonts/roboto/Roboto-Medium.ttf");
     font-weight: 500;
+    font-display: swap;
   }
   @font-face {
     font-family: "Roboto";
     src: url("./assets/fonts/roboto/Roboto-Bold.ttf");
     font-weight: 700;
+    font-display: swap;
   }
 
   * {
