@@ -286,7 +286,9 @@
 
             img {
               height: 100%;
-              width: auto;
+              width: 100%;
+              object-fit: cover;
+              object-position: center;
               max-width: 100%;
               transition: 0.3s;
               -webkit-transition: 0.3s;
