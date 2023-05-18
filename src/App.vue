@@ -18,7 +18,7 @@
         </button>
         <div class="about-picture" v-motion-fade>
           <figure>
-            <img src="./assets/images/about-me.png" alt="picture of stefan gall" />
+            <img src="./assets/images/about-me.jpg" alt="picture of stefan gall" />
           </figure>
         </div>
         <div class="about-me-title">
