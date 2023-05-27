@@ -123,12 +123,14 @@
 	$cibg2: #202020;
 	$cibg3: #2a2a2a;
 
+	//Jetbrains Mono
 	@font-face {
 		font-family: "Jetbrains Mono";
 		src: url("./assets/fonts/jetbrains/JetBrainsMono[wght].ttf");
 		font-display: swap;
 	}
 
+	//Roboto
 	@font-face {
 		font-family: "Roboto";
 		src: url("./assets/fonts/roboto/Roboto-Regular.ttf");
@@ -146,6 +148,105 @@
 		font-family: "Roboto";
 		src: url("./assets/fonts/roboto/Roboto-Bold.ttf");
 		font-weight: 700;
+		font-display: swap;
+	}
+
+	//Overpass
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght.woff2");
+		font-weight: 300;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght.woff2");
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght.woff2");
+		font-weight: 500;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght.woff2");
+		font-weight: 600;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght.woff2");
+		font-weight: 700;
+		font-display: swap;
+	}
+
+	//Overpass Italic
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght-italic.woff2");
+		font-weight: 300;
+		font-style: italic;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght-italic.woff2");
+		font-weight: 400;
+		font-style: italic;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght-italic.woff2");
+		font-weight: 500;
+		font-style: italic;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght-italic.woff2");
+		font-weight: 600;
+		font-style: italic;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: "Overpass";
+		src: url("./assets/fonts/overpass/Overpass-VariableFont_wght-italic.woff2");
+		font-weight: 700;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	//Inter
+	@font-face {
+		font-family: "Inter";
+		src: url("./assets/fonts/inter/Inter-VariableFont_wght.woff2");
+		font-weight: 300;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: "Inter";
+		src: url("./assets/fonts/inter/Inter-VariableFont_wght.woff2");
+		font-weight: 400;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: "Inter";
+		src: url("./assets/fonts/inter/Inter-VariableFont_wght.woff2");
+		font-weight: 500;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: "Inter";
+		src: url("./assets/fonts/inter/Inter-VariableFont_wght.woff2");
+		font-weight: 600;
 		font-display: swap;
 	}
 
@@ -174,7 +275,8 @@
 	}
 
 	#app {
-		font-family: Roboto, Jetbrains Mono, Helvetica, Arial, sans-serif;
+		font-family: Overpass, Inter, Jetbrains Mono, Roboto, Helvetica, Arial, sans-serif;
+		line-height: 1;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
@@ -375,7 +477,7 @@
 
 						h1 {
 							font-size: 3.8rem;
-							font-family: "Roboto";
+							font-family: "Overpass";
 							color: var(--ciprime);
 
 							@include media("<=sm") {

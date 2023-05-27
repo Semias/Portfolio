@@ -85,10 +85,11 @@
 					.gallery-links-text {
 						a {
 							text-decoration: underline;
-							text-underline-offset: 6px;
+							text-underline-offset: 8px;
+							text-decoration-thickness: 2px;
 							color: currentColor;
-							font-family: "Jetbrains Mono";
-							font-size: 2rem;
+							// font-family: "Jetbrains Mono";
+							font-size: 1.8rem;
 							transition: 0.3s;
 							-webkit-transition: 0.3s;
 							-moz-transition: 0.3s;

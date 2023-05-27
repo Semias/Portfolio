@@ -222,7 +222,7 @@
 				}
 
 				h1 {
-					font-family: "Jetbrains Mono";
+					// font-family: "Jetbrains Mono";
 					font-size: 3.8rem;
 					color: $ciprime;
 
