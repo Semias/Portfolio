@@ -4,3 +4,39 @@
   padding: 0;
   margin: 0;
 }
+
+:root {
+  --primary: #aec3b0;
+  --secondary: #598392;
+  --tertiary: #50e3c2;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  --text-dark: #000;
+  --cibg1-dark: #303030;
+  --cibg2-dark: #2a2a2a;
+  --cibg3-dark: #252525;
+
+  --text-light: #ffffff;
+  --cibg1-light: #f3f3f3;
+  --cibg2-light: #e6e6e6;
+  --cibg3-light: #cccccc;
+}
+
+html {
+  &[color-scheme='dark'] {
+    --text: var(--text-light);
+    --cibg1: var(--cibg1-dark);
+  }
+
+  &[color-scheme='light'] {
+    --text: var(--text-dark);
+    --cibg1: var(--cibg1-light);
+  }
+}
+
+body {
+  color: var(--text);
+  background-color: var(--cibg1);
+  font-family: var(--font-family);
+  transition: 0.3s;
+}
