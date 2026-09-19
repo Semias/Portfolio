@@ -9,3 +9,8 @@ services:
     ports:
       # Host port is configurable from Portainer's environment variables
       - "${PORTFOLIO_PORT:-1234}:80"
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
