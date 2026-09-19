@@ -1,0 +1,11 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: portfolio:latest
+    container_name: portfolio
+    restart: unless-stopped
+    ports:
+      # Host port is configurable from Portainer's environment variables
+      - "${PORTFOLIO_PORT:-1234}:80"
