@@ -1,42 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
+* { box-sizing: border-box; padding: 0; margin: 0; }
 :root {
+  color-scheme: light;
+  --primary: #345e41;
+  --secondary: #365f70;
+  --on-primary: #fff;
+  --text: #202020;
+  --cibg1: #f3f3f3;
+  --cibg2: #e6e6e6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+@mixin dark-theme {
+  color-scheme: dark;
   --primary: #aec3b0;
-  --secondary: #598392;
-  --tertiary: #50e3c2;
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  --text-dark: #000;
-  --cibg1-dark: #303030;
-  --cibg2-dark: #2a2a2a;
-  --cibg3-dark: #252525;
-
-  --text-light: #ffffff;
-  --cibg1-light: #f3f3f3;
-  --cibg2-light: #e6e6e6;
-  --cibg3-light: #cccccc;
+  --secondary: #a5ccd9;
+  --on-primary: #18281c;
+  --text: #fff;
+  --cibg1: #303030;
+  --cibg2: #454545;
 }
-
-html {
-  &[color-scheme='dark'] {
-    --text: var(--text-light);
-    --cibg1: var(--cibg1-dark);
-  }
-
-  &[color-scheme='light'] {
-    --text: var(--text-dark);
-    --cibg1: var(--cibg1-light);
-  }
-}
-
-body {
-  color: var(--text);
-  background-color: var(--cibg1);
-  font-family: var(--font-family);
-  transition: 0.3s;
+html[color-scheme='dark'] { @include dark-theme; }
+@media (prefers-color-scheme: dark) { html:not([color-scheme]) { @include dark-theme; } }
+body { color: var(--text); background: var(--cibg1); line-height: 1.5; }
+a { color: var(--primary); }
+:focus-visible { outline: 3px solid var(--secondary); outline-offset: 4px; }
+main { min-width: 0; }
+.skip-link { position: absolute; left: 1rem; top: -10rem; padding: 1rem; background: var(--cibg1); z-index: 10; }
+.skip-link:focus { top: 1rem; }
+.page { max-width: 75rem; margin: auto; padding: 2rem; }
+.page p { margin-block: 1rem; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }

@@ -1,5 +1,4 @@
 :host {
-  display: block;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -106,7 +105,7 @@
 
       &.primary {
         background-color: var(--primary);
-        color: #fff; // Always white text on primary button probably looks best, or adapt based on theme
+        color: var(--on-primary);
         border: 2px solid var(--primary);
       }
 

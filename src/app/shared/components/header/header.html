@@ -1,13 +1,8 @@
-<h1 class="header__title" [routerLink]="''">Stefan Gall</h1>
-<nav class="header__navigation">
-  <ul>
-    <li><a [routerLink]="'/about'">About</a></li>
-    <li><a [routerLink]="'/projects'">Projects</a></li>
-    <li><a [routerLink]="'/cv'">CV</a></li>
-  </ul>
-</nav>
-<div class="header__actions">
-  <button (click)="themeService.toggleTheme()">
-    @if (themeService.currentTheme() === 'light') { 🌙 Dark Mode } @else { ☀️ Light Mode }
-  </button>
-</div>
+<a class="header__title" routerLink="/" aria-label="Stefan Gall — home">Stefan Gall</a>
+<nav aria-label="Main navigation"><ul>
+  <li><a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">About</a></li>
+  <li><a routerLink="/projects" routerLinkActive="active" ariaCurrentWhenActive="page">Projects</a></li>
+  <li><a routerLink="/cv" routerLinkActive="active" ariaCurrentWhenActive="page">CV</a></li>
+  <li><a routerLink="/contact" routerLinkActive="active" ariaCurrentWhenActive="page">Contact</a></li>
+</ul></nav>
+<button type="button" (click)="themeService.toggleTheme()" [attr.aria-pressed]="themeService.currentTheme() === 'dark'">Dark mode</button>

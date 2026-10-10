@@ -1,44 +1,27 @@
-import { Injectable, effect, inject, signal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-
+import { Injectable, inject, signal } from '@angular/core';
 export type Theme = 'light' | 'dark';
-
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ThemeService {
-  private readonly _document = inject(DOCUMENT);
-
-  // Signal for the current theme in the application
-  readonly currentTheme = signal<Theme>('light');
-
-  constructor() {
-    this.initializeTheme();
-
-    // Effect that runs whenever currentTheme changes
-    effect(() => {
-      const theme = this.currentTheme();
-      this.applyTheme(theme);
-      localStorage.setItem('theme', theme);
-    });
+  private readonly document = inject(DOCUMENT);
+  private readonly theme = signal<Theme>(this.initialTheme());
+  readonly currentTheme = this.theme.asReadonly();
+  constructor() { this.applyTheme(); }
+  toggleTheme(): void {
+    this.theme.update(current => current === 'light' ? 'dark' : 'light');
+    this.applyTheme();
+    try { this.document.defaultView?.localStorage.setItem('theme', this.theme()); }
+    catch { /* Theme switching works even when storage is unavailable. */ }
   }
-
-  toggleTheme() {
-    this.currentTheme.update((current) => (current === 'light' ? 'dark' : 'light'));
+  private initialTheme(): Theme {
+    const browser = this.document.defaultView;
+    try {
+      const stored = browser?.localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') return stored;
+    } catch { /* Fall back to the system preference. */ }
+    return browser?.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
-
-  private initializeTheme() {
-    const storedTheme = localStorage.getItem('theme') as Theme | null;
-    if (storedTheme) {
-      this.currentTheme.set(storedTheme);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      // Optional: Detect system preference
-      this.currentTheme.set('dark');
-    }
-  }
-
-  private applyTheme(theme: Theme) {
-    // Set the attribute on the html element
-    this._document.documentElement.setAttribute('color-scheme', theme);
+  private applyTheme(): void {
+    this.document.documentElement.setAttribute('color-scheme', this.theme());
   }
 }

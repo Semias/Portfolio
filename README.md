@@ -1,59 +1,36 @@
-# PortfolioAngular
+# Stefan Gall's portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+Angular 21 portfolio using standalone components, signals, lazy routes, SCSS, and Vitest.
 
-## Development server
+## Local development
 
-To start a local development server, run:
+Use Node.js 22.12 or newer in the Node 22 release line and npm 11.
+Run `npm ci`, then `npm start`. Open http://localhost:4200.
+On Windows, use `npm.cmd` if PowerShell blocks the npm script.
 
-```bash
-ng serve
-```
+## Checks
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- `npm run build`: production build; browser files are generated in `dist/portfolio-angular/browser`.
+- `npm test -- --watch=false`: unit and routing tests.
+- `npx playwright install chromium`: install the browser once.
+- `npm run test:e2e`: browser accessibility, mobile overflow, navigation, and theme checks.
+- `npm audit`: dependency security report.
 
-## Code scaffolding
+The quality workflow runs these checks on pushes and pull requests.
+Automated axe checks cover WCAG A/AA rules on every route in light/dark themes at mobile and desktop widths. Manual assistive-technology review is still useful.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Structure
 
-```bash
-ng generate component component-name
-```
+- `src/app/pages`: lazy-loaded page components and the unknown-route page.
+- `src/app/shared/components/header`: responsive navigation and theme control.
+- `src/app/shared/services/theme.service.ts`: validated saved preference with system fallback.
+- `src/styles.scss`: theme colors, focus indicators, and reduced-motion support.
+- `public`: static assets.
+- `e2e`: Playwright and axe browser checks.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+About, Projects, CV, and Contact content remains intentionally unchanged pending owner-provided content.
+Route titles live in `app.routes.ts`; the default description is in `src/index.html`.
 
-```bash
-ng generate --help
-```
+## Deployment
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The existing Azure deployment workflow is unchanged. Its output path and SPA fallback configuration still need the separately deferred deployment review.
