@@ -12,16 +12,17 @@ module.exports = [
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: {
-        ...globals.browser,
-        // App.vue greift über die Element-ID auf <div id="app"> zu
-        app: 'readonly',
-      },
+      globals: { ...globals.browser },
     },
     rules: {
       // Bestehende Komponenten heißen "Skills" und "Gallographic"
       'vue/multi-word-component-names': 'off',
     },
+  },
+  {
+    // App.vue greift über die Element-ID auf <div id="app"> zu
+    files: ['src/App.vue'],
+    languageOptions: { globals: { app: 'readonly' } },
   },
   {
     files: ['*.config.js', 'babel.config.js'],
