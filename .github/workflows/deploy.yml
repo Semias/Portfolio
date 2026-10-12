@@ -1,0 +1,126 @@
+name: Deploy
+
+# main -> dev.gall-stefan.de (automatisch)
+# Tag v* -> gall-stefan.de (nach Freigabe im Environment production)
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: dist
+          path: dist
+          retention-days: 30
+
+  deploy-dev:
+    name: deploy-dev
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    # Ein Deploy pro Umgebung zur selben Zeit, damit kein älterer Stand einen neueren überschreibt
+    concurrency:
+      group: deploy-dev
+      cancel-in-progress: false
+    environment:
+      name: dev
+      url: https://dev.gall-stefan.de
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: dist
+          path: dist
+      - name: Basic-Auth-Secrets vorbereiten
+        env:
+          BASIC_AUTH_USER: ${{ secrets.DEV_BASIC_AUTH_USER }}
+          BASIC_AUTH_PASS: ${{ secrets.DEV_BASIC_AUTH_PASS }}
+        run: |
+          if [ -z "$BASIC_AUTH_USER" ] || [ -z "$BASIC_AUTH_PASS" ]; then
+            echo "::error::Secrets DEV_BASIC_AUTH_USER und DEV_BASIC_AUTH_PASS fehlen (siehe docs/deployment.md)"
+            exit 1
+          fi
+          jq -n --arg user "$BASIC_AUTH_USER" --arg pass "$BASIC_AUTH_PASS" \
+            '{BASIC_AUTH_USER: $user, BASIC_AUTH_PASS: $pass}' > "$RUNNER_TEMP/dev-secrets.json"
+      - name: Deploy auf dev.gall-stefan.de
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy --env dev --secrets-file "$RUNNER_TEMP/dev-secrets.json"
+      - name: Smoke-Test
+        env:
+          BASIC_AUTH_USER: ${{ secrets.DEV_BASIC_AUTH_USER }}
+          BASIC_AUTH_PASS: ${{ secrets.DEV_BASIC_AUTH_PASS }}
+        run: |
+          # Beim ersten Deploy braucht Cloudflare ein paar Minuten für DNS und Zertifikat
+          for i in $(seq 1 20); do
+            anonymous=$(curl -s -o /dev/null -w '%{http_code}' https://dev.gall-stefan.de/ || true)
+            page=$(curl -fsS -u "$BASIC_AUTH_USER:$BASIC_AUTH_PASS" https://dev.gall-stefan.de/ || true)
+            if [ "$anonymous" = "401" ] && [[ "$page" == *'id="app"'* ]]; then
+              echo "dev.gall-stefan.de antwortet, Basic Auth greift"
+              exit 0
+            fi
+            echo "Versuch $i: ohne Login HTTP $anonymous, warte..."
+            sleep 15
+          done
+          exit 1
+
+  deploy-prod:
+    name: deploy-prod
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    environment:
+      name: production
+      url: https://gall-stefan.de
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: dist
+          path: dist
+      - name: Deploy auf gall-stefan.de
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
+      - name: Smoke-Test
+        run: |
+          for i in $(seq 1 20); do
+            page=$(curl -fsS https://gall-stefan.de/ || true)
+            if [[ "$page" == *'id="app"'* ]]; then
+              echo "gall-stefan.de antwortet"
+              exit 0
+            fi
+            echo "Versuch $i, warte..."
+            sleep 15
+          done
+          exit 1
