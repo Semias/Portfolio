@@ -1,0 +1,36 @@
+// Cloudflare Worker für das Portfolio.
+// Ohne --env: Prod auf gall-stefan.de (+ www, leitet um). Mit --env dev: dev.gall-stefan.de mit Basic Auth.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "main": "cloudflare/worker.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "single-page-application"
+  },
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    "APP_ENV": "production"
+  },
+  "routes": [
+    { "pattern": "gall-stefan.de", "custom_domain": true },
+    { "pattern": "www.gall-stefan.de", "custom_domain": true }
+  ],
+  "env": {
+    // Worker heißt portfolio-dev; BASIC_AUTH_USER/BASIC_AUTH_PASS kommen als Secrets aus dem Deploy-Workflow
+    "dev": {
+      "workers_dev": false,
+      "preview_urls": false,
+      "vars": {
+        "APP_ENV": "dev"
+      },
+      "routes": [
+        { "pattern": "dev.gall-stefan.de", "custom_domain": true }
+      ]
+    }
+  }
+}
