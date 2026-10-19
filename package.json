@@ -1,6 +1,6 @@
 {
   "name": "Portfolio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,9 +8,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@vueuse/motion": "^2.0.0-beta.12",
+    "@vueuse/motion": "^3.0.3",
     "core-js": "^3.8.3",
-    "include-media": "^1.4.10",
+    "include-media": "^2.0.0",
     "primeicons": "^6.0.1",
     "primevue": "^3.42.0",
     "vue": "^3.2.13"
