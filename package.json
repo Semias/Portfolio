@@ -8,23 +8,23 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@vueuse/motion": "^2.0.0-beta.12",
+    "@vueuse/motion": "^3.0.3",
     "core-js": "^3.8.3",
-    "include-media": "^1.4.10",
-    "primeicons": "^6.0.1",
-    "primevue": "^3.42.0",
-    "vue": "^3.2.13"
+    "include-media": "^2.0.0",
+    "primeicons": "^8.0.2",
+    "primevue": "^5.0.2",
+    "vue": "^3.5.44"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "eslint-plugin-vue": "^10.11.1",
     "globals": "^17.13.0",
-    "sass": "^1.32.7",
-    "sass-loader": "^12.0.0",
+    "sass": "^1.105.2",
+    "sass-loader": "^17.0.1",
     "vue-eslint-parser": "^10.4.1",
-    "wrangler": "4.149.0"
+    "wrangler": "4.151.1"
   }
 }
