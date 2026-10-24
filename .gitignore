@@ -25,3 +25,8 @@ pnpm-debug.log*
 # Cloudflare Wrangler
 .wrangler
 .dev.vars*
+
+# Angular
+/.angular/cache
+/out-tsc
+/coverage

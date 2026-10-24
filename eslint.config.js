@@ -1,31 +1,41 @@
-const js = require('@eslint/js')
-const pluginVue = require('eslint-plugin-vue')
-const globals = require('globals')
+// @ts-check
+const eslint = require('@eslint/js');
+const { defineConfig } = require('eslint/config');
+const tseslint = require('typescript-eslint');
+const angular = require('angular-eslint');
 
-module.exports = [
-  // liga.js ist ein mitgelieferter Icon-Font-Polyfill (IcoMoon), kein eigener Code
-  { ignores: ['dist/**', 'node_modules/**', 'src/assets/fonts/**'] },
-  js.configs.recommended,
-  ...pluginVue.configs['flat/essential'],
+module.exports = defineConfig([
   {
-    files: ['**/*.{js,vue}'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: { ...globals.browser },
-    },
+    files: ['**/*.ts'],
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.recommended,
+      tseslint.configs.stylistic,
+      angular.configs.tsRecommended,
+    ],
+    processor: angular.processInlineTemplates,
     rules: {
-      // Bestehende Komponenten heißen "Skills" und "Gallographic"
-      'vue/multi-word-component-names': 'off',
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
+        },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case',
+        },
+      ],
     },
   },
   {
-    // App.vue greift über die Element-ID auf <div id="app"> zu
-    files: ['src/App.vue'],
-    languageOptions: { globals: { app: 'readonly' } },
+    files: ['**/*.html'],
+    extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
+    rules: {},
   },
-  {
-    files: ['*.config.js', 'babel.config.js'],
-    languageOptions: { sourceType: 'commonjs', globals: { ...globals.node } },
-  },
-]
+]);

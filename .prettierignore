@@ -1,0 +1,12 @@
+dist
+coverage
+.angular
+node_modules
+package-lock.json
+CHANGELOG.md
+# Bestehende Infrastruktur-Dateien und Doku behalten ihr Format
+.github
+cloudflare
+docs
+docker-compose.yml
+wrangler.jsonc
