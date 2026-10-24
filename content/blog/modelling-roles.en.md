@@ -23,12 +23,13 @@ It gets more stable once you first decide who owns data â€” tenant, site, team â
 // Role = capabilities, scope = ownership
 type Grant = {
   subject: UserId;
-  role: 'editor' | 'admin';
-  scope: { tenant: TenantId; site?: SiteId };
+  role:    "editor" | "admin";
+  scope:   { tenant: TenantId; site?: SiteId };
 };
 
 function can(u: User, action: Action, res: Resource) {
-  return u.grants.some((g) => owns(g.scope, res) && ROLES[g.role].includes(action));
+  return u.grants.some(g =>
+    owns(g.scope, res) && ROLES[g.role].includes(action));
 }
 ```
 

@@ -39,6 +39,8 @@ const FILE_NAME = /^([a-z0-9]+(?:-[a-z0-9]+)*)\.(en|de)\.md$/;
 const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
 const TOC_LABEL = /^(#{2,6}[ \t]+.*?)[ \t]*\{toc="([^"]+)"\}[ \t]*$/gm;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
+/** Links ohne Schema (relativ) oder mit http(s) bzw. mailto, nichts wie javascript: */
+const SAFE_URL = /^(?:https?:|mailto:|(?![a-z][a-z0-9+.-]*:))/i;
 
 export class ContentError extends Error {}
 
@@ -128,6 +130,24 @@ export function renderMarkdown(markdown, source = 'Markdown') {
   const marked = new Marked({
     gfm: true,
     renderer: {
+      // Die App setzt das HTML ungeprüft ein (sonst fehlen die IDs der Überschriften).
+      // Deshalb kein rohes HTML im Markdown und nur sichere Link-Ziele.
+      html(token) {
+        const snippet = token.text.trim().slice(0, 40);
+        throw new ContentError(`${source}: HTML im Markdown ist nicht erlaubt (${snippet})`);
+      },
+      link(token) {
+        if (!SAFE_URL.test(token.href)) {
+          throw new ContentError(`${source}: unsicheres Link-Ziel ${token.href}`);
+        }
+        return false;
+      },
+      image(token) {
+        if (!SAFE_URL.test(token.href)) {
+          throw new ContentError(`${source}: unsichere Bildquelle ${token.href}`);
+        }
+        return false;
+      },
       heading(token) {
         if (token.depth === 1) {
           throw new ContentError(

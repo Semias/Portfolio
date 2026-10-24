@@ -102,6 +102,25 @@ describe('renderMarkdown', () => {
   it('reserves # for the title', () => {
     assert.throws(() => renderMarkdown('# Title'), ContentError);
   });
+
+  // Die App setzt das HTML ohne Angulars Sanitizer ein, deshalb muss es hier sicher werden
+  it('rejects raw HTML', () => {
+    assert.throws(() => renderMarkdown('<script>alert(1)</script>'), /HTML im Markdown/);
+    assert.throws(() => renderMarkdown('Text <img src=x onerror=alert(1)> text'), ContentError);
+  });
+
+  it('allows only safe link and image targets', () => {
+    const { html } = renderMarkdown(
+      '[a](https://example.com) [b](mailto:me@example.com) [c](/de/impressum) [d](#part) ![e](/images/x.webp)',
+    );
+    assert.match(html, /href="https:\/\/example.com"/);
+    assert.match(html, /href="mailto:me@example.com"/);
+    assert.match(html, /href="\/de\/impressum"/);
+    assert.match(html, /<img src="\/images\/x.webp" alt="e">/);
+    assert.throws(() => renderMarkdown('[x](javascript:alert(1))'), /unsicheres Link-Ziel/);
+    assert.throws(() => renderMarkdown('[x](JAVASCRIPT:alert(1))'), ContentError);
+    assert.throws(() => renderMarkdown('![x](data:text/html,boom)'), /unsichere Bildquelle/);
+  });
 });
 
 describe('parsePost', () => {

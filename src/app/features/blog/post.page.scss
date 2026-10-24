@@ -1,0 +1,188 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.head {
+  padding: clamp(40px, 7vw, 96px) var(--gutter) clamp(36px, 5vw, 64px);
+  background: var(--field);
+}
+
+.head-inner {
+  max-width: 1100px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+  color: var(--mute);
+  font-size: 13px;
+
+  &:hover {
+    color: var(--acc);
+  }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 clamp(20px, 3vw, 32px);
+  color: var(--mute2);
+  font-size: 13px;
+}
+
+.category {
+  color: var(--acc);
+}
+
+.mark {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--acc);
+
+  &.is-faint {
+    background: var(--faint);
+  }
+}
+
+h1 {
+  max-width: 18ch;
+  margin: 0 0 clamp(20px, 3vw, 32px);
+  font-size: clamp(36px, 5.4vw, 76px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--acc);
+}
+
+.teaser {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--ink2);
+  font-size: clamp(17px, 1.6vw, 22px);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: clamp(28px, 5vw, 72px);
+  max-width: 1100px;
+  padding: clamp(48px, 7vw, 96px) var(--gutter);
+}
+
+.toc {
+  position: sticky;
+  top: calc(var(--header-h-compact) + 32px);
+  flex: 0 0 200px;
+  font-size: 13px;
+
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: flex;
+    gap: 10px;
+    color: var(--mute);
+
+    &:hover {
+      color: var(--ink);
+    }
+  }
+}
+
+.toc-title {
+  margin: 0 0 14px;
+  color: var(--mute2);
+}
+
+.toc-number {
+  color: var(--acc);
+}
+
+.content {
+  flex: 1 1 480px;
+  min-width: 0;
+  max-width: 68ch;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.more {
+  padding: clamp(40px, 6vw, 80px) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+
+.more-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 clamp(20px, 3vw, 32px);
+  color: var(--mute);
+  font-size: 13px;
+  font-weight: 400;
+
+  .mark {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+  max-width: 1100px;
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(44px, 6vw, 88px) var(--gutter);
+  background: var(--field);
+
+  h2 {
+    max-width: 22ch;
+    margin: 0;
+    font-size: clamp(26px, 3.6vw, 48px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+}
+
+@include mobile {
+  // Auf kleinen Bildschirmen steht das Inhaltsverzeichnis über dem Text und klebt nicht
+  .toc {
+    position: static;
+    flex-basis: 100%;
+  }
+}

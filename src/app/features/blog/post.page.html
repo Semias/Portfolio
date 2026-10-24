@@ -1,0 +1,76 @@
+<article class="post" aria-labelledby="post-title">
+  <header class="head">
+    <div class="head-inner">
+      <a class="back" [routerLink]="homePath()" fragment="writing"
+        ><app-icon name="arrow-left" />{{ t().post.back }}</a
+      >
+      <p class="meta">
+        <span class="category">{{ post().category }}</span>
+        @if (date(); as date) {
+          <span class="mark" aria-hidden="true"></span>
+          <time [attr.datetime]="post().date">{{ date }}</time>
+        }
+        @if (post().readingMinutes; as minutes) {
+          <span class="mark is-faint" aria-hidden="true"></span>
+          <span>{{ t().post.readingTime(minutes) }}</span>
+        }
+      </p>
+      <h1 id="post-title">
+        @for (part of post().titleParts; track $index) {
+          <span [class.accent]="part.accent">{{ part.text }}</span>
+        }
+      </h1>
+      <p class="teaser">{{ post().teaser }}</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    @if (post().toc.length) {
+      <nav class="toc" aria-labelledby="toc-title">
+        <p id="toc-title" class="toc-title">{{ t().post.contents }}</p>
+        <ol>
+          @for (entry of post().toc; track entry.id) {
+            <li>
+              <a [href]="path() + '#' + entry.id"
+                ><span class="toc-number">{{ entry.n }}</span
+                >{{ entry.label }}</a
+              >
+            </li>
+          }
+        </ol>
+      </nav>
+    }
+    <div class="content">
+      <app-post-body [html]="view().html" />
+      @if (post().tags.length) {
+        <ul class="tags" [attr.aria-label]="t().post.tags">
+          @for (tag of post().tags; track tag) {
+            <li>
+              <app-tag>{{ tag }}</app-tag>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+</article>
+
+@if (view().related.length) {
+  <section class="more" aria-labelledby="more-title">
+    <h2 id="more-title" class="more-title">
+      <span class="mark" aria-hidden="true"></span>{{ t().post.more }}
+    </h2>
+    <div class="cards">
+      @for (related of view().related; track related.slug) {
+        <app-post-card [post]="related" />
+      }
+    </div>
+  </section>
+}
+
+<section class="cta" aria-labelledby="cta-title">
+  <h2 id="cta-title">{{ t().post.ctaTitle }}</h2>
+  <a appPillButton [routerLink]="homePath()" fragment="contact"
+    ><app-icon name="mail" [size]="20" />{{ t().post.ctaLabel }}</a
+  >
+</section>

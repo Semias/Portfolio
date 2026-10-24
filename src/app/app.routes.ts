@@ -1,8 +1,10 @@
 import { Route, Routes } from '@angular/router';
 import { Alternates, PageRouteData } from './core/i18n/language.service';
-import { LANGS, Lang, PageKey, StaticPage, pagePath, routePath } from './core/i18n/paths';
+import { LANGS, Lang, PageKey, StaticPage, pagePath, postPath, routePath } from './core/i18n/paths';
+import { postRouteExtras } from './features/blog/post.routes';
 
 const loadHome = () => import('./features/home/home.page').then((m) => m.HomePage);
+const loadPost = () => import('./features/blog/post.page').then((m) => m.PostPage);
 const loadNotFound = () =>
   import('./features/not-found/not-found.page').then((m) => m.NotFoundPage);
 
@@ -24,6 +26,10 @@ function staticPage(lang: Lang, key: StaticPage, loadComponent: Route['loadCompo
 function localizedRoutes(lang: Lang): Routes {
   return [
     staticPage(lang, 'home', loadHome),
+    page(lang, 'post', routePath(postPath(':slug', lang), lang), {
+      loadComponent: loadPost,
+      ...postRouteExtras(lang),
+    }),
     // Wird als 404.html vorgerendert (scripts/postbuild.mjs)
     page(lang, 'notFound', routePath(pagePath('notFound', lang), lang), {
       loadComponent: loadNotFound,

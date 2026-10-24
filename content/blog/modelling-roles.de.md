@@ -23,12 +23,13 @@ Stabiler wird es, wenn man zuerst festlegt, wem Daten gehören — Mandant, Stan
 // Rolle = Fähigkeiten, Scope = Besitz
 type Grant = {
   subject: UserId;
-  role: 'editor' | 'admin';
-  scope: { tenant: TenantId; site?: SiteId };
+  role:    "editor" | "admin";
+  scope:   { tenant: TenantId; site?: SiteId };
 };
 
 function can(u: User, action: Action, res: Resource) {
-  return u.grants.some((g) => owns(g.scope, res) && ROLES[g.role].includes(action));
+  return u.grants.some(g =>
+    owns(g.scope, res) && ROLES[g.role].includes(action));
 }
 ```
 

@@ -3,17 +3,34 @@
   "rules": {
     "color-no-hex": [
       true,
-      { "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen" }
+      {
+        "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen"
+      }
     ],
     "color-named": [
       "never",
-      { "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen" }
+      {
+        "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen"
+      }
     ],
     "function-disallowed-list": [
       ["rgb", "rgba", "hsl", "hsla", "hwb", "lab", "lch", "oklab", "oklch", "color"],
-      { "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen" }
+      {
+        "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen"
+      }
     ],
-    "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["ng-deep"] }]
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ],
+    "selector-class-pattern": [
+      "^(?:[a-z][a-z0-9]*(?:-[a-z0-9]+)*|hljs(?:-[a-z_]+)*)$",
+      {
+        "message": "Klassen in kebab-case (Ausnahme: highlight.js-Klassen wie hljs-built_in)"
+      }
+    ]
   },
   "overrides": [
     {
