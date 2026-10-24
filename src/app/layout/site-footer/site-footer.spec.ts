@@ -45,10 +45,21 @@ describe('SiteFooter', () => {
     expect(imprint().getAttribute('href')).toBe('/de/impressum');
   });
 
+  it('links to the privacy policy in the current language', async () => {
+    const privacy = () => element.querySelectorAll('a')[1];
+    expect(privacy().textContent?.trim()).toBe('Privacy');
+    expect(privacy().getAttribute('href')).toBe('/privacy');
+
+    await router.navigateByUrl('/de/impressum');
+    await fixture.whenStable();
+    expect(privacy().textContent?.trim()).toBe('Datenschutz');
+    expect(privacy().getAttribute('href')).toBe('/de/datenschutz');
+  });
+
   it('scrolls back to the top', async () => {
     const scroll = TestBed.inject(ScrollService);
     const animate = vi.spyOn(scroll, 'animateTo').mockReturnValue(0);
-    const top = element.querySelectorAll('a')[1];
+    const top = element.querySelectorAll('a')[2];
     expect(top.getAttribute('href')).toBe('/#top');
     top.click();
     expect(animate).toHaveBeenCalledWith(0, undefined);

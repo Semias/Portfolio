@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { formatDate } from '../../core/i18n/format-date';
 import { LanguageService } from '../../core/i18n/language.service';
 import { pagePath, postPath } from '../../core/i18n/paths';
+import { pageMeta } from '../../core/seo/seo.service';
 import { Icon } from '../../shared/ui/icon/icon';
 import { PillButton } from '../../shared/ui/pill-button.directive';
 import { Tag } from '../../shared/ui/tag/tag';
@@ -30,4 +31,13 @@ export class PostPage {
     const date = this.post().date;
     return date ? formatDate(date, this.post().lang) : null;
   });
+
+  constructor() {
+    pageMeta(() => ({
+      title: `${this.post().title} · ${this.t().meta.siteName}`,
+      description: this.post().teaser,
+      type: 'article',
+      publishedTime: this.post().date,
+    }));
+  }
 }

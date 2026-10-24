@@ -17,6 +17,7 @@ export class SiteFooter {
   protected readonly t = this.language.t;
   protected readonly year = new Date().getFullYear();
   protected readonly imprintPath = computed(() => pagePath('imprint', this.language.lang()));
+  protected readonly privacyPath = computed(() => pagePath('privacy', this.language.lang()));
   protected readonly topHref = computed(() => `${this.language.path()}#top`);
 
   protected toTop(event: MouseEvent): void {

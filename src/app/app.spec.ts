@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { Router, provideRouter } from '@angular/router';
+import { Router, provideRouter, withComponentInputBinding } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
 import { routes } from './app.routes';
 import { HomePage } from './features/home/home.page';
+import { LegalPage } from './features/legal/legal.page';
 import { NotFoundPage } from './features/not-found/not-found.page';
 
 describe('App', () => {
@@ -39,7 +40,9 @@ describe('App', () => {
 
 describe('routes', () => {
   async function render(url: string) {
-    TestBed.configureTestingModule({ providers: [provideRouter(routes)] });
+    TestBed.configureTestingModule({
+      providers: [provideRouter(routes, withComponentInputBinding())],
+    });
     const harness = await RouterTestingHarness.create();
     const component = await harness.navigateByUrl(url);
     return { harness, component };
@@ -48,6 +51,10 @@ describe('routes', () => {
   it.each([
     ['/', HomePage],
     ['/de', HomePage],
+    ['/imprint', LegalPage],
+    ['/privacy', LegalPage],
+    ['/de/impressum', LegalPage],
+    ['/de/datenschutz', LegalPage],
     ['/404', NotFoundPage],
     ['/de/404', NotFoundPage],
     ['/does-not-exist', NotFoundPage],

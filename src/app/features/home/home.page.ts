@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService } from '../../core/i18n/language.service';
+import { pageMeta } from '../../core/seo/seo.service';
 import { NetworkBackground } from '../../shared/three/network-background';
 import { About } from './about/about';
 import { BlogTeasers } from './blog-teasers/blog-teasers';
@@ -29,4 +31,9 @@ import { SectionSnap } from './section-snap.directive';
     }
   `,
 })
-export class HomePage {}
+export class HomePage {
+  constructor() {
+    const t = inject(LanguageService).t;
+    pageMeta(() => ({ title: t().meta.homeTitle, description: t().meta.homeDescription }));
+  }
+}

@@ -13,6 +13,7 @@
     "start": "ng serve",
     "prebuild": "npm run content",
     "build": "ng build",
+    "postbuild": "node scripts/postbuild.mjs",
     "prewatch": "npm run content",
     "watch": "ng build --watch --configuration development",
     "pretest": "npm run content",

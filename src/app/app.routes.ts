@@ -5,6 +5,7 @@ import { postRouteExtras } from './features/blog/post.routes';
 
 const loadHome = () => import('./features/home/home.page').then((m) => m.HomePage);
 const loadPost = () => import('./features/blog/post.page').then((m) => m.PostPage);
+const loadLegal = () => import('./features/legal/legal.page').then((m) => m.LegalPage);
 const loadNotFound = () =>
   import('./features/not-found/not-found.page').then((m) => m.NotFoundPage);
 
@@ -30,6 +31,8 @@ function localizedRoutes(lang: Lang): Routes {
       loadComponent: loadPost,
       ...postRouteExtras(lang),
     }),
+    staticPage(lang, 'imprint', loadLegal),
+    staticPage(lang, 'privacy', loadLegal),
     // Wird als 404.html vorgerendert (scripts/postbuild.mjs)
     page(lang, 'notFound', routePath(pagePath('notFound', lang), lang), {
       loadComponent: loadNotFound,
