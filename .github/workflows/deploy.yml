@@ -4,10 +4,12 @@ name: Deploy
 # main -> Release Please pflegt den Release-PR; ist er gemergt, entsteht das Release
 #         und gall-stefan.de wird nach Freigabe im Environment production deployt
 # Tag v* (von Hand angelegtes Release) -> gall-stefan.de, ebenfalls nach Freigabe
+# Run workflow mit Tag vX.Y.Z -> dieses Release erneut auf gall-stefan.de deployen
 on:
   push:
     branches: [main]
     tags: ['v*']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -45,12 +47,22 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+      sha: ${{ steps.release.outputs.sha }}
     steps:
       - id: release
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+      # Release Please schaut auf den aktuellen Stand von main. Ist main seit diesem Lauf
+      # weitergelaufen, gehört der Build hier nicht zum Tag und wird nicht auf Prod deployt.
+      - name: Release gehört zu diesem Build?
+        if: steps.release.outputs.release_created == 'true' && steps.release.outputs.sha != github.sha
+        env:
+          TAG: ${{ steps.release.outputs.tag_name }}
+        run: |
+          echo "::error::$TAG zeigt nicht auf diesen Commit. Prod von Hand deployen: Actions -> Deploy -> Run workflow -> Tag $TAG"
+          exit 1
       # PRs vom GITHUB_TOKEN starten keine pull_request-Workflows. Die Pflicht-Checks
       # verify und pr-title werden deshalb für den Release-PR per workflow_dispatch angestoßen.
       - name: Checks für den Release-PR starten
@@ -122,13 +134,13 @@ jobs:
 
   deploy-prod:
     name: deploy-prod
-    # Über main nur, wenn Release Please gerade ein Release angelegt hat und dev grün ist
+    # Über main nur, wenn Release Please gerade ein Release für genau diesen Commit angelegt hat
     if: >-
       !cancelled() && needs.build.result == 'success' && (
         startsWith(github.ref, 'refs/tags/v') ||
-        (needs.release-please.outputs.release_created == 'true' && needs.deploy-dev.result == 'success')
+        (needs.release-please.outputs.release_created == 'true' && needs.release-please.outputs.sha == github.sha)
       )
-    needs: [build, release-please, deploy-dev]
+    needs: [build, release-please]
     runs-on: ubuntu-latest
     concurrency:
       group: deploy-production

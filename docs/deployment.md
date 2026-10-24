@@ -58,6 +58,8 @@ Weil der Release-PR vom `GITHUB_TOKEN` stammt, startet GitHub dafür keine `pull
 
 Eine bestimmte Version erzwingen (z. B. `2.0.0` für den Relaunch): in `release-please-config.json` unter `packages` → `.` den Eintrag `"release-as": "2.0.0"` ergänzen, per PR mergen und nach dem Release wieder entfernen.
 
+Ein Release erneut auf Prod deployen (z. B. wenn `deploy-prod` übersprungen wurde oder der Job `release-please` rot ist, weil `main` schon weitergelaufen war): *Actions → Deploy → Run workflow*, bei *Use workflow from* den Tag `vX.Y.Z` wählen, dann wie oben freigeben.
+
 Notfalls geht es weiter von Hand: *Releases → Draft a new release*, neuen Tag `vX.Y.Z` auf `main`, veröffentlichen, dann wie oben freigeben. Danach `.release-please-manifest.json` auf dieselbe Version setzen.
 
 ## Zurückrollen
