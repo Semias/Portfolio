@@ -1,3 +1,8 @@
-<main id="main" tabindex="-1">
+<a class="skip-link" [href]="mainHref()" (click)="skipToContent($event, main)">{{
+  t().header.skipLink
+}}</a>
+<app-site-header />
+<main #main id="main" tabindex="-1">
   <router-outlet />
 </main>
+<app-site-footer />

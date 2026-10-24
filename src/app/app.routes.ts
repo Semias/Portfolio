@@ -1,25 +1,23 @@
 import { Route, Routes } from '@angular/router';
-import { PageRouteData } from './core/i18n/language.service';
-import { Lang, PageKey, StaticPage, pagePath, routePath } from './core/i18n/paths';
+import { Alternates, PageRouteData } from './core/i18n/language.service';
+import { LANGS, Lang, PageKey, StaticPage, pagePath, routePath } from './core/i18n/paths';
 
 const loadHome = () => import('./features/home/home.page').then((m) => m.HomePage);
 const loadNotFound = () =>
   import('./features/not-found/not-found.page').then((m) => m.NotFoundPage);
 
-function page(
-  lang: Lang,
-  key: PageKey,
-  path: string,
-  loadComponent: Route['loadComponent'],
-): Route {
-  const data: PageRouteData = { lang, page: key };
-  return path === ''
-    ? { path, pathMatch: 'full', loadComponent, data }
-    : { path, loadComponent, data };
+function page(lang: Lang, key: PageKey, path: string, extra: Partial<Route> = {}): Route {
+  const data: PageRouteData = { lang, page: key, ...extra.data };
+  const route: Route = { ...extra, path, data };
+  return path === '' ? { ...route, pathMatch: 'full' } : route;
 }
 
 function staticPage(lang: Lang, key: StaticPage, loadComponent: Route['loadComponent']): Route {
-  return page(lang, key, routePath(pagePath(key, lang), lang), loadComponent);
+  const alternates: Alternates = Object.fromEntries(LANGS.map((l) => [l, pagePath(key, l)]));
+  return page(lang, key, routePath(pagePath(key, lang), lang), {
+    loadComponent,
+    data: { alternates },
+  });
 }
 
 /** Seiten einer Sprache. Englisch liegt ohne Präfix unter /, Deutsch unter /de. */
@@ -27,8 +25,10 @@ function localizedRoutes(lang: Lang): Routes {
   return [
     staticPage(lang, 'home', loadHome),
     // Wird als 404.html vorgerendert (scripts/postbuild.mjs)
-    staticPage(lang, 'notFound', loadNotFound),
-    page(lang, 'notFound', '**', loadNotFound),
+    page(lang, 'notFound', routePath(pagePath('notFound', lang), lang), {
+      loadComponent: loadNotFound,
+    }),
+    page(lang, 'notFound', '**', { loadComponent: loadNotFound }),
   ];
 }
 

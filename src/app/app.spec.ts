@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { App } from './app';
 import { routes } from './app.routes';
@@ -11,12 +11,29 @@ describe('App', () => {
     TestBed.configureTestingModule({ providers: [provideRouter(routes)] });
   });
 
-  it('renders the routed page inside the main landmark', async () => {
+  it('wraps the routed page in header, main landmark and footer', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
-    const main = (fixture.nativeElement as HTMLElement).querySelector('main#main');
-    expect(main).not.toBeNull();
-    expect(main?.querySelector('router-outlet')).not.toBeNull();
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('app-site-header header')).not.toBeNull();
+    expect(element.querySelector('main#main router-outlet')).not.toBeNull();
+    expect(element.querySelector('app-site-footer footer')).not.toBeNull();
+  });
+
+  it('offers a skip link that moves focus to the main content', async () => {
+    const fixture = TestBed.createComponent(App);
+    await TestBed.inject(Router).navigateByUrl('/de');
+    await fixture.whenStable();
+    const element = fixture.nativeElement as HTMLElement;
+    const skip = element.querySelector<HTMLAnchorElement>('.skip-link');
+    const main = element.querySelector<HTMLElement>('main');
+    if (!skip || !main) throw new Error('skip link or main missing');
+    main.scrollIntoView = vi.fn();
+
+    expect(skip.textContent?.trim()).toBe('Zum Inhalt springen');
+    expect(skip.getAttribute('href')).toBe('/de#main');
+    skip.click();
+    expect(document.activeElement).toBe(main);
   });
 });
 

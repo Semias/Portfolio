@@ -21,7 +21,15 @@ describe('LanguageService', () => {
             path: 'de',
             children: [
               { path: '', pathMatch: 'full', component: Blank, data: { lang: 'de', page: 'home' } },
-              { path: 'impressum', component: Blank, data: { lang: 'de', page: 'imprint' } },
+              {
+                path: 'impressum',
+                component: Blank,
+                data: {
+                  lang: 'de',
+                  page: 'imprint',
+                  alternates: { en: '/imprint', de: '/de/impressum' },
+                },
+              },
             ],
           },
           { path: '', pathMatch: 'full', component: Blank, data: { lang: 'en', page: 'home' } },
@@ -61,6 +69,23 @@ describe('LanguageService', () => {
     await harness.navigateByUrl('/without-data');
     expect(service.lang()).toBe('en');
     expect(service.page()).toBe('notFound');
+  });
+
+  it('exposes the current path without query and fragment', async () => {
+    await harness.navigateByUrl('/de/impressum?x=1#top');
+    expect(service.path()).toBe('/de/impressum');
+  });
+
+  it('switches to the same page in the other language when it exists', async () => {
+    await harness.navigateByUrl('/de/impressum');
+    expect(service.alternates()).toEqual({ en: '/imprint', de: '/de/impressum' });
+    expect(service.switchTarget()).toEqual({ lang: 'en', path: '/imprint' });
+  });
+
+  it('switches to the home page of the other language otherwise', async () => {
+    await harness.navigateByUrl('/');
+    expect(service.alternates()).toEqual({});
+    expect(service.switchTarget()).toEqual({ lang: 'de', path: '/de' });
   });
 
   it('gives access to the messages of the other language', () => {
