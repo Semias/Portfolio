@@ -1,0 +1,21 @@
+<section class="hero" data-hub="0" aria-labelledby="hero-title">
+  <div class="intro">
+    <h1 id="hero-title">
+      {{ t().hero.titleBefore }}<span class="accent">{{ t().hero.titleAccent }}</span
+      >{{ t().hero.titleAfter }}
+    </h1>
+    <p class="subline">{{ t().hero.subline }}</p>
+    <app-accent-picker class="picker" />
+  </div>
+  <div class="portrait-ring">
+    <div class="portrait">
+      <img
+        ngSrc="/images/portrait.webp"
+        width="210"
+        height="210"
+        priority
+        [alt]="t().hero.portraitAlt"
+      />
+    </div>
+  </div>
+</section>

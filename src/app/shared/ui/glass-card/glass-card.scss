@@ -1,0 +1,8 @@
+@use 'mixins' as *;
+
+:host {
+  @include glass;
+
+  display: block;
+  padding: clamp(32px, 4.6vw, 64px);
+}

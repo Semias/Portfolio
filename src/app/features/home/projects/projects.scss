@@ -1,0 +1,69 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+section {
+  @include home-section(right);
+}
+
+h2 {
+  @include section-heading;
+
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+
+.projects {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  list-style: none;
+}
+
+li {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: clamp(12px, 2.4vw, 32px);
+  align-items: baseline;
+  padding: clamp(28px, 3.6vw, 44px) 12px;
+  border-bottom: 1px solid var(--rule);
+  transition: background-color 200ms ease;
+
+  &:hover {
+    background: var(--hover);
+  }
+}
+
+.number {
+  color: var(--acc);
+  font-size: 13px;
+}
+
+h3 {
+  margin: 0;
+  font-size: clamp(20px, 2.3vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.body p {
+  max-width: 56ch;
+  margin: 10px 0 0;
+  color: var(--mute);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+@include mobile {
+  li {
+    grid-template-columns: 32px minmax(0, 1fr);
+    padding-inline: 4px;
+  }
+
+  .tag {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

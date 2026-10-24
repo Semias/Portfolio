@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  color: var(--mute);
+  font-size: 13px;
+}
+
+.number {
+  color: var(--acc);
+}
+
+.line {
+  width: 48px;
+  height: 1px;
+  background: var(--rule);
+}

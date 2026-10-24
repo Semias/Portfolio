@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/local
 
 
 # local env files
@@ -30,3 +31,7 @@ pnpm-debug.log*
 /.angular/cache
 /out-tsc
 /coverage
+
+# Erzeugt von scripts/build-content.mjs
+/src/app/content/posts.generated.ts
+/src/app/content/bodies/

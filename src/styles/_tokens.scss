@@ -83,6 +83,12 @@
   --scene-fallback: var(--bg);
 }
 
+// Unabhängig vom Theme
+:root {
+  // Regenbogen im Farbwähler für die freie Farbe
+  --picker-rainbow: conic-gradient(#ff563c, #ffc23c, #3ccf85, #2fd0c0, #4d9fff, #b36bff, #ff563c);
+}
+
 // Ohne gespeicherte Wahl und ohne JavaScript entscheidet die Systemeinstellung, sonst gilt Dunkel.
 :root,
 :root[data-theme='dark'] {

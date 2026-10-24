@@ -1,0 +1,31 @@
+<div class="picker" role="group" [attr.aria-label]="t().hero.pickerLabel">
+  @for (swatch of swatches(); track swatch.id) {
+    <button
+      type="button"
+      class="swatch"
+      [class.is-active]="swatch.active"
+      [style.--swatch]="swatch.color"
+      [attr.aria-label]="swatch.name"
+      [attr.aria-pressed]="swatch.active"
+      [title]="swatch.name"
+      (click)="pick(swatch.id)"
+    >
+      <span class="dot"></span>
+    </button>
+  }
+  <span class="divider" aria-hidden="true"></span>
+  <label
+    class="swatch custom"
+    [class.is-active]="isCustom()"
+    [style.--swatch]="customColor()"
+    [title]="t().hero.customColor"
+  >
+    <span class="dot rainbow"></span>
+    <input
+      type="color"
+      [value]="inputValue()"
+      [attr.aria-label]="t().hero.customColor"
+      (input)="onInput($event)"
+    />
+  </label>
+</div>

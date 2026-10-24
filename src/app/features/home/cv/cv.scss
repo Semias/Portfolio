@@ -1,0 +1,79 @@
+@use 'mixins' as *;
+
+:host {
+  --indent: clamp(28px, 4vw, 48px);
+
+  display: block;
+}
+
+section {
+  @include home-section(left);
+}
+
+h2 {
+  @include section-heading;
+
+  margin-bottom: clamp(56px, 7vw, 100px);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 7vw, 96px);
+  max-width: 720px;
+  margin: 0;
+  padding: 0 0 0 var(--indent);
+  border-left: 2px solid var(--rule);
+  list-style: none;
+}
+
+li {
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  top: 4px;
+  left: calc(var(--indent) * -1 - 9px);
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--dim);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 5px var(--bg);
+
+  .is-current & {
+    border: 0;
+    background: var(--acc);
+  }
+}
+
+.period {
+  margin: 0 0 12px;
+  color: var(--mute);
+  font-size: 13px;
+
+  .is-current & {
+    color: var(--acc-soft);
+  }
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.company {
+  margin: 0 0 18px;
+  color: var(--mute2);
+  font-size: 13px;
+}
+
+.text {
+  @include body-text;
+
+  max-width: 60ch;
+}
