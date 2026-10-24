@@ -7,9 +7,11 @@ import { Cv } from './cv/cv';
 import { Hero } from './hero/hero';
 import { InfoStrip } from './info-strip/info-strip';
 import { Projects } from './projects/projects';
+import { SectionSnap } from './section-snap.directive';
 
 @Component({
   selector: 'app-home-page',
+  hostDirectives: [SectionSnap],
   imports: [NetworkBackground, Hero, InfoStrip, About, Cv, Projects, BlogTeasers, Contact],
   template: `
     <app-network-background />
