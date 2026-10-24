@@ -1,0 +1,66 @@
+// Gemeinsame Bausteine für Komponenten-Styles: @use 'mixins' as *;
+
+$mobile: 719.98px;
+
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: ($mobile + 0.02px)) {
+    @content;
+  }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// Glas-Karte: halbtransparente Fläche über dem 3D-Hintergrund
+@mixin glass($radius: 20px) {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(1.1);
+  border: 1px solid var(--glass-border);
+  border-radius: $radius;
+  box-shadow: var(--glass-shadow);
+}
+
+// Sektion der Startseite: mindestens bildschirmhoch, abwechselnd links und rechts
+@mixin home-section($side: left) {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  max-width: min(100%, 880px);
+  padding: clamp(56px, 8vw, 110px) var(--gutter);
+
+  @if $side == right {
+    margin-left: auto;
+  }
+}
+
+@mixin section-heading {
+  margin: 0;
+  font-size: clamp(32px, 4.4vw, 60px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,28 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "rules": {
+    "color-no-hex": [
+      true,
+      { "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen" }
+    ],
+    "color-named": [
+      "never",
+      { "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen" }
+    ],
+    "function-disallowed-list": [
+      ["rgb", "rgba", "hsl", "hsla", "hwb", "lab", "lch", "oklab", "oklch", "color"],
+      { "message": "Feste Farben nur in src/styles/_tokens.scss, hier eine Variable nutzen" }
+    ],
+    "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["ng-deep"] }]
+  },
+  "overrides": [
+    {
+      "files": ["src/styles/_tokens.scss"],
+      "rules": {
+        "color-no-hex": null,
+        "color-named": null,
+        "function-disallowed-list": null
+      }
+    }
+  ]
+}

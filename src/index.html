@@ -1,11 +1,44 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Stefan Gall</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f8fa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1014" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      // Setzt Theme und Akzent, bevor die vorgerenderte Seite gezeichnet wird.
+      // Gegenstück zu ThemeService (src/app/core/theme), geprüft in scripts/tests/inline-theme.test.mjs.
+      (function () {
+        var root = document.documentElement;
+        var theme = null;
+        var palette = null;
+        try {
+          theme = localStorage.getItem('sg-portfolio-theme');
+          if (localStorage.getItem('sg-portfolio-accent')) {
+            palette = JSON.parse(localStorage.getItem('sg-portfolio-palette') || 'null');
+          }
+        } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          var light = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
+          theme = light && light.matches ? 'light' : 'dark';
+        }
+        root.setAttribute('data-theme', theme);
+        var colors = palette && palette[theme];
+        var hex = /^#[0-9a-f]{6}$/i;
+        if (colors && hex.test(colors.acc) && hex.test(colors.soft) && hex.test(colors.onAcc)) {
+          root.style.setProperty('--acc', colors.acc);
+          root.style.setProperty('--acc-soft', colors.soft);
+          root.style.setProperty('--on-acc', colors.onAcc);
+        }
+        var metas = document.querySelectorAll('meta[name="theme-color"]');
+        for (var i = 0; i < metas.length; i++) {
+          metas[i].setAttribute('content', theme === 'light' ? '#f7f8fa' : '#0e1014');
+        }
+      })();
+    </script>
   </head>
   <body>
     <app-root></app-root>
