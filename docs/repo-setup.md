@@ -6,7 +6,7 @@ Einmalige Handgriffe in den GitHub-Einstellungen, die sich nicht über Dateien i
 
 Releases → *Draft a new release* → *Choose a tag*: `v1.0.1` eingeben, *Create new tag on publish*, Target `main` → Titel `v1.0.1` → *Publish release*.
 
-Danach ist das der letzte Stand vor der neuen Pipeline. Das erste Release über Release Please wird `v2.0.0`.
+Danach ist das der letzte Stand vor der neuen Pipeline. Releases laufen inzwischen über Release Please (siehe `deployment.md`), `v2.0.0` bleibt für den Relaunch reserviert.
 
 ## 2. Alte Branches löschen
 
@@ -35,3 +35,8 @@ Den `main`-Ruleset erst importieren, nachdem die CI einmal gelaufen ist, sonst k
 
 - nur *Allow squash merging* aktiv, *Default commit message*: *Pull request title*
 - *Automatically delete head branches* aktiv
+
+## 5. Release Please
+
+- *Settings → Actions → General → Workflow permissions*: *Allow GitHub Actions to create and approve pull requests* aktivieren, *Save*.
+- *Settings → Environments → production → Deployment branches and tags*: zusätzlich den Branch `main` erlauben.

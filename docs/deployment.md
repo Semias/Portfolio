@@ -5,7 +5,7 @@ Die Seite läuft als Cloudflare Worker mit statischen Assets (`wrangler.jsonc`, 
 | Auslöser | Ziel | Schutz |
 | --- | --- | --- |
 | Merge auf `main` | https://dev.gall-stefan.de (Worker `portfolio-dev`) | Basic Auth, `X-Robots-Tag: noindex` |
-| Tag `v*` (Release) | https://gall-stefan.de (Worker `portfolio`), `www.` leitet um | Freigabe im Environment `production` |
+| Merge des Release-PRs von Release Please (oder Tag `v*`) | https://gall-stefan.de (Worker `portfolio`), `www.` leitet um | Freigabe im Environment `production` |
 
 Docker, nginx und `docker-compose.yml` bleiben davon unberührt und sind weiter für Portainer auf dem Home-VPS da.
 
@@ -26,7 +26,11 @@ Fehlen die Basic-Auth-Secrets, bricht der Dev-Deploy ab. Der Worker selbst bleib
 
 ### Environment `production`
 
-*Settings → Environments → production*: unter *Required reviewers* sich selbst eintragen. Unter *Deployment branches and tags* muss `v*` als Tag erlaubt sein (oder *No restriction*).
+*Settings → Environments → production*: unter *Required reviewers* sich selbst eintragen. Unter *Deployment branches and tags* müssen der Branch `main` (Releases über Release Please) und der Tag `v*` (von Hand angelegte Releases) erlaubt sein, oder *No restriction*.
+
+### Release Please darf PRs anlegen
+
+*Settings → Actions → General → Workflow permissions*: Haken bei *Allow GitHub Actions to create and approve pull requests*, dann *Save*.
 
 ### DNS in Cloudflare aufräumen
 
@@ -37,8 +41,26 @@ Cloudflare legt die Einträge für `dev.gall-stefan.de`, `gall-stefan.de` und `w
 
 ## Release auf Prod
 
-1. Release anlegen: *Releases → Draft a new release*, neuen Tag `vX.Y.Z` auf `main`, veröffentlichen.
-2. Unter *Actions → Deploy* wartet `deploy-prod` auf Freigabe: *Review deployments → Approve and deploy*.
+Release Please (Job `release-please` in `deploy.yml`, Konfiguration in `release-please-config.json`) liest nach jedem Merge auf `main` die Commit-Titel seit dem letzten Release und pflegt einen PR „chore(main): release X.Y.Z“ mit neuer Version und `CHANGELOG.md`:
+
+| Commit-Titel | Version |
+| --- | --- |
+| `fix: …` | 1.1.0 → 1.1.1 |
+| `feat: …` | 1.1.0 → 1.2.0 |
+| `feat!: …` oder `BREAKING CHANGE:` im Text | 1.1.0 → 2.0.0 |
+| `chore:`, `ci:`, `docs:`, `refactor:` … | kein neues Release |
+
+1. Release-PR prüfen: stimmen Versionsnummer und Changelog? `v2.0.0` ist für den Relaunch reserviert. Steht dort unerwartet 2.0.0, nicht mergen, sondern den auslösenden Commit-Titel prüfen.
+2. Release-PR mergen. Release Please legt Tag `vX.Y.Z` und das GitHub-Release an.
+3. Im selben Lauf unter *Actions → Deploy* wartet `deploy-prod` auf Freigabe: *Review deployments → Approve and deploy*.
+
+Weil der Release-PR vom `GITHUB_TOKEN` stammt, startet GitHub dafür keine `pull_request`-Workflows. Der Job `release-please` startet `verify` und `pr-title` deshalb selbst per `workflow_dispatch`, damit der PR mergebar wird.
+
+Eine bestimmte Version erzwingen (z. B. `2.0.0` für den Relaunch): in `release-please-config.json` unter `packages` → `.` den Eintrag `"release-as": "2.0.0"` ergänzen, per PR mergen und nach dem Release wieder entfernen.
+
+Ein Release erneut auf Prod deployen (z. B. wenn `deploy-prod` übersprungen wurde oder der Job `release-please` rot ist, weil `main` schon weitergelaufen war): *Actions → Deploy → Run workflow*, bei *Use workflow from* den Tag `vX.Y.Z` wählen, dann wie oben freigeben.
+
+Notfalls geht es weiter von Hand: *Releases → Draft a new release*, neuen Tag `vX.Y.Z` auf `main`, veröffentlichen, dann wie oben freigeben. Danach `.release-please-manifest.json` auf dieselbe Version setzen.
 
 ## Zurückrollen
 
