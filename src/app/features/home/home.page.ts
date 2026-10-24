@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NetworkBackground } from '../../shared/three/network-background';
 import { About } from './about/about';
 import { BlogTeasers } from './blog-teasers/blog-teasers';
 import { Contact } from './contact/contact';
@@ -9,8 +10,9 @@ import { Projects } from './projects/projects';
 
 @Component({
   selector: 'app-home-page',
-  imports: [Hero, InfoStrip, About, Cv, Projects, BlogTeasers, Contact],
+  imports: [NetworkBackground, Hero, InfoStrip, About, Cv, Projects, BlogTeasers, Contact],
   template: `
+    <app-network-background />
     <app-hero />
     <app-info-strip />
     <app-about />
