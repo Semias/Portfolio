@@ -1,7 +1,9 @@
 name: Deploy
 
 # main -> dev.gall-stefan.de (automatisch)
-# Tag v* -> gall-stefan.de (nach Freigabe im Environment production)
+# main -> Release Please pflegt den Release-PR; ist er gemergt, entsteht das Release
+#         und gall-stefan.de wird nach Freigabe im Environment production deployt
+# Tag v* (von Hand angelegtes Release) -> gall-stefan.de, ebenfalls nach Freigabe
 on:
   push:
     branches: [main]
@@ -27,6 +29,39 @@ jobs:
           name: dist
           path: dist
           retention-days: 30
+
+  release-please:
+    name: release-please
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: release-please
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      actions: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - id: release
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+      # PRs vom GITHUB_TOKEN starten keine pull_request-Workflows. Die Pflicht-Checks
+      # verify und pr-title werden deshalb für den Release-PR per workflow_dispatch angestoßen.
+      - name: Checks für den Release-PR starten
+        if: steps.release.outputs.pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          HEAD_BRANCH: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
+        run: |
+          gh workflow run ci.yml --ref "$HEAD_BRANCH"
+          gh workflow run pr-title.yml --ref "$HEAD_BRANCH"
 
   deploy-dev:
     name: deploy-dev
@@ -87,8 +122,13 @@ jobs:
 
   deploy-prod:
     name: deploy-prod
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: build
+    # Über main nur, wenn Release Please gerade ein Release angelegt hat und dev grün ist
+    if: >-
+      !cancelled() && needs.build.result == 'success' && (
+        startsWith(github.ref, 'refs/tags/v') ||
+        (needs.release-please.outputs.release_created == 'true' && needs.deploy-dev.result == 'success')
+      )
+    needs: [build, release-please, deploy-dev]
     runs-on: ubuntu-latest
     concurrency:
       group: deploy-production

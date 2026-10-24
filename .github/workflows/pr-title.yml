@@ -4,6 +4,8 @@ on:
   pull_request:
     # "edited" sorgt dafür, dass ein korrigierter Titel neu geprüft wird
     types: [opened, edited, synchronize, reopened]
+  # Für den Release-PR von Release Please (siehe deploy.yml), dessen Titel der Bot selbst setzt
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -17,5 +19,8 @@ jobs:
     steps:
       # Der PR-Titel wird beim Squash-Merge zur Commit-Message und steuert später die Version
       - uses: amannn/action-semantic-pull-request@0723387faaf9b38adef4775cd42cfd5155ed6017 # v5.5.3
+        if: github.event_name == 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - if: github.event_name == 'workflow_dispatch'
+        run: echo "Release-PR von Release Please, der Titel kommt vom Bot"
