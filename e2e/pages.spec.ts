@@ -113,4 +113,10 @@ test.describe('SEO', () => {
     const robots = await (await request.get('/robots.txt')).text();
     expect(robots).toContain('Sitemap: https://gall-stefan.de/sitemap.xml');
   });
+
+  test('leitet Adressen mit Schrägstrich am Ende auf die kanonische um', async ({ request }) => {
+    const response = await request.get('/de/impressum/?x=1', { maxRedirects: 0 });
+    expect(response.status()).toBe(307);
+    expect(response.headers()['location']).toBe('/de/impressum?x=1');
+  });
 });

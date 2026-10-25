@@ -1,5 +1,6 @@
-// Liefert dist/ aus wie Cloudflare (not_found_handling: 404-page) und nginx:
-// /pfad -> pfad/index.html oder pfad.html, unbekannte Pfade -> nächstgelegene 404.html mit Status 404.
+// Liefert dist/ aus wie Cloudflare (html_handling: drop-trailing-slash, not_found_handling: 404-page)
+// und nginx: /pfad -> pfad/index.html oder pfad.html, /pfad/ leitet auf /pfad um,
+// unbekannte Pfade -> nächstgelegene 404.html mit Status 404.
 // Für Playwright und zum lokalen Anschauen des Builds: node scripts/serve-dist.mjs [port]
 import { createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
@@ -63,8 +64,12 @@ function send(res, status, file) {
 }
 
 const server = createServer(async (req, res) => {
-  const { pathname } = new URL(req.url ?? '/', 'http://localhost');
+  const { pathname, search } = new URL(req.url ?? '/', 'http://localhost');
   const file = await resolveFile(pathname);
+  if (file && pathname.length > 1 && pathname.endsWith('/')) {
+    res.writeHead(307, { Location: pathname.slice(0, -1) + search }).end();
+    return;
+  }
   if (file) return send(res, 200, file);
   const fallback = await notFoundPage(pathname);
   if (fallback) return send(res, 404, fallback);

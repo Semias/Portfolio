@@ -123,11 +123,12 @@ jobs:
           for i in $(seq 1 20); do
             anonymous=$(curl -s -o /dev/null -w '%{http_code}' https://dev.gall-stefan.de/ || true)
             page=$(curl -fsS -u "$BASIC_AUTH_USER:$BASIC_AUTH_PASS" https://dev.gall-stefan.de/ || true)
-            if [ "$anonymous" = "401" ] && [[ "$page" == *'id="app"'* ]]; then
-              echo "dev.gall-stefan.de antwortet, Basic Auth greift"
+            missing=$(curl -s -o /dev/null -w '%{http_code}' -u "$BASIC_AUTH_USER:$BASIC_AUTH_PASS" https://dev.gall-stefan.de/gibt-es-nicht || true)
+            if [ "$anonymous" = "401" ] && [[ "$page" == *'<app-root'* ]] && [ "$missing" = "404" ]; then
+              echo "dev.gall-stefan.de antwortet, Basic Auth greift, unbekannte Seiten liefern 404"
               exit 0
             fi
-            echo "Versuch $i: ohne Login HTTP $anonymous, warte..."
+            echo "Versuch $i: ohne Login HTTP $anonymous, unbekannte Seite HTTP $missing, warte..."
             sleep 15
           done
           exit 1
@@ -168,11 +169,12 @@ jobs:
         run: |
           for i in $(seq 1 20); do
             page=$(curl -fsS https://gall-stefan.de/ || true)
-            if [[ "$page" == *'id="app"'* ]]; then
-              echo "gall-stefan.de antwortet"
+            missing=$(curl -s -o /dev/null -w '%{http_code}' https://gall-stefan.de/gibt-es-nicht || true)
+            if [[ "$page" == *'<app-root'* ]] && [ "$missing" = "404" ]; then
+              echo "gall-stefan.de antwortet, unbekannte Seiten liefern 404"
               exit 0
             fi
-            echo "Versuch $i, warte..."
+            echo "Versuch $i: unbekannte Seite HTTP $missing, warte..."
             sleep 15
           done
           exit 1
