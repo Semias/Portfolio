@@ -7,7 +7,7 @@ describe('PostBody', () => {
     const html =
       '<p>Lead with <em>emphasis</em> and <code>code</code>.</p>\n' +
       '<h2 id="part"><span class="heading-number" aria-hidden="true">01</span>Part</h2>\n' +
-      '<pre><code class="hljs language-typescript"><span class="hljs-keyword">type</span> A = <span class="hljs-string">"x"</span>;</code></pre>\n' +
+      '<pre tabindex="0"><code class="hljs language-typescript"><span class="hljs-keyword">type</span> A = <span class="hljs-string">"x"</span>;</code></pre>\n' +
       '<blockquote>\n<p>Quote</p>\n</blockquote>\n<ul>\n<li>one</li>\n</ul>';
     const fixture = TestBed.createComponent(PostBody);
     fixture.componentRef.setInput('html', html);

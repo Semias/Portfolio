@@ -80,7 +80,7 @@ describe('renderMarkdown', () => {
 
   it('highlights known languages with classes only', () => {
     const { html } = renderMarkdown('```ts\nconst a = "x"; // note\n```');
-    assert.match(html, /<pre><code class="hljs language-typescript">/);
+    assert.match(html, /<pre tabindex="0"><code class="hljs language-typescript">/);
     assert.match(html, /<span class="hljs-keyword">const<\/span>/);
     assert.match(html, /<span class="hljs-string">&quot;x&quot;<\/span>/);
     assert.match(html, /<span class="hljs-comment">\/\/ note<\/span>/);
@@ -89,7 +89,10 @@ describe('renderMarkdown', () => {
 
   it('escapes code in unknown languages', () => {
     const { html } = renderMarkdown('```brainfuck\n<script>alert(1)</script>\n```');
-    assert.match(html, /<pre><code class="hljs">&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+    assert.match(
+      html,
+      /<pre tabindex="0"><code class="hljs">&lt;script&gt;alert\(1\)&lt;\/script&gt;/,
+    );
   });
 
   it('renders quotes, lists and inline code', () => {

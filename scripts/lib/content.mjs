@@ -171,7 +171,8 @@ export function renderMarkdown(markdown, source = 'Markdown') {
         const className = known
           ? `hljs language-${hljs.getLanguage(lang).name.toLowerCase()}`
           : 'hljs';
-        return `<pre><code class="${className}">${body}</code></pre>\n`;
+        // tabindex: breite Code-Blöcke scrollen seitlich und müssen per Tastatur erreichbar sein
+        return `<pre tabindex="0"><code class="${className}">${body}</code></pre>\n`;
       },
     },
   });
