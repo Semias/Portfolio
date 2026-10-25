@@ -1,5 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, computed, effect, inject, signal } from '@angular/core';
+import {
+  Injectable,
+  TransferState,
+  computed,
+  effect,
+  inject,
+  makeStateKey,
+  signal,
+} from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { de } from './de';
@@ -19,17 +27,27 @@ export interface PageRouteData {
   alternates?: Alternates;
 }
 
-interface PageState extends Required<PageRouteData> {
+export interface PageState extends Required<PageRouteData> {
   /** Aktueller Pfad ohne Query und Fragment */
   path: string;
 }
+
+/**
+ * Zustand der vorgerenderten Seite. Im Browser gilt er, bis der Router seine erste Navigation
+ * abgeschlossen hat; sonst zeigten Header und Sprachumschalter beim Hydrieren kurz Englisch und
+ * die Startseite.
+ */
+export const PAGE_STATE_KEY = makeStateKey<PageState>('page');
 
 /** Sprache und Seite kommen aus der URL. Es gibt keine Weiterleitung nach Browsersprache. */
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly router = inject(Router);
   private readonly document = inject(DOCUMENT);
-  private readonly state = signal<PageState>(this.read());
+  private readonly transferState = inject(TransferState);
+  private readonly state = signal<PageState>(
+    this.transferState.get(PAGE_STATE_KEY, null) ?? this.read(),
+  );
 
   readonly lang = computed(() => this.state().lang);
   readonly page = computed(() => this.state().page);
@@ -44,9 +62,12 @@ export class LanguageService {
   });
 
   constructor() {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => this.state.set(this.read()));
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      const state = this.read();
+      this.state.set(state);
+      // Auf dem Server landet der Zustand so im HTML (ng-state) für den Browser
+      this.transferState.set(PAGE_STATE_KEY, state);
+    });
 
     effect(() => {
       this.document.documentElement.lang = this.lang();

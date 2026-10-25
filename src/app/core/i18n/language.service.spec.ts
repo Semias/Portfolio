@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, TransferState } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { de } from './de';
 import { en } from './en';
-import { LanguageService } from './language.service';
+import { LanguageService, PAGE_STATE_KEY } from './language.service';
 
 @Component({ template: '' })
 class Blank {}
@@ -90,5 +90,39 @@ describe('LanguageService', () => {
 
   it('gives access to the messages of the other language', () => {
     expect(service.messagesFor('de')).toBe(de);
+  });
+
+  it('hands the state of each page to the browser', async () => {
+    await harness.navigateByUrl('/de/impressum');
+    expect(TestBed.inject(TransferState).get(PAGE_STATE_KEY, null)).toEqual({
+      lang: 'de',
+      page: 'imprint',
+      alternates: { en: '/imprint', de: '/de/impressum' },
+      path: '/de/impressum',
+    });
+  });
+});
+
+describe('LanguageService before the first navigation', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
+  });
+
+  it('starts with the state of the prerendered page', () => {
+    TestBed.inject(TransferState).set(PAGE_STATE_KEY, {
+      lang: 'de',
+      page: 'post',
+      alternates: { en: '/blog/a', de: '/de/blog/a' },
+      path: '/de/blog/a',
+    });
+    const service = TestBed.inject(LanguageService);
+    expect(service.lang()).toBe('de');
+    expect(service.switchTarget()).toEqual({ lang: 'en', path: '/blog/a' });
+  });
+
+  it('falls back to the router without a prerendered page', () => {
+    const service = TestBed.inject(LanguageService);
+    expect(service.lang()).toBe('en');
+    expect(service.page()).toBe('notFound');
   });
 });
