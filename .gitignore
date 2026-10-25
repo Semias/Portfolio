@@ -35,3 +35,8 @@ pnpm-debug.log*
 # Erzeugt von scripts/build-content.mjs
 /src/app/content/posts.generated.ts
 /src/app/content/bodies/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
