@@ -24,10 +24,12 @@ Unter *Branches* löschen:
 
 *Settings → Rules → Rulesets → New ruleset → Import a ruleset*, nacheinander:
 
-- `.github/rulesets/main.json`: nur PRs auf `main`, nur Squash-Merge, lineare Historie, kein Force-Push oder Löschen, Pflicht-Checks `verify` und `pr-title`.
+- `.github/rulesets/main.json`: nur PRs auf `main`, nur Squash-Merge, lineare Historie, kein Force-Push oder Löschen, Pflicht-Checks `verify`, `e2e` und `pr-title`.
 - `.github/rulesets/release-tags.json`: Tags `v*` können nicht verschoben oder gelöscht werden.
 
-Den `main`-Ruleset erst importieren, nachdem die CI einmal gelaufen ist, sonst kennt GitHub die Checks `verify` und `pr-title` noch nicht. Wenn es noch klassische Branch-Protection-Regeln für `main` gibt (*Settings → Branches*), diese danach entfernen, damit nicht zwei Regelwerke greifen.
+Den `main`-Ruleset erst importieren, nachdem die CI einmal gelaufen ist, sonst kennt GitHub die Checks `verify`, `e2e` und `pr-title` noch nicht. Wenn es noch klassische Branch-Protection-Regeln für `main` gibt (*Settings → Branches*), diese danach entfernen, damit nicht zwei Regelwerke greifen.
+
+Ist der `main`-Ruleset schon importiert, kommt ein neuer Pflicht-Check (z. B. `e2e`) nicht von selbst dazu: *Settings → Rules → Rulesets → main → Require status checks to pass → Add checks*.
 
 ## 4. Merge-Einstellungen
 

@@ -7,7 +7,41 @@ Die Seite läuft als Cloudflare Worker mit statischen Assets (`wrangler.jsonc`, 
 | Merge auf `main` | https://dev.gall-stefan.de (Worker `portfolio-dev`) | Basic Auth, `X-Robots-Tag: noindex` |
 | Merge des Release-PRs von Release Please (oder Tag `v*`) | https://gall-stefan.de (Worker `portfolio`), `www.` leitet um | Freigabe im Environment `production` |
 
-Docker, nginx und `docker-compose.yml` bleiben davon unberührt und sind weiter für Portainer auf dem Home-VPS da.
+Docker, nginx und `docker-compose.yml` bleiben davon unberührt und sind weiter für Portainer auf dem Home-VPS da. Sie liefern dieselben vorgerenderten Seiten mit denselben Regeln aus (`nginx.conf`).
+
+## Seiten, Umleitungen und 404
+
+`npm run build` rendert jede Seite vor (`dist/imprint/index.html`, `dist/de/blog/…/index.html`) und legt `dist/404.html` und `dist/de/404.html` an. Cloudflare (`wrangler.jsonc`) liefert sie so aus:
+
+| Anfrage | Antwort |
+| --- | --- |
+| `/imprint` | `imprint/index.html` mit 200 |
+| `/imprint/` | 307 auf `/imprint` (Canonical und Sitemap nennen die Adresse ohne Schrägstrich) |
+| `/de/gibt-es-nicht` | `de/404.html` mit Status 404 |
+| `/gibt-es-nicht`, `/blog/unbekannt` | `404.html` mit Status 404 |
+
+Der Smoke-Test nach jedem Deploy prüft, dass die Startseite antwortet und eine unbekannte Seite 404 liefert. `node scripts/serve-dist.mjs` bildet dieselben Regeln lokal nach, darauf laufen auch die Playwright-Tests.
+
+## Tests in der CI
+
+`.github/workflows/ci.yml` läuft für jeden PR. Pflicht für den Merge auf `main` sind:
+
+- `verify`: Lint (TypeScript, Templates, SCSS), Prettier, Unit-Tests, Tests der Build-Skripte, Build, `npm audit` der Laufzeit-Abhängigkeiten
+- `e2e`: Playwright-Tests und axe-Barrierefreiheit gegen den Build, dazu die Screenshot-Vergleiche hell und dunkel. Der Job läuft im offiziellen Playwright-Docker-Image in der Version aus `package-lock.json`.
+- `pr-title`: Conventional-Commit-Format
+
+Schlägt `e2e` fehl, liegen Bericht, Traces und Screenshots im Artefakt `playwright-report` des Laufs (*Actions → Lauf → Artifacts*). Einen Trace öffnet `npx playwright show-trace trace.zip`.
+
+### Screenshots neu aufnehmen
+
+Nach gewollten Änderungen am Aussehen schlagen die Screenshot-Vergleiche fehl. Neue Vorlagen entstehen im selben Docker-Image wie in der CI, entweder lokal mit Docker:
+
+```sh
+npm run build
+npm run e2e:visual:update
+```
+
+oder ohne Docker über GitHub: *Actions → CI → Run workflow*, den Branch wählen und *Screenshots neu aufnehmen* anhaken. Das Artefakt `screenshots` des Laufs nach `e2e/__screenshots__/` entpacken, die Änderungen ansehen und committen. Solange es dort noch keine Screenshots gibt, überspringt die CI den Vergleich mit einer Warnung.
 
 ## Einmalige Einrichtung
 
@@ -54,7 +88,7 @@ Release Please (Job `release-please` in `deploy.yml`, Konfiguration in `release-
 2. Release-PR mergen. Release Please legt Tag `vX.Y.Z` und das GitHub-Release an.
 3. Im selben Lauf unter *Actions → Deploy* wartet `deploy-prod` auf Freigabe: *Review deployments → Approve and deploy*.
 
-Weil der Release-PR vom `GITHUB_TOKEN` stammt, startet GitHub dafür keine `pull_request`-Workflows. Der Job `release-please` startet `verify` und `pr-title` deshalb selbst per `workflow_dispatch`, damit der PR mergebar wird.
+Weil der Release-PR vom `GITHUB_TOKEN` stammt, startet GitHub dafür keine `pull_request`-Workflows. Der Job `release-please` startet die CI (`verify`, `e2e`) und `pr-title` deshalb selbst per `workflow_dispatch`, damit der PR mergebar wird.
 
 Eine bestimmte Version erzwingen (z. B. `2.0.0` für den Relaunch): in `release-please-config.json` unter `packages` → `.` den Eintrag `"release-as": "2.0.0"` ergänzen, per PR mergen und nach dem Release wieder entfernen.
 
@@ -70,6 +104,7 @@ Cloudflare-Dashboard → *Workers & Pages* → `portfolio` (bzw. `portfolio-dev`
 
 ```sh
 npm run build
+node scripts/serve-dist.mjs  # nur die Seiten, ohne Worker, auf http://localhost:4300
 printf 'BASIC_AUTH_USER=test\nBASIC_AUTH_PASS=test\n' > .dev.vars.dev
 npx wrangler dev --env dev   # mit Basic Auth
 npx wrangler dev             # wie Prod
