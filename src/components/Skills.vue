@@ -210,7 +210,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./src/assets/include-media";
+@import "@/assets/include-media";
 
 $ciprime: #42b883;
 $cibg1: #303030;

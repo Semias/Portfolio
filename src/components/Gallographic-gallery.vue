@@ -88,7 +88,7 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-@import "./src/assets/include-media";
+@import "@/assets/include-media";
 
 .gallery-teaser-container {
   display: flex;

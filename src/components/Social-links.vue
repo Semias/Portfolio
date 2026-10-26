@@ -27,7 +27,7 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-@import "./src/assets/include-media";
+@import "@/assets/include-media";
 
 .social-links {
   display: flex;

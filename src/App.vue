@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../src/assets/include-media";
+@import "@/assets/include-media";
 
 :root {
   --ciprime: #42b883;
