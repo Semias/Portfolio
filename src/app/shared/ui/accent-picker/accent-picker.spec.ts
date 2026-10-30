@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { mockMatchMedia } from '../../../../testing/media';
-import { accentPalette } from '../../../core/theme/color';
+import { DEFAULT_ACCENT, accentPalette } from '../../../core/theme/color';
 import { ThemeService } from '../../../core/theme/theme.service';
 import { AccentPicker } from './accent-picker';
 
@@ -24,11 +24,12 @@ describe('AccentPicker', () => {
 
   const swatches = () => [...element.querySelectorAll<HTMLButtonElement>('button.swatch')];
 
-  it('offers the four design colours as labelled toggle buttons', () => {
+  it('offers the preset colours as labelled toggle buttons, the default first', () => {
     expect(element.querySelector('[role="group"]')?.getAttribute('aria-label')).toBe(
       'Accent colour',
     );
     expect(swatches().map((b) => b.getAttribute('aria-label'))).toEqual([
+      'Coral',
       'Blue',
       'Teal',
       'Purple',
@@ -39,24 +40,25 @@ describe('AccentPicker', () => {
       'false',
       'false',
       'false',
+      'false',
     ]);
-    expect(swatches()[1].style.getPropertyValue('--swatch')).toBe(
+    expect(swatches()[2].style.getPropertyValue('--swatch')).toBe(
       accentPalette('dark', 'teal').acc,
     );
   });
 
   it('picks a preset colour', async () => {
-    swatches()[3].click();
+    swatches()[4].click();
     await fixture.whenStable();
     expect(theme.accent()).toBe('red');
-    expect(swatches()[3].getAttribute('aria-pressed')).toBe('true');
+    expect(swatches()[4].getAttribute('aria-pressed')).toBe('true');
     expect(swatches()[0].getAttribute('aria-pressed')).toBe('false');
   });
 
   it('shows the swatches in the colours of the active theme', async () => {
     theme.toggleTheme();
     await fixture.whenStable();
-    expect(swatches()[1].style.getPropertyValue('--swatch')).toBe(
+    expect(swatches()[2].style.getPropertyValue('--swatch')).toBe(
       accentPalette('light', 'teal').acc,
     );
   });
@@ -65,7 +67,7 @@ describe('AccentPicker', () => {
     const input = element.querySelector<HTMLInputElement>('input[type="color"]');
     if (!input) throw new Error('colour input missing');
     expect(input.getAttribute('aria-label')).toBe('Custom colour');
-    expect(input.value).toBe(accentPalette('dark', 'blue').acc);
+    expect(input.value).toBe(accentPalette('dark', DEFAULT_ACCENT).acc);
 
     input.value = '#12ab34';
     input.dispatchEvent(new Event('input'));

@@ -39,7 +39,7 @@ export const de: Messages = {
     portraitAlt: 'Porträt von Stefan Gall',
     pickerLabel: 'Akzentfarbe',
     customColor: 'Eigene Farbe',
-    accents: { blue: 'Blau', teal: 'Türkis', purple: 'Lila', red: 'Rot' },
+    accents: { coral: 'Koralle', blue: 'Blau', teal: 'Türkis', purple: 'Lila', red: 'Rot' },
   },
   info: {
     role: 'Solution Expert · Software Engineer',

@@ -3,7 +3,7 @@ import { LanguageService } from '../../../core/i18n/language.service';
 import { PRESET_ACCENTS, PresetAccent } from '../../../core/theme/color';
 import { ThemeService } from '../../../core/theme/theme.service';
 
-/** Farbmuster für die vier Akzentfarben plus freie Farbe */
+/** Farbmuster für die Akzentfarben plus freie Farbe */
 @Component({
   selector: 'app-accent-picker',
   templateUrl: './accent-picker.html',

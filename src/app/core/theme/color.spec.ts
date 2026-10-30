@@ -1,5 +1,6 @@
 import {
   ACCENT_PRESETS,
+  DEFAULT_ACCENT,
   MIN_CONTRAST,
   PRESET_ACCENTS,
   THEME_SURFACES,
@@ -119,8 +120,8 @@ describe('color', () => {
     });
 
     it('falls back to the default accent for invalid input', () => {
-      expect(accentPalette('dark', 'custom', 'red')).toEqual(accentPalette('dark', 'blue'));
-      expect(accentPalette('dark', 'custom', null)).toEqual(accentPalette('dark', 'blue'));
+      expect(accentPalette('dark', 'custom', 'red')).toEqual(accentPalette('dark', DEFAULT_ACCENT));
+      expect(accentPalette('dark', 'custom', null)).toEqual(accentPalette('dark', DEFAULT_ACCENT));
     });
   });
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MediaController, mockMatchMedia } from '../../../testing/media';
-import { accentPalette } from '../../core/theme/color';
+import { DEFAULT_ACCENT, accentPalette } from '../../core/theme/color';
 import { ThemeService } from '../../core/theme/theme.service';
 import {
   HUB_SIDES,
@@ -74,7 +74,9 @@ describe('NetworkBackground', () => {
     expect(host.classList.contains('stage')).toBe(true);
     expect(options.sides).toEqual(HUB_SIDES);
     expect(HUB_SIDES).toEqual([1, -1, 1, -1, 1, -1]);
-    expect(options.palette).toEqual(scenePalette('dark', accentPalette('dark', 'blue').acc));
+    expect(options.palette).toEqual(
+      scenePalette('dark', accentPalette('dark', DEFAULT_ACCENT).acc),
+    );
     expect(options.quality).toBe('high');
     expect(options.animate).toBe(true);
     expect(
@@ -92,7 +94,7 @@ describe('NetworkBackground', () => {
     theme.toggleTheme();
     TestBed.tick();
     expect(handle.setPalette).toHaveBeenLastCalledWith(
-      scenePalette('light', accentPalette('light', 'blue').acc),
+      scenePalette('light', accentPalette('light', DEFAULT_ACCENT).acc),
     );
 
     theme.setAccent('red');

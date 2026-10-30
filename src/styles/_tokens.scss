@@ -1,7 +1,7 @@
 // Alle festen Farbwerte der Seite, je ein Satz für Dunkel und Hell.
 // Komponenten verwenden nur die Variablen, Stylelint meldet feste Farben außerhalb dieser Datei.
 // --acc, --acc-soft und --on-acc setzt der ThemeService zur Laufzeit (Farbwähler, Kontrast).
-// Hier steht nur der Standard (Blau), damit die Seite auch ohne JavaScript stimmt.
+// Hier steht nur der Standard (Koralle), damit die Seite auch ohne JavaScript stimmt.
 // scripts/tests/tokens.test.mjs prüft, dass die Werte zu src/app/core/theme/color.ts passen
 // und jede Textfarbe mindestens 4,5 : 1 Kontrast hält.
 
@@ -24,8 +24,8 @@
   --dim: #5b6272;
   --rule: #262a33;
   --faint: #2c313c;
-  --acc: #4d9fff;
-  --acc-soft: #8fc2ff;
+  --acc: #ff7a66;
+  --acc-soft: #ffafa3;
   --on-acc: #0e1014;
   --glass-bg: color-mix(in srgb, var(--bg) 70%, transparent);
   --glass-border: color-mix(in srgb, var(--rule) 85%, transparent);
@@ -65,9 +65,9 @@
   --rule: #d6dae2;
   --faint: #d3d7df;
 
-  // Design: #1f6fd1 / #4d9fff, abgedunkelt auf 4,5 : 1 (siehe accentPalette in color.ts)
-  --acc: #1e6bc9;
-  --acc-soft: #1a5195;
+  // #ff7a66, abgedunkelt auf 4,5 : 1 (siehe accentPalette in color.ts)
+  --acc: #a85143;
+  --acc-soft: #7b3f37;
   --on-acc: #fff;
   --glass-bg: color-mix(in srgb, #fff 72%, transparent);
   --glass-border: color-mix(in srgb, var(--ink) 10%, transparent);

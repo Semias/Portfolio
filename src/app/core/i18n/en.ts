@@ -38,7 +38,7 @@ export const en: Messages = {
     portraitAlt: 'Portrait of Stefan Gall',
     pickerLabel: 'Accent colour',
     customColor: 'Custom colour',
-    accents: { blue: 'Blue', teal: 'Teal', purple: 'Purple', red: 'Red' },
+    accents: { coral: 'Coral', blue: 'Blue', teal: 'Teal', purple: 'Purple', red: 'Red' },
   },
   info: {
     role: 'Solution Expert · Software Engineer',

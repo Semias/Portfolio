@@ -2,7 +2,7 @@
 // Die Datei hat bewusst keine Imports: Die Node-Tests in scripts/tests laden sie direkt.
 
 export type Theme = 'dark' | 'light';
-export type PresetAccent = 'blue' | 'teal' | 'purple' | 'red';
+export type PresetAccent = 'coral' | 'blue' | 'teal' | 'purple' | 'red';
 export type Accent = PresetAccent | 'custom';
 
 export interface AccentPalette {
@@ -15,7 +15,7 @@ export interface AccentPalette {
 }
 
 /** Standardfarbe, solange niemand eine andere wählt. Bei einer Änderung auch --acc in _tokens.scss anpassen. */
-export const DEFAULT_ACCENT: PresetAccent = 'blue';
+export const DEFAULT_ACCENT: PresetAccent = 'coral';
 
 /** Mindestkontrast für Text (WCAG AA) */
 export const MIN_CONTRAST = 4.5;
@@ -34,6 +34,8 @@ export const ACCENT_PRESETS: Record<
   PresetAccent,
   { dark: string; darkSoft: string; light: string }
 > = {
+  // Standard: im Farbwähler gewählt (#ff7a66), übrige Töne wie bei einer freien Farbe berechnet
+  coral: { dark: '#ff7a66', darkSoft: '#ffafa3', light: '#a85143' },
   blue: { dark: '#4d9fff', darkSoft: '#8fc2ff', light: '#1f6fd1' },
   teal: { dark: '#2fd0c0', darkSoft: '#82e6db', light: '#0f8f84' },
   purple: { dark: '#b89cff', darkSoft: '#d6c7ff', light: '#7a5cc7' },

@@ -1,7 +1,7 @@
 import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { mockMatchMedia } from '../../../testing/media';
-import { THEME_SURFACES, accentPalette } from './color';
+import { DEFAULT_ACCENT, THEME_SURFACES, accentPalette } from './color';
 import { THEME_STORAGE_KEYS, ThemeService } from './theme.service';
 
 const LIGHT_QUERY = '(prefers-color-scheme: light)';
@@ -70,7 +70,7 @@ describe('ThemeService', () => {
     localStorage.setItem(THEME_STORAGE_KEYS.accent, 'gold');
     const service = create();
     expect(service.theme()).toBe('dark');
-    expect(service.accent()).toBe('blue');
+    expect(service.accent()).toBe(DEFAULT_ACCENT);
   });
 
   it('stores the toggled theme and updates the page', () => {
@@ -81,7 +81,7 @@ describe('ThemeService', () => {
 
     expect(localStorage.getItem(THEME_STORAGE_KEYS.theme)).toBe('light');
     expect(root.dataset['theme']).toBe('light');
-    expect(root.style.getPropertyValue('--acc')).toBe(accentPalette('light', 'blue').acc);
+    expect(root.style.getPropertyValue('--acc')).toBe(accentPalette('light', DEFAULT_ACCENT).acc);
     document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
       expect(meta.getAttribute('content')).toBe(THEME_SURFACES.light.bg);
     });

@@ -12,7 +12,7 @@ const PAGES = [
   '/gibt-es-nicht',
 ];
 
-const ACCENTS = ['blue', 'teal', 'purple', 'red'];
+const ACCENTS = ['coral', 'blue', 'teal', 'purple', 'red'];
 
 const THEMES: Theme[] = ['dark', 'light'];
 
