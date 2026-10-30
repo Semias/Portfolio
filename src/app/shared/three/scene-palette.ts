@@ -16,8 +16,6 @@ export interface ScenePalette {
   pointOpacity: number;
   routeOpacity: number;
   travelledOpacity: number;
-  edgeColor: string;
-  edgeOpacity: number;
   /** Wird mit den Sternfarben multipliziert */
   starTint: string;
   starOpacity: number;
@@ -41,8 +39,6 @@ export function scenePalette(theme: Theme, accent: string): ScenePalette {
       pointOpacity: 0.8,
       routeOpacity: 0.22,
       travelledOpacity: 0.9,
-      edgeColor: '#ffffff',
-      edgeOpacity: 0.3,
       starTint: '#ffffff',
       starOpacity: 1,
       denseStars: true,
@@ -61,8 +57,6 @@ export function scenePalette(theme: Theme, accent: string): ScenePalette {
     pointOpacity: 0.5,
     routeOpacity: 0.16,
     travelledOpacity: 0.7,
-    edgeColor: surfaces.ink,
-    edgeOpacity: 0.3,
     starTint: '#5b6272',
     starOpacity: 0.35,
     denseStars: false,

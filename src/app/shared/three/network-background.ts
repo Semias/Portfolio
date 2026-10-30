@@ -13,7 +13,7 @@ import {
 import { ScrollService } from '../../core/scroll/scroll.service';
 import { ThemeService } from '../../core/theme/theme.service';
 import { hubProgress } from './hub-progress';
-import type { HubKind, NetworkSceneOptions } from './network-scene';
+import type { NetworkSceneOptions } from './network-scene';
 import { ScenePalette, scenePalette } from './scene-palette';
 
 /** Was die Komponente von der Szene braucht. In Tests durch eine Attrappe ersetzbar. */
@@ -40,15 +40,10 @@ export const NETWORK_SCENE_LOADER = new InjectionToken<() => Promise<SceneFactor
 );
 
 /** Ein Knoten je Sektion der Startseite, abwechselnd rechts und links */
-export const HUB_KINDS: readonly HubKind[] = [
-  'spark',
-  'person',
-  'career',
-  'work',
-  'blog',
-  'contact',
-];
-export const HUB_SIDES = HUB_KINDS.map((_, i) => (i % 2 ? -1 : 1));
+const HUB_COUNT = 6;
+export const HUB_SIDES: readonly number[] = Array.from({ length: HUB_COUNT }, (_, i) =>
+  i % 2 ? -1 : 1,
+);
 
 /** Mobilgeräte bekommen weniger Sterne und eine begrenzte Pixel-Ratio */
 const LOW_QUALITY_QUERY = '(max-width: 719.98px), (pointer: coarse)';
@@ -127,7 +122,6 @@ export class NetworkBackground {
 
     try {
       this.scene = factory(this.stage().nativeElement, {
-        kinds: HUB_KINDS,
         sides: HUB_SIDES,
         palette: this.currentPalette(),
         quality,

@@ -4,7 +4,6 @@ import { MediaController, mockMatchMedia } from '../../../testing/media';
 import { accentPalette } from '../../core/theme/color';
 import { ThemeService } from '../../core/theme/theme.service';
 import {
-  HUB_KINDS,
   HUB_SIDES,
   NETWORK_SCENE_LOADER,
   NetworkBackground,
@@ -73,7 +72,6 @@ describe('NetworkBackground', () => {
     expect(created).toHaveLength(1);
     const { host, options } = created[0];
     expect(host.classList.contains('stage')).toBe(true);
-    expect(options.kinds).toEqual(HUB_KINDS);
     expect(options.sides).toEqual(HUB_SIDES);
     expect(HUB_SIDES).toEqual([1, -1, 1, -1, 1, -1]);
     expect(options.palette).toEqual(scenePalette('dark', accentPalette('dark', 'blue').acc));

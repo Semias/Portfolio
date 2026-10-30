@@ -68,7 +68,6 @@ describe('scenePalette', () => {
     expect(light.travelledOpacity).toBeLessThan(dark.travelledOpacity);
     expect(light.nebulaOpacity).toBeLessThan(dark.nebulaOpacity);
     expect(light.starOpacity).toBeLessThan(dark.starOpacity);
-    expect(light.edgeColor).toBe(THEME_SURFACES.light.ink);
     expect(light.pulseColor).toBe('#1e6bc9');
   });
 });

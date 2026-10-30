@@ -3,31 +3,22 @@
 // zu Knoten, eine Linie zeigt den zurückgelegten Weg, die Maus bewegt die Kamera leicht mit.
 import {
   AdditiveBlending,
-  BoxGeometry,
   BufferAttribute,
   BufferGeometry,
   CanvasTexture,
   CatmullRomCurve3,
   Color,
-  CylinderGeometry,
-  DirectionalLight,
-  DoubleSide,
-  EdgesGeometry,
   Euler,
   Fog,
   Group,
-  HemisphereLight,
-  IcosahedronGeometry,
   Line,
   LineBasicMaterial,
   LineSegments,
   Material,
   Mesh,
   MeshBasicMaterial,
-  MeshStandardMaterial,
   NormalBlending,
   Object3D,
-  OctahedronGeometry,
   PerspectiveCamera,
   Points,
   PointsMaterial,
@@ -36,7 +27,6 @@ import {
   SphereGeometry,
   Sprite,
   SpriteMaterial,
-  TetrahedronGeometry,
   Texture,
   Vector3,
   WebGLRenderer,
@@ -45,20 +35,14 @@ import { Theme } from '../../core/theme/color';
 import { gaussian, seededRandom } from './random';
 import { ScenePalette } from './scene-palette';
 
-export type HubKind = 'spark' | 'person' | 'career' | 'work' | 'blog' | 'contact';
-
 export interface NetworkSceneOptions {
-  /** Symbol je Knoten, ein Knoten pro Sektion */
-  kinds: readonly HubKind[];
-  /** Seite des Knotens: 1 rechts, -1 links */
+  /** Ein Knoten pro Sektion, Seite des Knotens: 1 rechts, -1 links */
   sides: readonly number[];
   palette: ScenePalette;
   /** low: weniger Sterne, kleinere Texturen, Pixel-Ratio höchstens 1,5 (Mobilgeräte) */
   quality: 'high' | 'low';
   /** false bei „Bewegung reduzieren“: ein ruhiges Standbild ohne Kamerafahrt */
   animate: boolean;
-  /** Symbole an den Knoten. Im Prototyp gebaut, aber nicht zur Szene hinzugefügt. */
-  hubSymbols?: boolean;
   seed?: number;
 }
 
@@ -83,7 +67,6 @@ function smoothing(perFrame: number, dt: number): number {
 interface Live {
   accent: Color;
   background: Color;
-  edge: Color;
   starTint: Color;
   dust: Color;
   pulse: Color;
@@ -92,7 +75,6 @@ interface Live {
   point: number;
   route: number;
   travelled: number;
-  edgeOpacity: number;
   star: number;
   dustOpacity: number;
   nebula: number;
@@ -115,7 +97,6 @@ function toLive(palette: ScenePalette): Live {
   return {
     accent,
     background: new Color(palette.background),
-    edge: new Color(palette.edgeColor),
     starTint: new Color(palette.starTint),
     dust: new Color(palette.dustColor),
     pulse: new Color(palette.pulseColor),
@@ -124,7 +105,6 @@ function toLive(palette: ScenePalette): Live {
     point: palette.pointOpacity,
     route: palette.routeOpacity,
     travelled: palette.travelledOpacity,
-    edgeOpacity: palette.edgeOpacity,
     star: palette.starOpacity,
     dustOpacity: palette.dustOpacity,
     nebula: palette.nebulaOpacity,
@@ -212,7 +192,6 @@ export class NetworkScene {
   private readonly resizeObserver: ResizeObserver;
   private readonly mouse = { x: 0, y: 0, tx: 0, ty: 0 };
   private readonly hubs: Vector3[];
-  private readonly halos: Group[] = [];
   private readonly camPath: CatmullRomCurve3;
   private readonly lookPath: CatmullRomCurve3;
   private readonly route: CatmullRomCurve3;
@@ -224,8 +203,6 @@ export class NetworkScene {
 
   private readonly lineMaterial: LineBasicMaterial;
   private readonly pointMaterial: PointsMaterial;
-  private readonly solidMaterial: MeshStandardMaterial;
-  private readonly edgeMaterial: LineBasicMaterial;
   private readonly routeMaterial: LineBasicMaterial;
   private readonly travelledMaterial: LineBasicMaterial;
   private readonly pulseMaterial: MeshBasicMaterial;
@@ -287,14 +264,6 @@ export class NetworkScene {
       opacity: 0.8,
       depthWrite: false,
     });
-    this.solidMaterial = new MeshStandardMaterial({
-      color: accent,
-      roughness: 0.4,
-      metalness: 0.15,
-      flatShading: true,
-      side: DoubleSide,
-    });
-    this.edgeMaterial = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
     this.routeMaterial = new LineBasicMaterial({ color: accent, transparent: true, opacity: 0.22 });
     this.travelledMaterial = new LineBasicMaterial({
       color: accent,
@@ -312,7 +281,7 @@ export class NetworkScene {
     this.glowing.push(this.pointMaterial, this.dustMaterial);
 
     // Netz aus Punkten und den Knoten der Sektionen
-    const count = options.kinds.length;
+    const count = options.sides.length;
     const span = 12 * (count - 1);
     const side = (i: number) => options.sides[i] || 1;
     const points = Array.from(
@@ -324,7 +293,7 @@ export class NetworkScene {
           6 - this.random() * (span + 14),
         ),
     );
-    this.hubs = options.kinds.map(
+    this.hubs = options.sides.map(
       (_, i) => new Vector3(2.8 * side(i), i % 2 ? -0.7 : 0.7, -12 * i),
     );
     const all = points.concat(this.hubs);
@@ -338,13 +307,7 @@ export class NetworkScene {
     this.scene.add(
       new LineSegments(new BufferGeometry().setFromPoints(segments), this.lineMaterial),
       new Points(new BufferGeometry().setFromPoints(points), this.pointMaterial),
-      new HemisphereLight(0xdfe6ff, 0x202430, 1.2),
     );
-    const light = new DirectionalLight(0xffffff, 1.4);
-    light.position.set(3, 5, 6);
-    this.scene.add(light);
-
-    this.buildHubSymbols();
 
     // Kamerafahrt und Weg
     this.camPath = new CatmullRomCurve3(
@@ -403,94 +366,19 @@ export class NetworkScene {
     this.resizeObserver.disconnect();
     window.removeEventListener('pointermove', this.onPointerMove);
     const textures = new Set<Texture>();
-    const roots: Object3D[] = [this.scene, ...this.halos.filter((halo) => !halo.parent)];
-    roots.forEach((root) =>
-      root.traverse((object: Object3D) => {
-        const node = object as Partial<Mesh>;
-        node.geometry?.dispose();
-        const materials = ([] as Material[]).concat(node.material ?? []);
-        for (const material of materials) {
-          const map = (material as { map?: Texture | null }).map;
-          if (map) textures.add(map);
-          material.dispose();
-        }
-      }),
-    );
+    this.scene.traverse((object: Object3D) => {
+      const node = object as Partial<Mesh>;
+      node.geometry?.dispose();
+      const materials = ([] as Material[]).concat(node.material ?? []);
+      for (const material of materials) {
+        const map = (material as { map?: Texture | null }).map;
+        if (map) textures.add(map);
+        material.dispose();
+      }
+    });
     textures.forEach((texture) => texture.dispose());
     this.renderer.dispose();
     this.renderer.domElement.remove();
-  }
-
-  private buildHubSymbols(): void {
-    const put = (
-      group: Group,
-      geometry: BufferGeometry,
-      position = [0, 0, 0],
-      rotation = [0, 0, 0],
-    ) => {
-      const mesh = new Mesh(geometry, this.solidMaterial);
-      mesh.position.set(position[0], position[1], position[2]);
-      mesh.rotation.set(rotation[0], rotation[1], rotation[2]);
-      const edges = new LineSegments(new EdgesGeometry(geometry, 25), this.edgeMaterial);
-      edges.position.copy(mesh.position);
-      edges.rotation.copy(mesh.rotation);
-      group.add(mesh, edges);
-    };
-    const makers: Record<HubKind, (group: Group) => void> = {
-      // Start: Kristall
-      spark: (g) => {
-        put(g, new OctahedronGeometry(0.5, 0));
-        put(g, new TetrahedronGeometry(0.14, 0), [0.62, 0.38, 0]);
-        put(g, new TetrahedronGeometry(0.1, 0), [-0.55, -0.42, 0.1]);
-      },
-      // Über mich: Büste
-      person: (g) => {
-        put(g, new IcosahedronGeometry(0.24, 1), [0, 0.32, 0]);
-        put(g, new CylinderGeometry(0.2, 0.42, 0.5, 8, 1), [0, -0.18, 0]);
-      },
-      // Lebenslauf: Treppe mit Fahne
-      career: (g) => {
-        for (const i of [0, 1, 2]) {
-          const height = 0.2 + i * 0.2;
-          put(g, new BoxGeometry(0.32, height, 0.4), [-0.34 + i * 0.34, -0.4 + height / 2, 0]);
-        }
-        put(g, new CylinderGeometry(0.015, 0.015, 0.45, 6), [0.4, 0.4, 0]);
-        put(g, new BoxGeometry(0.22, 0.14, 0.01), [0.52, 0.55, 0]);
-      },
-      // Projekte: gestapelte Module
-      work: (g) => {
-        put(g, new BoxGeometry(0.42, 0.42, 0.42), [-0.22, -0.22, 0]);
-        put(g, new BoxGeometry(0.42, 0.42, 0.42), [0.22, -0.22, 0.05]);
-        put(g, new BoxGeometry(0.42, 0.42, 0.42), [0, 0.22, -0.02], [0, 0.4, 0]);
-      },
-      // Blog: offenes Buch
-      blog: (g) => {
-        put(g, new BoxGeometry(0.5, 0.03, 0.66), [-0.24, 0, 0], [0, 0, 0.32]);
-        put(g, new BoxGeometry(0.5, 0.03, 0.66), [0.24, 0, 0], [0, 0, -0.32]);
-        put(g, new BoxGeometry(0.46, 0.012, 0.6), [0.2, 0.08, 0], [0, 0, -0.62]);
-        g.rotation.x = 0.5;
-      },
-      // Kontakt: Papierflieger
-      contact: (g) => {
-        const vertices = new Float32Array([
-          0, 0, 0.6, -0.55, 0, -0.45, 0, 0.02, -0.25, 0, 0, 0.6, 0, 0.02, -0.25, 0.55, 0, -0.45, 0,
-          0, 0.6, 0, 0.02, -0.25, 0, -0.22, -0.4,
-        ]);
-        const geometry = new BufferGeometry();
-        geometry.setAttribute('position', new BufferAttribute(vertices, 3));
-        geometry.computeVertexNormals();
-        put(g, geometry, [0, 0, 0], [0.25, 0.6, 0]);
-      },
-    };
-    this.hubs.forEach((hub, i) => {
-      const outer = new Group();
-      outer.position.copy(hub);
-      const inner = new Group();
-      makers[this.options.kinds[i]](inner);
-      outer.add(inner);
-      this.halos.push(outer);
-      if (this.options.hubSymbols !== false) this.scene.add(outer);
-    });
   }
 
   private buildSky(span: number, quality: (typeof SCENE_QUALITY)['high' | 'low']): void {
@@ -688,16 +576,6 @@ export class NetworkScene {
       this.pulse.position,
     );
 
-    const position = current * (this.hubs.length - 1);
-    const grow = animate ? smoothing(0.1, dt) : 1;
-    this.halos.forEach((halo, i) => {
-      const closeness = Math.max(0, 1 - Math.abs(position - i));
-      const scale = 1 + closeness * 0.6;
-      halo.scale.setScalar(halo.scale.x + (scale - halo.scale.x) * grow);
-      halo.rotation.y = t * 0.35 + i * 1.3;
-      halo.position.y = this.hubs[i].y + Math.sin(t * 0.9 + i) * 0.08;
-    });
-
     if (animate) this.stepPalette(dt);
     this.applyLive(t);
   }
@@ -717,7 +595,7 @@ export class NetworkScene {
     const k = 1 - Math.exp(-dt * COLOR_RATE);
     const live = this.live;
     const target = this.targetLive;
-    for (const key of ['accent', 'background', 'edge', 'starTint', 'dust', 'pulse'] as const) {
+    for (const key of ['accent', 'background', 'starTint', 'dust', 'pulse'] as const) {
       live[key].lerp(target[key], k);
     }
     live.hues.forEach((hue, i) => hue.lerp(target.hues[i], k));
@@ -726,7 +604,6 @@ export class NetworkScene {
       'point',
       'route',
       'travelled',
-      'edgeOpacity',
       'star',
       'dustOpacity',
       'nebula',
@@ -754,9 +631,6 @@ export class NetworkScene {
     this.lineMaterial.opacity = (live.line + shimmer * Math.sin(t * 0.8)) * fade;
     this.pointMaterial.color.copy(live.accent);
     this.pointMaterial.opacity = live.point * fade;
-    this.solidMaterial.color.copy(live.accent);
-    this.edgeMaterial.color.copy(live.edge);
-    this.edgeMaterial.opacity = live.edgeOpacity * fade;
     this.routeMaterial.color.copy(live.accent);
     this.routeMaterial.opacity = live.route * fade;
     this.travelledMaterial.color.copy(live.accent);
