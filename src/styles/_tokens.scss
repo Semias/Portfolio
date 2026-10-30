@@ -30,6 +30,9 @@
   --glass-bg: color-mix(in srgb, var(--bg) 70%, transparent);
   --glass-border: color-mix(in srgb, var(--rule) 85%, transparent);
   --glass-shadow: 0 30px 60px -40px rgb(0 0 0 / 60%);
+
+  // Durchsichtiger als die Karten, damit der Footer nicht als dunkler Balken wirkt
+  --footer-bg: color-mix(in srgb, var(--field) 35%, transparent);
   --header-bg: var(--field);
   --header-compact-bg: var(--bg);
   --header-compact-shadow: 0 8px 24px -14px rgb(0 0 0 / 60%);
@@ -69,6 +72,7 @@
   --glass-bg: color-mix(in srgb, #fff 72%, transparent);
   --glass-border: color-mix(in srgb, var(--ink) 10%, transparent);
   --glass-shadow: 0 24px 48px -32px rgb(20 30 50 / 28%), 0 1px 2px rgb(20 30 50 / 6%);
+  --footer-bg: var(--glass-bg);
   --header-bg: var(--field);
   --header-compact-bg: var(--bg);
   --header-compact-shadow: 0 8px 24px -16px rgb(20 30 50 / 25%);

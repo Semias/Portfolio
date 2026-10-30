@@ -20,10 +20,16 @@ $mobile: 719.98px;
   }
 }
 
-// Glas-Karte: halbtransparente Fläche über dem 3D-Hintergrund
-@mixin glass($radius: 20px) {
-  background: var(--glass-bg);
+// Halbtransparente, unscharfe Fläche über dem 3D-Hintergrund
+@mixin glass-surface($background: var(--glass-bg)) {
+  background: $background;
   backdrop-filter: blur(12px) saturate(1.1);
+}
+
+// Glas-Karte
+@mixin glass($radius: 20px) {
+  @include glass-surface;
+
   border: 1px solid var(--glass-border);
   border-radius: $radius;
   box-shadow: var(--glass-shadow);

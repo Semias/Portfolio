@@ -15,11 +15,11 @@ import { Icon } from '../../../shared/ui/icon/icon';
       <span class="mark" aria-hidden="true"></span>
       <span class="profiles">
         <a [href]="site.github" target="_blank" rel="noreferrer"
-          ><app-icon name="github" [size]="14" />github</a
+          ><app-icon name="github" [size]="14" />GitHub</a
         >
         <span class="slash" aria-hidden="true"></span>
         <a [href]="site.linkedin" target="_blank" rel="noreferrer"
-          ><app-icon name="linkedin" [size]="14" />linkedin</a
+          ><app-icon name="linkedin" [size]="14" />LinkedIn</a
         >
       </span>
     </div>
