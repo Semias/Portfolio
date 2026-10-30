@@ -15,9 +15,11 @@ test.describe('Blog', () => {
 
   test('zeigt Kopf, Inhaltsverzeichnis, Code, Zitat, Liste und Tags', async ({ page }) => {
     await page.goto(POST);
-    await expect(page.locator('.meta')).toContainText('Identity');
-    await expect(page.locator('time')).toHaveText('Sep 12, 2026');
-    await expect(page.locator('.meta')).toContainText('min read');
+    // Kopf des Beitrags, nicht die Karten unter „Weiterlesen“
+    const meta = page.locator('header.head .meta');
+    await expect(meta).toContainText('Identity');
+    await expect(meta.locator('time')).toHaveText('Sep 12, 2026');
+    await expect(meta).toContainText('min read');
     await expect(page.locator('.toc a')).toHaveText([
       '01Roles are the surface',
       '02Ownership first',
@@ -77,7 +79,7 @@ test.describe('Blog', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
       'Rollen modellieren, ohne sich zu verbauen',
     );
-    await expect(page.locator('time')).toHaveText('12. Sep 2026');
+    await expect(page.locator('header.head time')).toHaveText('12. Sep 2026');
   });
 
   test('behält Sprache und Umschalter, solange der Beitragstext noch lädt', async ({ page }) => {

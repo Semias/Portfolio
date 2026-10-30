@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Post } from '../../../content/post';
+import { formatDate } from '../../../core/i18n/format-date';
 import { LanguageService } from '../../../core/i18n/language.service';
 import { postPath } from '../../../core/i18n/paths';
 
@@ -11,7 +12,12 @@ import { postPath } from '../../../core/i18n/paths';
   host: { '[class.is-link]': 'post().published' },
   template: `
     <article>
-      <p class="tag">#{{ tag() }}</p>
+      <p class="meta">
+        <span class="tag">#{{ tag() }}</span>
+        @if (date(); as date) {
+          <time [attr.datetime]="post().date">{{ date }}</time>
+        }
+      </p>
       <h3>
         @if (post().published) {
           <a [routerLink]="path()">{{ post().title }}</a>
@@ -31,5 +37,9 @@ export class PostCard {
   readonly post = input.required<Post>();
   protected readonly t = inject(LanguageService).t;
   protected readonly tag = computed(() => this.post().category.toLowerCase());
+  protected readonly date = computed(() => {
+    const date = this.post().date;
+    return date ? formatDate(date, this.post().lang) : null;
+  });
   protected readonly path = computed(() => postPath(this.post().slug, this.post().lang));
 }

@@ -105,7 +105,7 @@ describe('HomePage', () => {
   it('links the profiles in the info strip', async () => {
     const page = await render('/');
     const links = [...page.querySelectorAll<HTMLAnchorElement>('app-info-strip a')];
-    expect(links.map((a) => a.textContent?.trim())).toEqual(['github', 'linkedin']);
+    expect(links.map((a) => a.textContent?.trim())).toEqual(['GitHub', 'LinkedIn']);
   });
 
   it('switches every text to German under /de', async () => {

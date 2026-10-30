@@ -25,10 +25,18 @@ article {
   padding: clamp(26px, 3.4vw, 40px);
 }
 
-.tag {
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
   margin: 0;
-  color: var(--acc-soft);
+  color: var(--mute2);
   font-size: 12px;
+}
+
+.tag {
+  color: var(--acc-soft);
 }
 
 h3 {
