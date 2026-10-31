@@ -65,13 +65,15 @@ jobs:
           exit 1
       # PRs vom GITHUB_TOKEN starten keine pull_request-Workflows. Die Pflicht-Checks
       # verify und pr-title werden deshalb für den Release-PR per workflow_dispatch angestoßen.
+      # Step-env wird schon vor dem if ausgewertet, daher kein fromJSON auf einer leeren Ausgabe
       - name: Checks für den Release-PR starten
-        if: steps.release.outputs.pr
+        if: steps.release.outputs.prs_created == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          HEAD_BRANCH: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
+          PR_JSON: ${{ steps.release.outputs.pr }}
         run: |
+          HEAD_BRANCH=$(jq -r .headBranchName <<<"$PR_JSON")
           gh workflow run ci.yml --ref "$HEAD_BRANCH"
           gh workflow run pr-title.yml --ref "$HEAD_BRANCH"
 
