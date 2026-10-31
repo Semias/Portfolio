@@ -1,0 +1,37 @@
+// Pillen-Buttons, gesetzt über die Direktive appPillButton (src/app/shared/ui/pill-button.directive.ts)
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12.5px 22px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.pill:hover {
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+.pill.is-primary {
+  padding: 14px 22px;
+  border: 0;
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.pill.is-primary:hover {
+  background: var(--acc);
+  color: var(--on-acc);
+}

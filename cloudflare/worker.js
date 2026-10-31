@@ -1,4 +1,4 @@
-// Liefert die gebaute Vue-App aus dist/ aus.
+// Liefert die vorgerenderte Angular-Seite aus dist/ aus (Routing der Seiten und 404: siehe wrangler.jsonc).
 // Prod: www leitet auf die Hauptdomain um. Jede andere Umgebung: Basic Auth und noindex.
 export default {
   async fetch(request, env) {

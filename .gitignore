@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/local
 
 
 # local env files
@@ -25,3 +26,17 @@ pnpm-debug.log*
 # Cloudflare Wrangler
 .wrangler
 .dev.vars*
+
+# Angular
+/.angular/cache
+/out-tsc
+/coverage
+
+# Erzeugt von scripts/build-content.mjs
+/src/app/content/posts.generated.ts
+/src/app/content/bodies/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/

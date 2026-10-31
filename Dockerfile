@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
 
-# ---- Build stage: compile the Vue SPA to static files ----
-FROM node:20-alpine AS build
+# ---- Build stage: build and prerender the Angular site to static files ----
+# Angular 22 needs Node 22 or newer (see "engines" in package.json)
+FROM node:22-alpine AS build
 
 WORKDIR /app
 

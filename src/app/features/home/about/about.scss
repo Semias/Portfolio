@@ -1,0 +1,35 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+section {
+  @include home-section(right);
+}
+
+h2 {
+  @include section-heading;
+
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(28px, 5vw, 80px);
+}
+
+.lead {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(20px, 1.9vw, 26px);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.body {
+  @include body-text;
+
+  line-height: 1.75;
+}

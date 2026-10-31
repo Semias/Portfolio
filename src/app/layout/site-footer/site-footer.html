@@ -1,0 +1,8 @@
+<footer class="site-footer">
+  <span>© {{ year }} Stefan Gall</span>
+  <div class="links">
+    <a [routerLink]="imprintPath()">{{ t().footer.imprint }}</a>
+    <a [routerLink]="privacyPath()">{{ t().footer.privacy }}</a>
+    <a [href]="topHref()" (click)="toTop($event)">{{ t().footer.backToTop }}</a>
+  </div>
+</footer>

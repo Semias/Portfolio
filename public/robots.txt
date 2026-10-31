@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gall-stefan.de/sitemap.xml

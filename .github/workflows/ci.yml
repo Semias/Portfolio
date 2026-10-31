@@ -4,8 +4,13 @@ on:
   pull_request:
   push:
     branches: [main]
-  # Für den Release-PR von Release Please (siehe deploy.yml)
+  # Für den Release-PR von Release Please (siehe deploy.yml) und zum Neuaufnehmen der Screenshots
   workflow_dispatch:
+    inputs:
+      update_screenshots:
+        description: Screenshots für die Vergleiche neu aufnehmen (Artefakt „screenshots“)
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -26,6 +31,66 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - run: npm run lint:styles
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run test:scripts
       - run: npm run build
-      # Nur Laufzeit-Abhängigkeiten: die bekannten Lücken stecken in den Vue-CLI-Dev-Tools
+      # Nur Laufzeit-Abhängigkeiten, die Dev-Tools landen nicht auf der Seite
       - run: npm audit --omit=dev --audit-level=high
+
+  # Das Playwright-Image muss zur installierten Version passen; Dependabot hebt nur package-lock.json an
+  playwright-image:
+    name: playwright-image
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - id: image
+        run: |
+          version=$(jq -r '.packages["node_modules/@playwright/test"].version' package-lock.json)
+          echo "image=mcr.microsoft.com/playwright:v$version-noble" >> "$GITHUB_OUTPUT"
+
+  # Im Playwright-Image: dieselben Schriften und dasselbe Rendering wie lokal mit npm run e2e:visual
+  e2e:
+    name: e2e
+    needs: playwright-image
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ needs.playwright-image.outputs.image }}
+      options: --ipc=host
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run e2e
+      - name: Screenshot-Vergleiche
+        if: ${{ !inputs.update_screenshots }}
+        run: |
+          if ls e2e/__screenshots__/visual.spec.ts/*-linux.png > /dev/null 2>&1; then
+            npx playwright test --grep @visual
+          else
+            echo "::warning::Noch keine Screenshots zum Vergleichen. Actions -> CI -> Run workflow mit „Screenshots neu aufnehmen“ (siehe docs/deployment.md)"
+          fi
+      - name: Screenshots neu aufnehmen
+        if: ${{ inputs.update_screenshots }}
+        run: npx playwright test --grep @visual --update-snapshots
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: ${{ inputs.update_screenshots }}
+        with:
+          name: screenshots
+          path: e2e/__screenshots__
+          retention-days: 7
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          retention-days: 14

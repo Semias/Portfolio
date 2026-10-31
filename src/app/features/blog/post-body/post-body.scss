@@ -1,0 +1,162 @@
+app-post-body {
+  display: block;
+  color: var(--ink2);
+  font-size: 17px;
+  line-height: 1.7;
+
+  > p {
+    margin: 0 0 1.2em;
+    text-wrap: pretty;
+  }
+
+  // Erster Absatz als Einleitung
+  > p:first-child {
+    color: var(--ink);
+    font-size: clamp(19px, 1.8vw, 23px);
+    line-height: 1.55;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  h2,
+  h3 {
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 2em 0 0.6em;
+    font-size: clamp(22px, 2.4vw, 30px);
+  }
+
+  h3 {
+    margin: 1.6em 0 0.5em;
+    font-size: clamp(19px, 1.9vw, 23px);
+  }
+
+  .heading-number {
+    color: var(--acc);
+    font-size: 0.6em;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  a {
+    color: var(--acc-soft);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  code {
+    color: var(--acc-soft);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+
+  pre {
+    margin: 1.6em 0;
+    padding: clamp(18px, 2.4vw, 26px);
+    overflow-x: auto;
+    border-radius: 6px;
+    background: var(--code-bg);
+    font-size: 14px;
+    line-height: 1.65;
+
+    code {
+      color: var(--code-text);
+      font-size: inherit;
+    }
+  }
+
+  // Syntaxfarben (highlight.js-Klassen), je Theme in _tokens.scss
+  .hljs-comment,
+  .hljs-quote {
+    color: var(--code-comment);
+  }
+
+  .hljs-keyword,
+  .hljs-built_in,
+  .hljs-meta,
+  .hljs-selector-tag {
+    color: var(--code-keyword);
+  }
+
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-attr,
+  .hljs-symbol {
+    color: var(--code-string);
+  }
+
+  .hljs-number,
+  .hljs-literal {
+    color: var(--code-number);
+  }
+
+  blockquote {
+    margin: 2em 0;
+    padding: 0 0 0 clamp(18px, 2.4vw, 28px);
+    border-left: 2px solid var(--acc);
+    color: var(--ink);
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  ul,
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 1.2em;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    padding-left: 22px;
+  }
+
+  ul > li::before {
+    content: '';
+    position: absolute;
+    top: 0.65em;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--acc);
+  }
+
+  ol {
+    counter-reset: item;
+  }
+
+  ol > li {
+    padding-left: 32px;
+  }
+
+  ol > li::before {
+    content: counter(item, decimal-leading-zero);
+    counter-increment: item;
+    position: absolute;
+    left: 0;
+    color: var(--acc);
+    font-size: 0.8em;
+  }
+}

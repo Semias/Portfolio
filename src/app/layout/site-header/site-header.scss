@@ -1,0 +1,180 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+// Fixiert und mit festen Höhen, damit beim Wechsel in den kompakten Zustand nichts springt.
+// main hält den Platz über padding-top: var(--header-h) frei.
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: var(--header-h);
+  padding: 0 var(--gutter);
+  background: var(--header-bg);
+  transition:
+    height 250ms ease,
+    background-color 250ms ease,
+    box-shadow 250ms ease;
+
+  &.is-compact {
+    height: var(--header-h-compact);
+    background: var(--header-compact-bg);
+    box-shadow:
+      var(--header-compact-shadow),
+      inset 0 -1px 0 var(--header-compact-line);
+  }
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--ink);
+  }
+}
+
+.logo-mark {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--acc);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 28px);
+  margin-left: auto;
+  margin-right: clamp(8px, 2vw, 24px);
+  font-size: 13px;
+  white-space: nowrap;
+  transition:
+    opacity 250ms ease,
+    visibility 250ms ease;
+
+  a {
+    padding: 4px 0;
+    border-bottom: 1.5px solid transparent;
+    color: var(--mute);
+    transition:
+      color 200ms ease,
+      border-color 200ms ease;
+
+    &:hover {
+      border-bottom-color: var(--acc);
+      color: var(--ink);
+    }
+  }
+}
+
+// Kompakter Header: Navigation blendet aus, kommt aber für die Tastatur zurück
+.is-compact:not(:focus-within) .site-nav {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.site-nav + .actions {
+  margin-left: 0;
+}
+
+.theme-toggle,
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.theme-toggle {
+  width: 30px;
+  padding: 0;
+  border: 1.5px solid var(--rule);
+  background: none;
+  color: var(--ink);
+
+  &:hover {
+    border-color: var(--acc);
+    color: var(--acc);
+  }
+}
+
+.lang-switch {
+  padding: 0 9px;
+  border: 1.5px solid var(--acc);
+  color: var(--acc);
+  font-size: 12px;
+  font-weight: 500;
+
+  &:hover {
+    background: var(--acc);
+    color: var(--on-acc);
+  }
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--acc);
+  transform-origin: left center;
+}
+
+// Mobil: Logo und Buttons oben, Navigation in einer eigenen Zeile darunter
+@include mobile {
+  .site-header {
+    flex-wrap: wrap;
+    align-content: center;
+    row-gap: 12px;
+  }
+
+  .site-nav {
+    order: 3;
+    flex-basis: 100%;
+    gap: 18px;
+    margin: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .site-nav + .actions {
+    margin-left: auto;
+  }
+
+  .site-header.is-compact:focus-within {
+    height: var(--header-h);
+  }
+
+  .is-compact:not(:focus-within) .site-nav {
+    display: none;
+  }
+}

@@ -1,0 +1,85 @@
+@use 'mixins' as *;
+
+:root {
+  --font-sans: 'Google Sans', system-ui, sans-serif;
+  --font-mono: 'Google Sans Code', ui-monospace, 'SFMono-Regular', menlo, consolas, monospace;
+  --gutter: clamp(20px, 5vw, 64px);
+
+  // Der Header liegt fixiert über der Seite. Die Höhen sind fest, damit beim Scrollen nichts springt.
+  --header-h: 80px;
+  --header-h-compact: 52px;
+
+  @include mobile {
+    --header-h: 100px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h-compact) + 24px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--acc-soft);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--acc);
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--acc);
+  color: var(--on-acc);
+}
+
+:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+// Kurze Überblendung beim Theme-Wechsel. Der ThemeService setzt die Klasse nur beim Umschalten,
+// nicht beim ersten Laden.
+@media (prefers-reduced-motion: no-preference) {
+  :root.theme-switching,
+  :root.theme-switching *,
+  :root.theme-switching *::before,
+  :root.theme-switching *::after {
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      fill 200ms ease,
+      stroke 200ms ease !important;
+  }
+}

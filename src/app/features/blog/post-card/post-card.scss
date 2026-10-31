@@ -1,0 +1,77 @@
+:host {
+  position: relative;
+  display: block;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  transition: border-color 200ms ease;
+}
+
+:host(.is-link:hover),
+:host(.is-link:focus-within) {
+  border-color: var(--acc);
+}
+
+// Fokusrahmen um die ganze Karte statt nur um den Titel
+:host(:has(a:focus-visible)) {
+  outline: 2px solid var(--acc);
+  outline-offset: 3px;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+  padding: clamp(26px, 3.4vw, 40px);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 0;
+  color: var(--mute2);
+  font-size: 12px;
+}
+
+.tag {
+  color: var(--acc-soft);
+}
+
+h3 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+// Die ganze Karte ist klickbar, der Link bleibt aber nur der Titel
+a {
+  color: inherit;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.excerpt {
+  margin: 0;
+  color: var(--ink3);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.soon {
+  margin: auto 0 0;
+  color: var(--mute2);
+  font-size: 12px;
+}

@@ -1,0 +1,110 @@
+// Alle festen Farbwerte der Seite, je ein Satz für Dunkel und Hell.
+// Komponenten verwenden nur die Variablen, Stylelint meldet feste Farben außerhalb dieser Datei.
+// --acc, --acc-soft und --on-acc setzt der ThemeService zur Laufzeit (Farbwähler, Kontrast).
+// Hier steht nur der Standard (Koralle), damit die Seite auch ohne JavaScript stimmt.
+// scripts/tests/tokens.test.mjs prüft, dass die Werte zu src/app/core/theme/color.ts passen
+// und jede Textfarbe mindestens 4,5 : 1 Kontrast hält.
+
+@mixin dark {
+  color-scheme: dark;
+
+  --bg: #0e1014;
+  --field: #14171d;
+  --hover: #151820;
+  --ink: #eef0f4;
+  --ink2: #c3c8d2;
+  --ink3: #a3a9b6;
+  --mute: #8b93a3;
+  --mute2: #7d8596;
+
+  // Design: #6c7383, für 4,5 : 1 leicht angehoben
+  --mute3: #7a818f;
+
+  // nur für Deko (Linien, Punkte), nicht für Text
+  --dim: #5b6272;
+  --rule: #262a33;
+  --faint: #2c313c;
+  --acc: #ff7a66;
+  --acc-soft: #ffafa3;
+  --on-acc: #0e1014;
+  --glass-bg: color-mix(in srgb, var(--bg) 70%, transparent);
+  --glass-border: color-mix(in srgb, var(--rule) 85%, transparent);
+  --glass-shadow: 0 30px 60px -40px rgb(0 0 0 / 60%);
+
+  // Durchsichtiger als die Karten, damit der Footer nicht als dunkler Balken wirkt
+  --footer-bg: color-mix(in srgb, var(--field) 35%, transparent);
+  --header-bg: var(--field);
+  --header-compact-bg: var(--bg);
+  --header-compact-shadow: 0 8px 24px -14px rgb(0 0 0 / 60%);
+
+  // Im Dunkeln ist ein Schatten kaum sichtbar, dort trägt die Trennlinie
+  --header-compact-line: var(--rule);
+  --code-bg: var(--field);
+  --code-text: var(--ink2);
+  --code-comment: var(--mute2);
+  --code-keyword: var(--acc-soft);
+  --code-string: var(--acc);
+  --code-number: var(--ink);
+  --code-title: var(--ink);
+  --scene-fallback: var(--bg);
+}
+
+@mixin light {
+  color-scheme: light;
+
+  --bg: #f7f8fa;
+  --field: #eef0f4;
+  --hover: #eceef3;
+  --ink: #11141a;
+  --ink2: #323843;
+  --ink3: #444b57;
+  --mute: #586070;
+  --mute2: #5f6676;
+  --mute3: #646b7a;
+  --dim: #8a91a0;
+  --rule: #d6dae2;
+  --faint: #d3d7df;
+
+  // #ff7a66, abgedunkelt auf 4,5 : 1 (siehe accentPalette in color.ts)
+  --acc: #a85143;
+  --acc-soft: #7b3f37;
+  --on-acc: #fff;
+  --glass-bg: color-mix(in srgb, #fff 72%, transparent);
+  --glass-border: color-mix(in srgb, var(--ink) 10%, transparent);
+  --glass-shadow: 0 24px 48px -32px rgb(20 30 50 / 28%), 0 1px 2px rgb(20 30 50 / 6%);
+  --footer-bg: var(--glass-bg);
+  --header-bg: var(--field);
+  --header-compact-bg: var(--bg);
+  --header-compact-shadow: 0 8px 24px -16px rgb(20 30 50 / 25%);
+  --header-compact-line: transparent;
+  --code-bg: var(--field);
+  --code-text: var(--ink2);
+  --code-comment: var(--mute2);
+  --code-keyword: var(--acc-soft);
+  --code-string: var(--acc);
+  --code-number: var(--ink);
+  --code-title: var(--ink);
+  --scene-fallback: var(--bg);
+}
+
+// Unabhängig vom Theme
+:root {
+  // Regenbogen im Farbwähler für die freie Farbe
+  --picker-rainbow: conic-gradient(#ff563c, #ffc23c, #3ccf85, #2fd0c0, #4d9fff, #b36bff, #ff563c);
+}
+
+// Ohne gespeicherte Wahl und ohne JavaScript entscheidet die Systemeinstellung, sonst gilt Dunkel.
+:root,
+:root[data-theme='dark'] {
+  @include dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    @include light;
+  }
+}
+
+:root[data-theme='light'] {
+  @include light;
+}

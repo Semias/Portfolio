@@ -1,0 +1,45 @@
+<header id="top" class="site-header" [class.is-compact]="scroll.scrolled()">
+  <a
+    class="logo"
+    [href]="homePath()"
+    [attr.aria-label]="t().header.homeLabel"
+    (click)="onLogo($event)"
+  >
+    <span class="logo-mark" aria-hidden="true"></span>
+    <span>Stefan Gall</span>
+  </a>
+
+  <nav class="site-nav" [attr.aria-label]="t().header.navLabel">
+    @for (item of navItems(); track item.id) {
+      <a [href]="item.href" (click)="onNav($event, item.id)">{{ item.label }}</a>
+    }
+  </nav>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="theme-toggle"
+      [attr.aria-label]="themeLabel()"
+      [title]="themeLabel()"
+      (click)="theme.toggleTheme()"
+    >
+      <app-icon [name]="isDark() ? 'sun' : 'moon'" [size]="17" />
+    </button>
+    <a
+      class="lang-switch"
+      [routerLink]="switchTarget().path"
+      [attr.hreflang]="switchTarget().lang"
+      [attr.lang]="switchTarget().lang"
+      [attr.aria-label]="switchLabel()"
+      >{{ t().header.switchLangShort }}</a
+    >
+  </div>
+
+  @if (showProgress()) {
+    <span
+      class="progress"
+      aria-hidden="true"
+      [style.transform]="'scaleX(' + scroll.progress() + ')'"
+    ></span>
+  }
+</header>

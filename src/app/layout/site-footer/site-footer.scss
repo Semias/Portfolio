@@ -1,0 +1,35 @@
+@use 'mixins' as *;
+
+:host {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px var(--gutter);
+  color: var(--mute3);
+  font-size: 12px;
+  border-top: 1px solid var(--glass-border);
+
+  @include glass-surface(var(--footer-bg));
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+
+  a {
+    color: var(--mute3);
+
+    &:hover {
+      color: var(--acc);
+    }
+  }
+}

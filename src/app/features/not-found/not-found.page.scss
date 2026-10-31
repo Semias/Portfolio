@@ -1,0 +1,36 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  max-width: 720px;
+  min-height: calc(100vh - var(--header-h) - 120px);
+  padding: clamp(48px, 8vw, 96px) var(--gutter);
+}
+
+.kicker {
+  margin: 0;
+  color: var(--acc);
+  font-size: 13px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.text {
+  margin: 0;
+  color: var(--ink2);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.home-link {
+  align-self: flex-start;
+  margin-top: 12px;
+  font-weight: 600;
+}

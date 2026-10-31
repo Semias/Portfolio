@@ -9,7 +9,10 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "run_worker_first": true,
-    "not_found_handling": "single-page-application"
+    // Vorgerenderte Seiten liegen als imprint/index.html; Canonical und Sitemap nennen /imprint
+    "html_handling": "drop-trailing-slash",
+    // Unbekannte Pfade: nächstgelegene 404.html (de/404.html bzw. 404.html) mit Status 404
+    "not_found_handling": "404-page"
   },
   "workers_dev": false,
   "preview_urls": false,
