@@ -4,7 +4,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { mockMatchMedia } from '../../../testing/media';
 import { routes } from '../../app.routes';
 import { SITE } from '../../core/site';
-import { LEGAL } from './legal-content';
+import { IMPRINT } from './legal-content';
 import { LegalPage } from './legal.page';
 
 describe('LegalPage', () => {
@@ -23,8 +23,6 @@ describe('LegalPage', () => {
   it.each([
     ['/imprint', 'Imprint'],
     ['/de/impressum', 'Impressum'],
-    ['/privacy', 'Privacy policy'],
-    ['/de/datenschutz', 'Datenschutzerklärung'],
   ])('%s shows %s as a plain text page', async (url, heading) => {
     const { component, page } = await render(url);
     expect(component).toBeInstanceOf(LegalPage);
@@ -36,18 +34,18 @@ describe('LegalPage', () => {
     const { page } = await render('/de/impressum');
     const sections = [...page.querySelectorAll('section')];
     expect(sections.map((s) => s.querySelector('h2')?.textContent)).toEqual(
-      LEGAL.imprint.de.sections.map((s) => s.heading),
+      IMPRINT.de.sections.map((s) => s.heading),
     );
-    expect(sections[0].querySelectorAll('br')).toHaveLength(3);
+    expect(sections[0].querySelectorAll('br')).toHaveLength(
+      IMPRINT.de.sections[0].lines.length - 1,
+    );
     expect(sections[0].textContent).toContain('Stefan Gall');
     expect(sections[1].querySelector('a')?.getAttribute('href')).toBe(`mailto:${SITE.email}`);
   });
 
   it('has the same structure in both languages', () => {
-    for (const kind of ['imprint', 'privacy'] as const) {
-      expect(LEGAL[kind].en.sections.map((s) => s.lines.length)).toEqual(
-        LEGAL[kind].de.sections.map((s) => s.lines.length),
-      );
-    }
+    expect(IMPRINT.en.sections.map((s) => s.lines.length)).toEqual(
+      IMPRINT.de.sections.map((s) => s.lines.length),
+    );
   });
 });

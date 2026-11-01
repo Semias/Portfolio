@@ -1,0 +1,10 @@
+<app-network-background />
+<app-hero />
+<app-info-strip />
+<app-about />
+<app-cv />
+<app-projects />
+@if (hasPosts()) {
+  <app-blog-teasers />
+}
+<app-contact [number]="hasPosts() ? '05' : '04'" />

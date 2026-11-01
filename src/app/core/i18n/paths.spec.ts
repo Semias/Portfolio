@@ -1,5 +1,6 @@
-import { de } from './de';
-import { en } from './en';
+import de from './de.json';
+import en from './en.json';
+import { interpolate } from './interpolate';
 import { isLang, langPrefix, otherLang, pagePath, postPath, routePath } from './paths';
 
 describe('paths', () => {
@@ -8,8 +9,6 @@ describe('paths', () => {
     expect(pagePath('home', 'de')).toBe('/de');
     expect(pagePath('imprint', 'en')).toBe('/imprint');
     expect(pagePath('imprint', 'de')).toBe('/de/impressum');
-    expect(pagePath('privacy', 'en')).toBe('/privacy');
-    expect(pagePath('privacy', 'de')).toBe('/de/datenschutz');
     expect(postPath('some-post', 'en')).toBe('/blog/some-post');
     expect(postPath('some-post', 'de')).toBe('/de/blog/some-post');
   });
@@ -36,7 +35,6 @@ describe('messages', () => {
   // Gleiche Struktur in beiden Sprachen, damit nirgends ein Text fehlt
   function shape(value: unknown): unknown {
     if (Array.isArray(value)) return value.map(shape);
-    if (typeof value === 'function') return 'function';
     if (value && typeof value === 'object') {
       return Object.fromEntries(Object.entries(value).map(([key, inner]) => [key, shape(inner)]));
     }
@@ -48,7 +46,7 @@ describe('messages', () => {
   });
 
   it('format reading times', () => {
-    expect(en.post.readingTime(3)).toBe('3 min read');
-    expect(de.post.readingTime(3)).toBe('3 Min. Lesezeit');
+    expect(interpolate(en.post.readingTime, { minutes: 3 })).toBe('3 min read');
+    expect(interpolate(de.post.readingTime, { minutes: 3 })).toBe('3 Min. Lesezeit');
   });
 });

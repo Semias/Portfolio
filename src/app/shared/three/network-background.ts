@@ -40,10 +40,9 @@ export const NETWORK_SCENE_LOADER = new InjectionToken<() => Promise<SceneFactor
 );
 
 /** Ein Knoten je Sektion der Startseite, abwechselnd rechts und links */
-const HUB_COUNT = 6;
-export const HUB_SIDES: readonly number[] = Array.from({ length: HUB_COUNT }, (_, i) =>
-  i % 2 ? -1 : 1,
-);
+export function hubSides(count: number): number[] {
+  return Array.from({ length: count }, (_, i) => (i % 2 ? -1 : 1));
+}
 
 /** Mobilgeräte bekommen weniger Sterne und eine begrenzte Pixel-Ratio */
 const LOW_QUALITY_QUERY = '(max-width: 719.98px), (pointer: coarse)';
@@ -64,20 +63,8 @@ export function supportsWebGL(document: Document): boolean {
 @Component({
   selector: 'app-network-background',
   host: { 'aria-hidden': 'true' },
-  template: '<div #stage class="stage"></div>',
-  styles: `
-    :host {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .stage {
-      position: absolute;
-      inset: 0;
-    }
-  `,
+  templateUrl: './network-background.html',
+  styleUrl: './network-background.scss',
 })
 export class NetworkBackground {
   private readonly document = inject(DOCUMENT);
@@ -122,7 +109,8 @@ export class NetworkBackground {
 
     try {
       this.scene = factory(this.stage().nativeElement, {
-        sides: HUB_SIDES,
+        // Die Blog-Sektion fehlt ohne Beiträge, darum zählen statt fest sechs
+        sides: hubSides(this.document.querySelectorAll('[data-hub]').length),
         palette: this.currentPalette(),
         quality,
         animate,

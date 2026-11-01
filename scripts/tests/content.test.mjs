@@ -232,9 +232,9 @@ describe('content/blog', () => {
   const files = readdirSync(dir)
     .filter((name) => name.endsWith('.md'))
     .map((name) => ({ name, source: readFileSync(join(dir, name), 'utf8') }));
-  const posts = buildPosts(files);
 
+  // Ein leerer Ordner ist erlaubt, dann blendet die App den Blog aus
   it('parses all real posts', () => {
-    assert.ok(posts.length > 0);
+    assert.equal(buildPosts(files).length, files.length);
   });
 });

@@ -4,10 +4,10 @@ import { MediaController, mockMatchMedia } from '../../../testing/media';
 import { DEFAULT_ACCENT, accentPalette } from '../../core/theme/color';
 import { ThemeService } from '../../core/theme/theme.service';
 import {
-  HUB_SIDES,
   NETWORK_SCENE_LOADER,
   NetworkBackground,
   SceneHandle,
+  hubSides,
   supportsWebGL,
 } from './network-background';
 import type { NetworkSceneOptions } from './network-scene';
@@ -72,8 +72,8 @@ describe('NetworkBackground', () => {
     expect(created).toHaveLength(1);
     const { host, options } = created[0];
     expect(host.classList.contains('stage')).toBe(true);
-    expect(options.sides).toEqual(HUB_SIDES);
-    expect(HUB_SIDES).toEqual([1, -1, 1, -1, 1, -1]);
+    expect(options.sides).toEqual([1, -1]);
+    expect(hubSides(5)).toEqual([1, -1, 1, -1, 1]);
     expect(options.palette).toEqual(
       scenePalette('dark', accentPalette('dark', DEFAULT_ACCENT).acc),
     );

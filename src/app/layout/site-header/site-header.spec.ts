@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
 import { mockMatchMedia } from '../../../testing/media';
+import { fakePost, providePosts } from '../../../testing/posts';
 import { ScrollService } from '../../core/scroll/scroll.service';
 import { ThemeService } from '../../core/theme/theme.service';
 import { SiteHeader } from './site-header';
@@ -49,6 +50,8 @@ describe('SiteHeader', () => {
           },
           { path: 'blog/a-post', component: Blank, data: { lang: 'en', page: 'post' } },
         ]),
+        // Nur ein englischer Beitrag, der deutsche Blog bleibt leer
+        providePosts([fakePost()]),
       ],
     });
     router = TestBed.inject(Router);
@@ -70,6 +73,16 @@ describe('SiteHeader', () => {
       ['Projects', '/#work'],
       ['Blog', '/#writing'],
       ['Contact', '/#contact'],
+    ]);
+  });
+
+  it('leaves out the blog in a language without posts', async () => {
+    await go('/de');
+    expect(navLinks().map((a) => a.getAttribute('href'))).toEqual([
+      '/de#about',
+      '/de#cv',
+      '/de#work',
+      '/de#contact',
     ]);
   });
 

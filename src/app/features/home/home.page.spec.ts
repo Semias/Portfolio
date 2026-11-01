@@ -65,8 +65,8 @@ describe('HomePage', () => {
     const projects = page.querySelectorAll('#work li');
     expect(projects).toHaveLength(5);
     expect(projects[0].querySelector('.number')?.textContent).toBe('01');
-    expect(projects[4].querySelector('h3')?.textContent).toBe('Location access management');
-    expect(projects[4].querySelector('app-tag')?.textContent?.trim()).toBe('access · iot');
+    expect(projects[4].querySelector('h3')?.textContent).toBe('Location Access Management');
+    expect(projects[4].querySelector('app-tag')?.textContent?.trim()).toBe('access · workflows');
   });
 
   it('shows the CV timeline with the current position first', async () => {
@@ -75,7 +75,7 @@ describe('HomePage', () => {
     expect(entries).toHaveLength(2);
     expect(entries[0].classList.contains('is-current')).toBe(true);
     expect(entries[0].querySelector('.period')?.textContent).toBe('2023 → heute');
-    expect(entries[1].querySelector('.period')?.textContent).toBe('2021 → 2023');
+    expect(entries[1].querySelector('.period')?.textContent).toBe('2018 → 2023');
     expect(entries[1].querySelector('.company')?.textContent).toBe('@cm city media GmbH');
   });
 
@@ -88,6 +88,20 @@ describe('HomePage', () => {
       'b',
       'c',
     ]);
+  });
+
+  it('leaves out the blog without posts and numbers contact as the fourth section', async () => {
+    const page = await render('/', []);
+    expect([...page.querySelectorAll('[data-hub]')].map((s) => s.id || 'hero')).toEqual([
+      'hero',
+      'about',
+      'cv',
+      'work',
+      'contact',
+    ]);
+    expect(
+      [...page.querySelectorAll('app-section-kicker .number')].map((n) => n.textContent),
+    ).toEqual(['01', '02', '03', '04']);
   });
 
   it('links e-mail, GitHub and LinkedIn in the contact section', async () => {
@@ -109,7 +123,7 @@ describe('HomePage', () => {
   });
 
   it('switches every text to German under /de', async () => {
-    const page = await render('/de');
+    const page = await render('/de', [fakePost({ lang: 'de' })]);
     expect(page.querySelector('h1')?.textContent).toContain('digitale Produkte');
     expect(page.querySelector('#about-heading')?.textContent).toBe('Über mich');
     expect(page.querySelector('#contact-heading')?.textContent).toBe('Lass uns sprechen.');

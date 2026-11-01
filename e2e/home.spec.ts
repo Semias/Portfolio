@@ -24,11 +24,10 @@ test.describe('Startseite', () => {
       'About me',
       'Curriculum',
       'Projects',
-      'Blog',
       "Let's talk.",
     ]);
     await expect(page.locator('#work li')).toHaveCount(5);
-    await expect(page.locator('#writing app-post-card')).toHaveCount(3);
+    await expect(page.locator('#writing')).toHaveCount(0);
   });
 
   test('springt mit dem Mausrad von Sektion zu Sektion', async ({ page }) => {
@@ -38,8 +37,10 @@ test.describe('Startseite', () => {
     await page.mouse.wheel(0, 120);
     await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(await topOf(page, '#about'));
     await page.waitForTimeout(400);
-    await page.mouse.wheel(0, 120);
-    await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(await topOf(page, '#cv'));
+    // Nach oben statt weiter zu #cv: „Über mich“ ist höher als der Viewport, dort wird erst normal
+    // gescrollt (snapTarget). So hängt der Test nicht an der Textlänge.
+    await page.mouse.wheel(0, -120);
+    await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(0);
   });
 
   test('springt mit Bild ab und Pfeil hoch', async ({ page }) => {
@@ -262,7 +263,7 @@ test.describe('Mobil @mobile', () => {
   });
 
   test('passt ohne seitliches Scrollen auf den Bildschirm', async ({ page }) => {
-    for (const path of ['/', '/de/blog/modelling-roles', '/de/impressum']) {
+    for (const path of ['/', '/de/impressum']) {
       await page.goto(path);
       await settle(page);
       const overflow = await page.evaluate(

@@ -1,0 +1,139 @@
+{
+  "langName": "English",
+  "meta": {
+    "siteName": "Stefan Gall",
+    "homeTitle": "Stefan Gall · Software Engineer",
+    "homeDescription": "Stefan Gall, Solution Expert and Software Engineer. Transforming complex requirements into excellent products with TypeScript, Node and SQL.",
+    "imprintTitle": "Imprint · Stefan Gall",
+    "imprintDescription": "Legal notice for gall-stefan.de.",
+    "notFoundTitle": "Page not found · Stefan Gall"
+  },
+  "header": {
+    "skipLink": "Skip to content",
+    "homeLabel": "Stefan Gall, home",
+    "navLabel": "Main",
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme",
+    "switchLangShort": "DE",
+    "switchLang": "Deutsche Version",
+    "readingProgress": "Reading progress"
+  },
+  "nav": {
+    "about": "About",
+    "cv": "CV",
+    "work": "Projects",
+    "writing": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "titleBefore": "Hi, I'm Stefan. I love building ",
+    "titleAccent": "digital products",
+    "titleAfter": ".",
+    "subline": "Transforming complex requirements into excellent products.",
+    "portraitAlt": "Portrait of Stefan Gall",
+    "pickerLabel": "Accent colour",
+    "customColor": "Custom colour",
+    "accents": {
+      "coral": "Coral",
+      "blue": "Blue",
+      "teal": "Teal",
+      "purple": "Purple",
+      "red": "Red"
+    }
+  },
+  "info": {
+    "role": "Solution Expert · Software Engineer",
+    "stack": "TypeScript · Node · SQL"
+  },
+  "about": {
+    "kicker": "About",
+    "heading": "About me",
+    "lead": "As a full-stack software engineer focused on Microsoft Azure and .NET, I look at solutions as a whole: from cloud architecture through secure backend services and APIs to the finished client application. Every part should work together reliably, scale and stay maintainable.",
+    "body": [
+      "Technically, I'm at home in Azure services such as Azure Functions, App Service, API Management, Key Vault and Microsoft Entra ID, and in AI software engineering. I get up to speed quickly and reliably with new technologies, frameworks and project setups, so I can adapt to different client needs and make a real contribution early in every project.",
+      "Communication in the team matters just as much to me: understanding requirements together early, making decisions transparently, sharing knowledge openly. Working closely with clients, business teams and developers turns different perspectives into a solution that holds up technically and adds real value day to day. Along the way I take ownership, bring in my own ideas and keep the implementation clear and sustainable, even when requirements get complex."
+    ]
+  },
+  "cv": {
+    "kicker": "CV",
+    "heading": "Curriculum",
+    "now": "today",
+    "entries": [
+      {
+        "from": "2023",
+        "to": null,
+        "title": "Solution Expert · Software Engineer",
+        "company": "@PlanB. GmbH",
+        "text": "Full-stack development of single-page and SSR applications from Figma designs, plus REST APIs and scalable backend services. Integrating services into an Azure microservice architecture (Container Apps, Key Vault, PostgreSQL, Redis) with security and compliance in mind. Also requirements engineering, user stories and client consulting in close alignment with architects and product owners."
+      },
+      {
+        "from": "2018",
+        "to": "2023",
+        "title": "Web Developer",
+        "company": "@cm city media GmbH",
+        "text": "Evolving the in-house Cross7 CMS and building and maintaining responsive client websites with Cross7 and TYPO3 (Fluid templates, module development, SEO). Reusable web components with Stencil and TypeScript. Advising public-sector clients such as municipalities and districts, from requirements to launch."
+      }
+    ]
+  },
+  "work": {
+    "kicker": "Projects",
+    "heading": "Projects",
+    "projects": [
+      {
+        "title": "E-Commerce Shop · Multi-Vendor & Multi-Market",
+        "text": "Online shop for eyewear products that processes prescription data and serves multiple vendors and markets. Connected to microservices as well as Salesforce, OneTrust and other systems. Built with Angular, NestJS, BullMQ and PostgreSQL.",
+        "tag": "commerce"
+      },
+      {
+        "title": "AI Agent for Product Recommendations",
+        "text": "Developing an AI agent application that generates personalized product recommendations. Built with React, Angular, Python, .NET and MCP.",
+        "tag": "ai · agents"
+      },
+      {
+        "title": "Identity Management Portal",
+        "text": "Portal for managing user identities, access permissions and security policies. Built with Next.js, TypeScript and .NET.",
+        "tag": "identity · security"
+      },
+      {
+        "title": "Production Solution Management Portal",
+        "text": "Management portal for viewing and managing production status and for creating templates and configurations. Built with Angular, .NET, TypeScript and TypeORM.",
+        "tag": "manufacturing"
+      },
+      {
+        "title": "Location Access Management",
+        "text": "System for requesting access to company sites. Built with Angular, .NET and Azure Functions.",
+        "tag": "access · workflows"
+      }
+    ]
+  },
+  "writing": {
+    "kicker": "Blog",
+    "heading": "Blog",
+    "note": "notes, irregular",
+    "comingSoon": "Coming soon"
+  },
+  "contact": {
+    "kicker": "Contact",
+    "heading": "Let's talk.",
+    "email": "E-Mail"
+  },
+  "footer": {
+    "imprint": "Imprint",
+    "backToTop": "↑ back to top"
+  },
+  "post": {
+    "back": "All posts",
+    "contents": "Contents",
+    "readingTime": "{minutes} min read",
+    "tags": "Tags",
+    "more": "Keep reading",
+    "ctaTitle": "Similar problem on your desk?",
+    "ctaLabel": "Get in touch"
+  },
+  "notFound": {
+    "kicker": "404",
+    "heading": "Page not found.",
+    "text": "This page does not exist or has moved.",
+    "home": "Back to the homepage"
+  }
+}

@@ -1,29 +1,24 @@
 import { SCROLL_TIMEOUT, expect, test } from './fixtures';
 
-test.describe('Impressum und Datenschutz', () => {
-  test('sind über den Footer erreichbar, schlicht und ohne 3D', async ({ page }) => {
+test.describe('Impressum', () => {
+  test('ist über den Footer erreichbar, schlicht und ohne 3D', async ({ page }) => {
     await page.goto('/de');
     await page.getByRole('contentinfo').getByRole('link', { name: 'Impressum' }).click();
     await expect(page).toHaveURL('/de/impressum');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Impressum');
     await expect(page).toHaveTitle('Impressum · Stefan Gall');
     await expect(page.locator('app-network-background, app-glass-card')).toHaveCount(0);
-
-    await page.getByRole('contentinfo').getByRole('link', { name: 'Datenschutz' }).click();
-    await expect(page).toHaveURL('/de/datenschutz');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Datenschutzerklärung');
   });
 
-  test('wechseln die Sprache auf die passende Seite', async ({ page }) => {
+  test('wechselt die Sprache auf die passende Seite', async ({ page }) => {
     await page.goto('/imprint');
     await page.getByRole('link', { name: 'DE, Deutsche Version' }).click();
     await expect(page).toHaveURL('/de/impressum');
-    await page.goto('/de/datenschutz');
     await page.getByRole('link', { name: 'EN, English version' }).click();
-    await expect(page).toHaveURL('/privacy');
+    await expect(page).toHaveURL('/imprint');
   });
 
-  test('führen über die Navigation zur Sektion der Startseite', async ({ page }) => {
+  test('führt über die Navigation zur Sektion der Startseite', async ({ page }) => {
     await page.goto('/imprint');
     await page
       .getByRole('navigation', { name: 'Main' })
@@ -38,7 +33,7 @@ test.describe('Impressum und Datenschutz', () => {
       .toBeLessThan(200);
   });
 
-  test('springen zur Sektion, auch wenn die Seite beim Klick noch lädt', async ({ page }) => {
+  test('springt zur Sektion, auch wenn die Seite beim Klick noch lädt', async ({ page }) => {
     // Den Chunk der Rechtsseite zurückhalten: Der Header ist bedienbar, die App aber noch nicht stabil
     let release!: () => void;
     const held = new Promise<void>((resolve) => (release = resolve));
@@ -108,7 +103,7 @@ test.describe('SEO', () => {
   test('hat eine Sitemap und robots.txt', async ({ request }) => {
     const sitemap = await (await request.get('/sitemap.xml')).text();
     expect(sitemap).toContain('<loc>https://gall-stefan.de/</loc>');
-    expect(sitemap).toContain('<loc>https://gall-stefan.de/de/blog/modelling-roles</loc>');
+    expect(sitemap).toContain('<loc>https://gall-stefan.de/de/impressum</loc>');
     expect(sitemap).not.toContain('404');
     const robots = await (await request.get('/robots.txt')).text();
     expect(robots).toContain('Sitemap: https://gall-stefan.de/sitemap.xml');

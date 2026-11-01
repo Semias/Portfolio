@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
  */
 @Component({
   selector: 'app-post-body',
-  template: '',
+  templateUrl: './post-body.html',
   host: { '[innerHTML]': 'trusted()' },
   encapsulation: ViewEncapsulation.None,
   styleUrl: './post-body.scss',

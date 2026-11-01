@@ -25,6 +25,11 @@ export class PostsService {
     return this.posts.filter((post) => post.lang === lang);
   }
 
+  /** Ohne Beiträge in der Sprache entfällt der Blog auf der Startseite und in der Navigation */
+  hasPosts(lang: Lang): boolean {
+    return this.posts.some((post) => post.lang === lang);
+  }
+
   /** Veröffentlichter Beitrag, sonst undefined */
   find(slug: string, lang: Lang): Post | undefined {
     return this.posts.find((post) => post.slug === slug && post.lang === lang && post.published);

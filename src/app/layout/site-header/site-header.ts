@@ -1,5 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { PostsService } from '../../content/posts.service';
 import { LanguageService } from '../../core/i18n/language.service';
 import { Messages } from '../../core/i18n/messages';
 import { pagePath } from '../../core/i18n/paths';
@@ -21,6 +22,7 @@ export type SectionId = (typeof SECTION_IDS)[number];
 export class SiteHeader {
   private readonly language = inject(LanguageService);
   private readonly router = inject(Router);
+  private readonly posts = inject(PostsService);
   protected readonly scroll = inject(ScrollService);
   protected readonly theme = inject(ThemeService);
   protected readonly t = this.language.t;
@@ -29,7 +31,12 @@ export class SiteHeader {
   protected readonly navItems = computed(() => {
     const nav: Messages['nav'] = this.t().nav;
     const home = this.homePath();
-    return SECTION_IDS.map((id) => ({ id, label: nav[id], href: `${home}#${id}` }));
+    const hasPosts = this.posts.hasPosts(this.language.lang());
+    return SECTION_IDS.filter((id) => id !== 'writing' || hasPosts).map((id) => ({
+      id,
+      label: nav[id],
+      href: `${home}#${id}`,
+    }));
   });
   protected readonly isDark = computed(() => this.theme.theme() === 'dark');
   protected readonly themeLabel = computed(() =>

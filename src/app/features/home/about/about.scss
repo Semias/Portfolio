@@ -28,8 +28,12 @@ h2 {
   text-wrap: pretty;
 }
 
-.body {
+.body p {
   @include body-text;
 
   line-height: 1.75;
+
+  & + p {
+    margin-top: 1.2em;
+  }
 }

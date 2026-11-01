@@ -11,22 +11,7 @@ export const HOME_TEASER_COUNT = 3;
 @Component({
   selector: 'app-blog-teasers',
   imports: [GlassCard, SectionKicker, PostCard],
-  template: `
-    <section id="writing" data-hub="4" aria-labelledby="writing-heading">
-      <app-glass-card>
-        <app-section-kicker number="04" [label]="t().writing.kicker" />
-        <div class="head">
-          <h2 id="writing-heading">{{ t().writing.heading }}</h2>
-          <p class="note">{{ t().writing.note }}</p>
-        </div>
-        <div class="cards">
-          @for (post of posts(); track post.slug) {
-            <app-post-card [post]="post" />
-          }
-        </div>
-      </app-glass-card>
-    </section>
-  `,
+  templateUrl: './blog-teasers.html',
   styleUrl: './blog-teasers.scss',
 })
 export class BlogTeasers {

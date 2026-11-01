@@ -2,8 +2,8 @@ import { Component, TransferState } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { de } from './de';
-import { en } from './en';
+import de from './de.json';
+import en from './en.json';
 import { LanguageService, PAGE_STATE_KEY } from './language.service';
 
 @Component({ template: '' })

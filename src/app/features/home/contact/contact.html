@@ -1,0 +1,17 @@
+<section id="contact" data-hub="5" aria-labelledby="contact-heading">
+  <app-glass-card>
+    <app-section-kicker [number]="number()" [label]="t().contact.kicker" />
+    <h2 id="contact-heading">{{ t().contact.heading }}</h2>
+    <div class="actions">
+      <a appPillButton="primary" [href]="'mailto:' + site.email"
+        ><app-icon name="mail" [size]="20" />{{ t().contact.email }}</a
+      >
+      <a appPillButton [href]="site.github" target="_blank" rel="noreferrer"
+        ><app-icon name="github" />GitHub</a
+      >
+      <a appPillButton [href]="site.linkedin" target="_blank" rel="noreferrer"
+        ><app-icon name="linkedin" />LinkedIn</a
+      >
+    </div>
+  </app-glass-card>
+</section>

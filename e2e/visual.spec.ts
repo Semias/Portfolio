@@ -7,15 +7,11 @@ const THEMES: Theme[] = ['dark', 'light'];
 
 const DESKTOP_PAGES = [
   ['startseite', '/'],
-  ['beitrag', '/blog/modelling-roles'],
   ['impressum', '/de/impressum'],
   ['404', '/gibt-es-nicht'],
 ];
 
-const MOBILE_PAGES = [
-  ['startseite', '/de'],
-  ['beitrag', '/de/blog/modelling-roles'],
-];
+const MOBILE_PAGES = [['startseite', '/de']];
 
 async function compare(page: Page, name: string, path: string, theme: Theme): Promise<void> {
   await storeTheme(page, theme);

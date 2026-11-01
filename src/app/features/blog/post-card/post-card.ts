@@ -10,27 +10,7 @@ import { postPath } from '../../../core/i18n/paths';
   selector: 'app-post-card',
   imports: [RouterLink],
   host: { '[class.is-link]': 'post().published' },
-  template: `
-    <article>
-      <p class="meta">
-        <span class="tag">#{{ tag() }}</span>
-        @if (date(); as date) {
-          <time [attr.datetime]="post().date">{{ date }}</time>
-        }
-      </p>
-      <h3>
-        @if (post().published) {
-          <a [routerLink]="path()">{{ post().title }}</a>
-        } @else {
-          {{ post().title }}
-        }
-      </h3>
-      <p class="excerpt">{{ post().excerpt }}</p>
-      @if (!post().published) {
-        <p class="soon">{{ t().writing.comingSoon }}</p>
-      }
-    </article>
-  `,
+  templateUrl: './post-card.html',
   styleUrl: './post-card.scss',
 })
 export class PostCard {
