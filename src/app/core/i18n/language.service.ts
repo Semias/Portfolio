@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { de } from './de';
-import { en } from './en';
+import de from './de.json';
+import en from './en.json';
 import { Messages } from './messages';
 import { DEFAULT_LANG, Lang, PageKey, isLang, otherLang, pagePath } from './paths';
 

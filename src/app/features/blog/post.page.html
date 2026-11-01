@@ -10,9 +10,9 @@
           <span class="mark" aria-hidden="true"></span>
           <time [attr.datetime]="post().date">{{ date }}</time>
         }
-        @if (post().readingMinutes; as minutes) {
+        @if (readingTime(); as readingTime) {
           <span class="mark is-faint" aria-hidden="true"></span>
-          <span>{{ t().post.readingTime(minutes) }}</span>
+          <span>{{ readingTime }}</span>
         }
       </p>
       <h1 id="post-title">

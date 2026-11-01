@@ -1,0 +1,19 @@
+{
+  "imprint": {
+    "heading": "Impressum",
+    "sections": [
+      {
+        "heading": "Angaben gemäß § 5 DDG",
+        "lines": ["Stefan Gall", "Deutschland"]
+      },
+      {
+        "heading": "Kontakt",
+        "lines": [{ "text": "{email}", "href": "mailto:{email}" }]
+      },
+      {
+        "heading": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
+        "lines": ["Stefan Gall, Anschrift wie oben"]
+      }
+    ]
+  }
+}

@@ -2,15 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import type { Page } from '@playwright/test';
 import { expect, settle, storeTheme, test, type Theme } from './fixtures';
 
-const PAGES = [
-  '/',
-  '/de',
-  '/blog/modelling-roles',
-  '/de/blog/modelling-roles',
-  '/imprint',
-  '/de/datenschutz',
-  '/gibt-es-nicht',
-];
+const PAGES = ['/', '/de', '/imprint', '/de/impressum', '/gibt-es-nicht'];
 
 const ACCENTS = ['coral', 'blue', 'teal', 'purple', 'red'];
 

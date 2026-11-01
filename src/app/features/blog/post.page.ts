@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { formatDate } from '../../core/i18n/format-date';
+import { interpolate } from '../../core/i18n/interpolate';
 import { LanguageService } from '../../core/i18n/language.service';
 import { pagePath, postPath } from '../../core/i18n/paths';
 import { pageMeta } from '../../core/seo/seo.service';
@@ -30,6 +31,10 @@ export class PostPage {
   protected readonly date = computed(() => {
     const date = this.post().date;
     return date ? formatDate(date, this.post().lang) : null;
+  });
+  protected readonly readingTime = computed(() => {
+    const minutes = this.post().readingMinutes;
+    return minutes ? interpolate(this.t().post.readingTime, { minutes }) : null;
   });
 
   constructor() {

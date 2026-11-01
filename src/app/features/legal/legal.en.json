@@ -1,0 +1,19 @@
+{
+  "imprint": {
+    "heading": "Imprint",
+    "sections": [
+      {
+        "heading": "Information according to § 5 DDG",
+        "lines": ["Stefan Gall", "Germany"]
+      },
+      {
+        "heading": "Contact",
+        "lines": [{ "text": "{email}", "href": "mailto:{email}" }]
+      },
+      {
+        "heading": "Responsible for the content according to § 18 (2) MStV",
+        "lines": ["Stefan Gall, address as above"]
+      }
+    ]
+  }
+}

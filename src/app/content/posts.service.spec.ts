@@ -30,6 +30,13 @@ describe('PostsService', () => {
     expect(service.forLang('de').map((p) => p.slug)).toEqual(['rbac']);
   });
 
+  it('knows whether a language has posts', () => {
+    expect(service.hasPosts('de')).toBe(true);
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: providePosts([posts[0]]) });
+    expect(TestBed.inject(PostsService).hasPosts('de')).toBe(false);
+  });
+
   it('finds published posts only', () => {
     expect(service.find('rbac', 'de')?.lang).toBe('de');
     expect(service.find('teaser', 'en')).toBeUndefined();
@@ -57,7 +64,6 @@ describe('PostsService', () => {
 
 describe('generated posts', () => {
   it('come from content/blog', () => {
-    expect(POSTS.length).toBeGreaterThan(0);
     expect(POSTS.every((post) => post.title && post.category)).toBe(true);
   });
 });

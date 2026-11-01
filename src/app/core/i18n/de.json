@@ -1,0 +1,139 @@
+{
+  "langName": "Deutsch",
+  "meta": {
+    "siteName": "Stefan Gall",
+    "homeTitle": "Stefan Gall · Software Engineer",
+    "homeDescription": "Stefan Gall, Solution Expert und Software Engineer. Ich verwandle komplexe Anforderungen in exzellente Produkte, mit TypeScript, Node und SQL.",
+    "imprintTitle": "Impressum · Stefan Gall",
+    "imprintDescription": "Impressum von gall-stefan.de.",
+    "notFoundTitle": "Seite nicht gefunden · Stefan Gall"
+  },
+  "header": {
+    "skipLink": "Zum Inhalt springen",
+    "homeLabel": "Stefan Gall, Startseite",
+    "navLabel": "Hauptnavigation",
+    "toLight": "Zu hellem Design wechseln",
+    "toDark": "Zu dunklem Design wechseln",
+    "switchLangShort": "EN",
+    "switchLang": "English version",
+    "readingProgress": "Lesefortschritt"
+  },
+  "nav": {
+    "about": "Über mich",
+    "cv": "Lebenslauf",
+    "work": "Projekte",
+    "writing": "Blog",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "titleBefore": "Hi, ich bin Stefan. Ich liebe es, ",
+    "titleAccent": "digitale Produkte",
+    "titleAfter": " zu bauen.",
+    "subline": "Ich verwandle komplexe Anforderungen in exzellente Produkte.",
+    "portraitAlt": "Porträt von Stefan Gall",
+    "pickerLabel": "Akzentfarbe",
+    "customColor": "Eigene Farbe",
+    "accents": {
+      "coral": "Koralle",
+      "blue": "Blau",
+      "teal": "Türkis",
+      "purple": "Lila",
+      "red": "Rot"
+    }
+  },
+  "info": {
+    "role": "Solution Expert · Software Engineer",
+    "stack": "TypeScript · Node · SQL"
+  },
+  "about": {
+    "kicker": "Über mich",
+    "heading": "Über mich",
+    "lead": "Als Full-Stack Software Engineer mit Fokus auf Microsoft Azure und .NET betrachte ich Lösungen ganzheitlich: von der Cloud-Architektur über sichere Backend-Services und Schnittstellen bis zur fertigen Client-Anwendung. Alle Teile sollen zuverlässig, skalierbar und wartbar zusammenspielen.",
+    "body": [
+      "Technisch zu Hause bin ich in Azure-Services wie Azure Functions, App Service, API Management, Key Vault und Microsoft Entra ID, dazu im AI Software Engineering. In neue Technologien, Frameworks und Projektumgebungen arbeite ich mich schnell und zuverlässig ein. So kann ich flexibel auf unterschiedliche Kundenanforderungen eingehen und in jedem Projekt früh einen echten Beitrag leisten.",
+      "Genauso wichtig ist mir die Kommunikation im Team: Anforderungen früh gemeinsam verstehen, Entscheidungen transparent treffen, Wissen offen teilen. Im engen Austausch mit Kunden, Fachbereichen und Entwicklern entsteht so eine Lösung, die technisch überzeugt und im Alltag echten Mehrwert bietet. Dabei übernehme ich Verantwortung, bringe eigene Ideen ein und behalte auch bei komplexen Anforderungen eine verständliche, nachhaltige Umsetzung im Blick."
+    ]
+  },
+  "cv": {
+    "kicker": "Lebenslauf",
+    "heading": "Lebenslauf",
+    "now": "heute",
+    "entries": [
+      {
+        "from": "2023",
+        "to": null,
+        "title": "Solution Expert · Software Engineer",
+        "company": "@PlanB. GmbH",
+        "text": "Full-Stack-Entwicklung von Single-Page- und SSR-Anwendungen auf Basis von Figma-Designs sowie von REST-APIs und skalierbaren Backend-Services. Integration in eine Azure-Microservice-Architektur (Container Apps, Key Vault, PostgreSQL, Redis) mit Blick auf Sicherheit und Compliance. Dazu Anforderungsanalyse, User Stories und Kundenberatung im engen Austausch mit Architekten und Product Ownern."
+      },
+      {
+        "from": "2018",
+        "to": "2023",
+        "title": "Web Developer",
+        "company": "@cm city media GmbH",
+        "text": "Weiterentwicklung des hauseigenen CMS sowie Umsetzung und Betreuung responsiver Kundenwebsites mit dem hauseigenen CMS und TYPO3 (Fluid Templates, Modulentwicklung, SEO). Wiederverwendbare Web Components mit Stencil und TypeScript. Beratung öffentlicher Auftraggeber wie Kommunen und Landkreise, von der Anforderungsaufnahme bis zum Launch."
+      }
+    ]
+  },
+  "work": {
+    "kicker": "Projekte",
+    "heading": "Projekte",
+    "projects": [
+      {
+        "title": "E-Commerce-Shop · Multi-Vendor & Multi-Market",
+        "text": "Onlineshop für Brillenprodukte, der Brillenpass-Daten verarbeitet und mehrere Händler und Märkte bedient. Angebunden an Microservices sowie an Salesforce, OneTrust und weitere Systeme. Umgesetzt mit Angular, NestJS, BullMQ und PostgreSQL.",
+        "tag": "commerce"
+      },
+      {
+        "title": "AI-Agent für Produktempfehlungen",
+        "text": "Entwicklung einer AI-Agent-Anwendung, die personalisierte Produktempfehlungen erzeugt. Umgesetzt mit React, Angular, Python, .NET und MCP.",
+        "tag": "ai · agents"
+      },
+      {
+        "title": "Identity Management Portal",
+        "text": "Portal zur Verwaltung von Benutzeridentitäten, Zugriffsberechtigungen und Sicherheitsrichtlinien. Umgesetzt mit Next.js, TypeScript und .NET.",
+        "tag": "identity · security"
+      },
+      {
+        "title": "Production Solution Management Portal",
+        "text": "Management-Portal, in dem sich der Produktionsstatus einsehen und verwalten lässt und Templates und Konfigurationen angelegt werden. Umgesetzt mit Angular, .NET, TypeScript und TypeORM.",
+        "tag": "manufacturing"
+      },
+      {
+        "title": "Location Access Management",
+        "text": "System, über das Zugänge zu Firmenstandorten beantragt werden. Umgesetzt mit Angular, .NET und Azure Functions.",
+        "tag": "access · workflows"
+      }
+    ]
+  },
+  "writing": {
+    "kicker": "Blog",
+    "heading": "Blog",
+    "note": "notizen, unregelmäßig",
+    "comingSoon": "Folgt bald"
+  },
+  "contact": {
+    "kicker": "Kontakt",
+    "heading": "Lass uns sprechen.",
+    "email": "E-Mail"
+  },
+  "footer": {
+    "imprint": "Impressum",
+    "backToTop": "↑ nach oben"
+  },
+  "post": {
+    "back": "Alle Beiträge",
+    "contents": "Inhalt",
+    "readingTime": "{minutes} Min. Lesezeit",
+    "tags": "Tags",
+    "more": "Weiterlesen",
+    "ctaTitle": "Ähnliches Problem auf dem Tisch?",
+    "ctaLabel": "Kontakt"
+  },
+  "notFound": {
+    "kicker": "404",
+    "heading": "Seite nicht gefunden.",
+    "text": "Diese Seite gibt es nicht oder nicht mehr.",
+    "home": "Zur Startseite"
+  }
+}

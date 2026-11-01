@@ -3,6 +3,5 @@ export const SITE = {
   url: 'https://gall-stefan.de',
   github: 'https://github.com/Semias',
   linkedin: 'https://www.linkedin.com/in/stefangall/',
-  // TODO(text): E-Mail-Adresse für den Kontakt-Button und das Impressum
-  email: 'TODO(text)',
+  email: 'stefan.gall08@gmail.com',
 } as const;

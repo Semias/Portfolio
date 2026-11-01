@@ -1,0 +1,14 @@
+<section id="about" data-hub="1" aria-labelledby="about-heading">
+  <app-glass-card>
+    <app-section-kicker number="01" [label]="t().about.kicker" />
+    <h2 id="about-heading">{{ t().about.heading }}</h2>
+    <div class="columns">
+      <p class="lead">{{ t().about.lead }}</p>
+      <div class="body">
+        @for (paragraph of t().about.body; track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+    </div>
+  </app-glass-card>
+</section>

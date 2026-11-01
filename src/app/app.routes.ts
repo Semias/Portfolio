@@ -32,7 +32,6 @@ function localizedRoutes(lang: Lang): Routes {
       ...postRouteExtras(lang),
     }),
     staticPage(lang, 'imprint', loadLegal),
-    staticPage(lang, 'privacy', loadLegal),
     // Wird als 404.html vorgerendert (scripts/postbuild.mjs)
     page(lang, 'notFound', routePath(pagePath('notFound', lang), lang), {
       loadComponent: loadNotFound,

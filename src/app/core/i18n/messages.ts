@@ -1,5 +1,6 @@
 import { PresetAccent } from '../theme/color';
 
+// Die Texte stehen in en.json und de.json, dieses Interface beschreibt ihre Struktur.
 // Platzhalter für Texte, die noch fehlen, sind mit TODO(text) markiert. Der Prod-Deploy bricht ab,
 // solange einer davon auf einer Seite steht (siehe .github/workflows/deploy.yml).
 
@@ -26,8 +27,6 @@ export interface Messages {
     homeDescription: string;
     imprintTitle: string;
     imprintDescription: string;
-    privacyTitle: string;
-    privacyDescription: string;
     notFoundTitle: string;
   };
   header: {
@@ -66,7 +65,8 @@ export interface Messages {
     kicker: string;
     heading: string;
     lead: string;
-    body: string;
+    /** Absätze neben dem Lead */
+    body: string[];
   };
   cv: {
     kicker: string;
@@ -92,13 +92,13 @@ export interface Messages {
   };
   footer: {
     imprint: string;
-    privacy: string;
     backToTop: string;
   };
   post: {
     back: string;
     contents: string;
-    readingTime: (minutes: number) => string;
+    /** Mit Platzhalter {minutes}, siehe interpolate() */
+    readingTime: string;
     tags: string;
     more: string;
     ctaTitle: string;
