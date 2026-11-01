@@ -37,8 +37,10 @@ test.describe('Startseite', () => {
     await page.mouse.wheel(0, 120);
     await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(await topOf(page, '#about'));
     await page.waitForTimeout(400);
-    await page.mouse.wheel(0, 120);
-    await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(await topOf(page, '#cv'));
+    // Nach oben statt weiter zu #cv: „Über mich“ ist höher als der Viewport, dort wird erst normal
+    // gescrollt (snapTarget). So hängt der Test nicht an der Textlänge.
+    await page.mouse.wheel(0, -120);
+    await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(0);
   });
 
   test('springt mit Bild ab und Pfeil hoch', async ({ page }) => {
