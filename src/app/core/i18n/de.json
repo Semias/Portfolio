@@ -29,7 +29,7 @@
     "titleBefore": "Hi, ich bin Stefan. Ich liebe es, ",
     "titleAccent": "digitale Produkte",
     "titleAfter": " zu bauen.",
-    "subline": "Ich verwandle komplexe Anforderungen in exzellente Produkte.",
+    "subline": "Und Ideen in Lösungen zu verwandeln, die echten Mehrwert schaffen.",
     "portraitAlt": "Porträt von Stefan Gall",
     "pickerLabel": "Akzentfarbe",
     "customColor": "Eigene Farbe",
@@ -42,16 +42,17 @@
     }
   },
   "info": {
-    "role": "Solution Expert · Software Engineer",
-    "stack": "TypeScript · Node · SQL"
+    "role": "Solution Expert · Full-Stack Software Engineer",
+    "stack": "Angular · NestJS · TypeScript · Node.js"
   },
   "about": {
     "kicker": "Über mich",
     "heading": "Über mich",
-    "lead": "Als Full-Stack Software Engineer mit Fokus auf Microsoft Azure und .NET betrachte ich Lösungen ganzheitlich: von der Cloud-Architektur über sichere Backend-Services und Schnittstellen bis zur fertigen Client-Anwendung. Alle Teile sollen zuverlässig, skalierbar und wartbar zusammenspielen.",
+    "lead": "Ich bin Full-Stack Software Engineer und arbeite vor allem mit TypeScript, Node.js und C#/.NET. Bevor ich Code schreibe, will ich das Problem dahinter verstehen. Deshalb ist mir der enge Austausch mit dem Team und den Kunden wichtig.",
     "body": [
-      "Technisch zu Hause bin ich in Azure-Services wie Azure Functions, App Service, API Management, Key Vault und Microsoft Entra ID, dazu im AI Software Engineering. In neue Technologien, Frameworks und Projektumgebungen arbeite ich mich schnell und zuverlässig ein. So kann ich flexibel auf unterschiedliche Kundenanforderungen eingehen und in jedem Projekt früh einen echten Beitrag leisten.",
-      "Genauso wichtig ist mir die Kommunikation im Team: Anforderungen früh gemeinsam verstehen, Entscheidungen transparent treffen, Wissen offen teilen. Im engen Austausch mit Kunden, Fachbereichen und Entwicklern entsteht so eine Lösung, die technisch überzeugt und im Alltag echten Mehrwert bietet. Dabei übernehme ich Verantwortung, bringe eigene Ideen ein und behalte auch bei komplexen Anforderungen eine verständliche, nachhaltige Umsetzung im Blick."
+      "Im Frontend arbeite ich am liebsten mit Angular. Ich achte auf eine saubere, modulare Struktur, nutze serverseitiges Rendering wenn nötig, und baue Oberflächen, die auf jedem Gerät funktionieren und barrierefrei sind. Im Backend baue ich REST-APIs mit NestJS oder .NET. Die laufen meist als Microservices auf Azure, in Docker-Containern.",
+      "Ich möchte, dass Software auch in ein paar Jahren noch verständlich und sicher ist. Deshalb sichere ich neue Features mit Unit- und Integrationstests ab, wichtige Architekturentscheidungen (ADR's) schreibe ich auf, und Security plane ich von Anfang an mit. OpenTelemetry verschafft mir den Überblick, auch über Servicegrenzen hinweg, und erkenne Auffälligkeiten, bevor sie zum Problem werden.",
+      "Agentic Software Engineering hat die Softwareentwicklung komplett verändert. KI-Agenten schreiben, testen und überarbeiten Code heute weitgehend selbstständig. Ich setze sie gezielt dort ein, wo sie mich am meisten entlasten. Was gebaut wird und wie, entscheide ich aber weiterhin selbst."
     ]
   },
   "cv": {
@@ -62,16 +63,16 @@
       {
         "from": "2023",
         "to": null,
-        "title": "Solution Expert · Software Engineer",
+        "title": "Solution Expert · Full-Stack Software Engineer",
         "company": "@PlanB. GmbH",
-        "text": "Full-Stack-Entwicklung von Single-Page- und SSR-Anwendungen auf Basis von Figma-Designs sowie von REST-APIs und skalierbaren Backend-Services. Integration in eine Azure-Microservice-Architektur (Container Apps, Key Vault, PostgreSQL, Redis) mit Blick auf Sicherheit und Compliance. Dazu Anforderungsanalyse, User Stories und Kundenberatung im engen Austausch mit Architekten und Product Ownern."
+        "text": "Full-Stack-Entwicklung mit Angular, Next.js, NestJS und .NET in einer Azure-Microservice-Architektur. Technologien wähle ich nach Anforderung statt nach Gewohnheit, Sicherheit und Compliance sind von Beginn an Teil der Architektur. Dazu Kundenberatung in enger Abstimmung mit Architekten und Product Ownern."
       },
       {
         "from": "2018",
         "to": "2023",
         "title": "Web Developer",
         "company": "@cm city media GmbH",
-        "text": "Weiterentwicklung des hauseigenen CMS sowie Umsetzung und Betreuung responsiver Kundenwebsites mit dem hauseigenen CMS und TYPO3 (Fluid Templates, Modulentwicklung, SEO). Wiederverwendbare Web Components mit Stencil und TypeScript. Beratung öffentlicher Auftraggeber wie Kommunen und Landkreise, von der Anforderungsaufnahme bis zum Launch."
+        "text": "Weiterentwicklung des hauseigenen CMS und Umsetzung responsiver Kundenwebsites mit TYPO3, mit Fokus auf Barrierefreiheit und wiederverwendbare Web Components in TypeScript. Dazu Beratung öffentlicher Auftraggeber vom Konzept bis zum Launch."
       }
     ]
   },
@@ -81,27 +82,27 @@
     "projects": [
       {
         "title": "E-Commerce-Shop · Multi-Vendor & Multi-Market",
-        "text": "Onlineshop für Brillenprodukte, der Brillenpass-Daten verarbeitet und mehrere Händler und Märkte bedient. Angebunden an Microservices sowie an Salesforce, OneTrust und weitere Systeme. Umgesetzt mit Angular, NestJS, BullMQ und PostgreSQL.",
+        "text": "Full-Stack-Entwicklung eines Shops für Brillenprodukte inklusive Brillenpass-Daten, angebunden an Microservices, Salesforce und OneTrust. Umgesetzt mit Angular, NestJS, BullMQ, PostgreSQL und TypeORM.",
         "tag": "commerce"
       },
       {
-        "title": "AI-Agent für Produktempfehlungen",
-        "text": "Entwicklung einer AI-Agent-Anwendung, die personalisierte Produktempfehlungen erzeugt. Umgesetzt mit React, Angular, Python, .NET und MCP.",
+        "title": "Agentenbasierte Produktempfehlungen",
+        "text": "Frontend einer Anwendung für personalisierte Produktempfehlungen sowie Anpassungen an den API-Endpunkten im Python-Backend. Umgesetzt mit Angular, TypeScript und Python.",
         "tag": "ai · agents"
       },
       {
-        "title": "Identity Management Portal",
-        "text": "Portal zur Verwaltung von Benutzeridentitäten, Zugriffsberechtigungen und Sicherheitsrichtlinien. Umgesetzt mit Next.js, TypeScript und .NET.",
-        "tag": "identity · security"
-      },
-      {
         "title": "Production Solution Management Portal",
-        "text": "Management-Portal, in dem sich der Produktionsstatus einsehen und verwalten lässt und Templates und Konfigurationen angelegt werden. Umgesetzt mit Angular, .NET, TypeScript und TypeORM.",
+        "text": "Portal für Produktionsstatus, Templates und Konfigurationen. Serverseitig gerendertes Frontend und API-Contracts zum .NET-Backend. Umgesetzt mit Next.js, TypeScript und .NET.",
         "tag": "manufacturing"
       },
       {
+        "title": "Identity Management Portal",
+        "text": "Portal zur Verwaltung von Benutzeridentitäten und rollenbasierten Zugriffsrechten. Umgesetzt mit Next.js, .NET und OAuth/OIDC.",
+        "tag": "identity · security"
+      },
+      {
         "title": "Location Access Management",
-        "text": "System, über das Zugänge zu Firmenstandorten beantragt werden. Umgesetzt mit Angular, .NET und Azure Functions.",
+        "text": "System, über das Zugänge zu Firmenstandorten beantragt werden. Umgesetzt mit Angular und .NET.",
         "tag": "access · workflows"
       }
     ]
