@@ -67,6 +67,19 @@ test.describe('Impressum', () => {
   });
 });
 
+test.describe('Datenschutz', () => {
+  test('ist über den Footer erreichbar und wechselt die Sprache', async ({ page }) => {
+    await page.goto('/de');
+    await page.getByRole('contentinfo').getByRole('link', { name: 'Datenschutz' }).click();
+    await expect(page).toHaveURL('/de/datenschutz');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Datenschutzerklärung');
+    await expect(page).toHaveTitle('Datenschutz · Stefan Gall');
+    await page.getByRole('link', { name: 'EN, English version' }).click();
+    await expect(page).toHaveURL('/privacy');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Privacy policy');
+  });
+});
+
 test.describe('404', () => {
   for (const [path, heading] of [
     ['/gibt-es-nicht', 'Page not found.'],

@@ -4,7 +4,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { mockMatchMedia } from '../../../testing/media';
 import { routes } from '../../app.routes';
 import { SITE } from '../../core/site';
-import { IMPRINT } from './legal-content';
+import { IMPRINT, PRIVACY } from './legal-content';
 import { LegalPage } from './legal.page';
 
 describe('LegalPage', () => {
@@ -23,6 +23,8 @@ describe('LegalPage', () => {
   it.each([
     ['/imprint', 'Imprint'],
     ['/de/impressum', 'Impressum'],
+    ['/privacy', 'Privacy policy'],
+    ['/de/datenschutz', 'Datenschutzerklärung'],
   ])('%s shows %s as a plain text page', async (url, heading) => {
     const { component, page } = await render(url);
     expect(component).toBeInstanceOf(LegalPage);
@@ -46,6 +48,22 @@ describe('LegalPage', () => {
   it('has the same structure in both languages', () => {
     expect(IMPRINT.en.sections.map((s) => s.lines.length)).toEqual(
       IMPRINT.de.sections.map((s) => s.lines.length),
+    );
+  });
+
+  it('shows the privacy policy with a mail link to the controller', async () => {
+    const { page } = await render('/de/datenschutz');
+    const sections = [...page.querySelectorAll('section')];
+    expect(sections.map((s) => s.querySelector('h2')?.textContent)).toEqual(
+      PRIVACY.de.sections.map((s) => s.heading),
+    );
+    expect(sections[0].querySelector('a')?.getAttribute('href')).toBe(`mailto:${SITE.email}`);
+    expect(page.textContent).toContain('Cloudflare');
+  });
+
+  it('has the same privacy structure in both languages', () => {
+    expect(PRIVACY.en.sections.map((s) => s.lines.length)).toEqual(
+      PRIVACY.de.sections.map((s) => s.lines.length),
     );
   });
 });

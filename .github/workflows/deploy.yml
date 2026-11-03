@@ -162,6 +162,13 @@ jobs:
         with:
           name: dist
           path: dist
+      # Fehlende Texte sind im Code mit TODO(text) markiert und dürfen nicht live gehen
+      - name: Keine Platzhalter auf Prod
+        run: |
+          if grep -rl 'TODO(text)' dist; then
+            echo "::error::In den Dateien oben steht noch TODO(text). Erst die Texte ergänzen, dann neu releasen."
+            exit 1
+          fi
       - name: Deploy auf gall-stefan.de
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

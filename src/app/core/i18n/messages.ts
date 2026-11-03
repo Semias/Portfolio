@@ -2,7 +2,7 @@ import { PresetAccent } from '../theme/color';
 
 // Die Texte stehen in en.json und de.json, dieses Interface beschreibt ihre Struktur.
 // Platzhalter für Texte, die noch fehlen, sind mit TODO(text) markiert. Der Prod-Deploy bricht ab,
-// solange einer davon auf einer Seite steht (siehe .github/workflows/deploy.yml).
+// solange einer davon in der gebauten Seite steht (siehe .github/workflows/deploy.yml).
 
 export interface CvEntry {
   from: string;
@@ -27,6 +27,8 @@ export interface Messages {
     homeDescription: string;
     imprintTitle: string;
     imprintDescription: string;
+    privacyTitle: string;
+    privacyDescription: string;
     notFoundTitle: string;
   };
   header: {
@@ -92,6 +94,7 @@ export interface Messages {
   };
   footer: {
     imprint: string;
+    privacy: string;
     backToTop: string;
   };
   post: {

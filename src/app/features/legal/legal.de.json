@@ -4,7 +4,12 @@
     "sections": [
       {
         "heading": "Angaben gemäß § 5 DDG",
-        "lines": ["Stefan Gall", "Deutschland"]
+        "lines": [
+          "Stefan Gall",
+          "TODO(text): Straße und Hausnummer",
+          "TODO(text): PLZ und Ort",
+          "Deutschland"
+        ]
       },
       {
         "heading": "Kontakt",
@@ -13,6 +18,60 @@
       {
         "heading": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
         "lines": ["Stefan Gall, Anschrift wie oben"]
+      }
+    ]
+  },
+  "privacy": {
+    "heading": "Datenschutzerklärung",
+    "sections": [
+      {
+        "heading": "Verantwortlicher",
+        "lines": [
+          "Stefan Gall, Anschrift siehe Impressum",
+          { "text": "{email}", "href": "mailto:{email}" }
+        ]
+      },
+      {
+        "heading": "Kurz gesagt",
+        "lines": [
+          "Diese Seite setzt keine Cookies, nutzt kein Tracking und keine Analyse-Tools und lädt keine Inhalte von fremden Servern, also auch keine externen Schriften oder Videos."
+        ]
+      },
+      {
+        "heading": "Hosting und Server-Logs",
+        "lines": [
+          "Die Seite wird über Cloudflare ausgeliefert (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA). Beim Aufruf verarbeitet Cloudflare technisch notwendige Daten wie IP-Adresse, Zeitpunkt, aufgerufene Seite und Browser-Kennung, um die Seite auszuliefern und vor Angriffen zu schützen.",
+          "Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, mein berechtigtes Interesse an einer sicheren und stabilen Website. Mit Cloudflare besteht ein Auftragsverarbeitungsvertrag. Cloudflare ist nach dem EU-US Data Privacy Framework zertifiziert, die Übermittlung in die USA stützt sich auf Art. 45 DSGVO.",
+          {
+            "text": "Datenschutzhinweise von Cloudflare",
+            "href": "https://www.cloudflare.com/privacypolicy/"
+          }
+        ]
+      },
+      {
+        "heading": "Kontakt per E-Mail",
+        "lines": [
+          "Wenn du mir schreibst, verarbeite ich deine Adresse und deine Nachricht, um zu antworten (Art. 6 Abs. 1 lit. b oder f DSGVO). Ich lösche die Daten, wenn die Unterhaltung erledigt ist und keine Aufbewahrungspflicht besteht."
+        ]
+      },
+      {
+        "heading": "Einstellungen im Browser",
+        "lines": [
+          "Dein gewähltes Design (hell oder dunkel) und die Akzentfarbe speichere ich nur lokal in deinem Browser (Local Storage). Diese Werte verlassen dein Gerät nicht und dienen allein der von dir gewünschten Darstellung (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst sie jederzeit über die Browser-Einstellungen löschen."
+        ]
+      },
+      {
+        "heading": "Links zu anderen Seiten",
+        "lines": [
+          "Links zu GitHub oder LinkedIn öffnen erst beim Anklicken die Seite des jeweiligen Anbieters. Ab dann gelten dessen Datenschutzhinweise."
+        ]
+      },
+      {
+        "heading": "Deine Rechte",
+        "lines": [
+          "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15 bis 21 DSGVO). Schreib mir dafür einfach eine E-Mail.",
+          "Außerdem kannst du dich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO)."
+        ]
       }
     ]
   }

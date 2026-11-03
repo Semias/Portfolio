@@ -4,7 +4,12 @@
     "sections": [
       {
         "heading": "Information according to § 5 DDG",
-        "lines": ["Stefan Gall", "Germany"]
+        "lines": [
+          "Stefan Gall",
+          "TODO(text): Straße und Hausnummer",
+          "TODO(text): PLZ und Ort",
+          "Germany"
+        ]
       },
       {
         "heading": "Contact",
@@ -13,6 +18,60 @@
       {
         "heading": "Responsible for the content according to § 18 (2) MStV",
         "lines": ["Stefan Gall, address as above"]
+      }
+    ]
+  },
+  "privacy": {
+    "heading": "Privacy policy",
+    "sections": [
+      {
+        "heading": "Controller",
+        "lines": [
+          "Stefan Gall, address see imprint",
+          { "text": "{email}", "href": "mailto:{email}" }
+        ]
+      },
+      {
+        "heading": "In short",
+        "lines": [
+          "This site sets no cookies, uses no tracking or analytics and loads nothing from third-party servers, so no external fonts or videos either."
+        ]
+      },
+      {
+        "heading": "Hosting and server logs",
+        "lines": [
+          "The site is delivered through Cloudflare (Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA). When you visit, Cloudflare processes technically necessary data such as your IP address, the time, the requested page and your browser identifier to deliver the site and protect it from attacks.",
+          "The legal basis is Art. 6 (1) (f) GDPR, my legitimate interest in a secure and stable website. A data processing agreement with Cloudflare is in place. Cloudflare is certified under the EU-US Data Privacy Framework, transfers to the USA are based on Art. 45 GDPR.",
+          {
+            "text": "Cloudflare privacy policy",
+            "href": "https://www.cloudflare.com/privacypolicy/"
+          }
+        ]
+      },
+      {
+        "heading": "Contact by email",
+        "lines": [
+          "If you write to me, I process your address and your message to reply (Art. 6 (1) (b) or (f) GDPR). I delete the data once the conversation is finished and no retention obligation applies."
+        ]
+      },
+      {
+        "heading": "Settings in your browser",
+        "lines": [
+          "Your chosen theme (light or dark) and accent colour are stored only locally in your browser (local storage). These values never leave your device and only serve the display you asked for (§ 25 (2) no. 2 TDDDG). You can delete them at any time in your browser settings."
+        ]
+      },
+      {
+        "heading": "Links to other sites",
+        "lines": [
+          "Links to GitHub or LinkedIn only open the provider's site when you click them. From then on, their privacy policy applies."
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "lines": [
+          "You have the right to access, rectification, erasure, restriction of processing, data portability and objection (Art. 15 to 21 GDPR). Just send me an email.",
+          "You can also lodge a complaint with a data protection supervisory authority (Art. 77 GDPR)."
+        ]
       }
     ]
   }

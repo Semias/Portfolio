@@ -18,8 +18,7 @@ export interface LegalDocument {
 }
 
 // Die Texte stehen in legal.de.json und legal.en.json. Platzhalter wie {email} kommen aus SITE.
-//
-// TODO(text): Anschrift ergänzen.
+// Die Anschrift im Impressum ist noch mit TODO(text) markiert, solange sie fehlt.
 
 const fill = (text: string) => interpolate(text, { email: SITE.email });
 
@@ -38,4 +37,9 @@ function withSiteData(doc: LegalDocument): LegalDocument {
 export const IMPRINT: Record<Lang, LegalDocument> = {
   de: withSiteData(de.imprint),
   en: withSiteData(en.imprint),
+};
+
+export const PRIVACY: Record<Lang, LegalDocument> = {
+  de: withSiteData(de.privacy),
+  en: withSiteData(en.privacy),
 };
