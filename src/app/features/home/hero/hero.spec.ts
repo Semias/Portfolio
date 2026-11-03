@@ -28,7 +28,7 @@ describe('Hero', () => {
     expect(title?.textContent?.trim()).toBe("Hi, I'm Stefan. I love building digital products.");
     expect(title?.querySelector('.accent')?.textContent).toBe('digital products');
     expect(element.querySelector('.subline')?.textContent).toBe(
-      'Transforming complex requirements into excellent products.',
+      'And turning ideas into solutions that create real value.',
     );
   });
 

@@ -15,8 +15,8 @@ describe('InfoStrip', () => {
 
   it('shows role and stack between decorative marks', () => {
     const strip = element.querySelector('.strip');
-    expect(strip?.textContent).toContain('Solution Expert · Software Engineer');
-    expect(strip?.textContent).toContain('TypeScript · Node · SQL');
+    expect(strip?.textContent).toContain('Solution Expert · Full-Stack Software Engineer');
+    expect(strip?.textContent).toContain('Angular · NestJS · TypeScript · Node.js');
     const marks = [...element.querySelectorAll('.mark, .slash')];
     expect(marks).toHaveLength(3);
     expect(marks.every((mark) => mark.getAttribute('aria-hidden') === 'true')).toBe(true);
