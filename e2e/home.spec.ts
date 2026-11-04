@@ -53,6 +53,22 @@ test.describe('Startseite', () => {
     await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(0);
   });
 
+  test('scrollt mit dem Mausrad weich statt in Stufen', async ({ page }) => {
+    // Auf der Datenschutz-Seite gibt es keine Sektionen zum Springen
+    await page.goto('/de/datenschutz');
+    await settle(page);
+    const positions = await page.evaluateHandle(() => {
+      const seen: number[] = [];
+      addEventListener('scroll', () => seen.push(Math.round(window.scrollY)));
+      return seen;
+    });
+    await page.mouse.move(720, 450);
+    await page.mouse.wheel(0, 200);
+    await expect.poll(() => scrollY(page), SCROLL_TIMEOUT).toBe(200);
+    const seen = await positions.jsonValue();
+    expect(seen.filter((y) => y > 0 && y < 200).length).toBeGreaterThan(10);
+  });
+
   test('scrollt bei „Bewegung reduzieren“ normal und ohne Animation', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');

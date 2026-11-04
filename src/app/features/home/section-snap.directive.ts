@@ -1,10 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { DestroyRef, Directive, ElementRef, afterNextRender, inject } from '@angular/core';
-import { ScrollService } from '../../core/scroll/scroll.service';
+import { FINE_POINTER_QUERY, ScrollService } from '../../core/scroll/scroll.service';
 import { keyDirection, snapTarget } from './snap';
 
 /** Nur mit Maus oder Touchpad als Hauptzeiger, auf Touch-Geräten wird normal gescrollt */
-export const SNAP_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
+export const SNAP_POINTER_QUERY = FINE_POINTER_QUERY;
 
 /** In diesen Elementen gehören die Tasten dem Element, nicht dem Sektions-Springen */
 const EDITABLE = 'input, textarea, select, [contenteditable]:not([contenteditable="false"])';
@@ -13,6 +13,7 @@ const ACTIVATABLE = 'button, a[href], summary, [role="button"], [role="checkbox"
 /**
  * Mausrad, Pfeiltasten, Bild auf/ab und Leertaste springen animiert von Sektion ([data-hub]) zu
  * Sektion. Nur auf dem Desktop und nicht bei „Bewegung reduzieren“ (Entscheidung C).
+ * Springt es nicht, z. B. innerhalb einer hohen Sektion, scrollt das Mausrad weich (ScrollService).
  */
 @Directive({ selector: '[appSectionSnap]' })
 export class SectionSnap {
@@ -25,10 +26,10 @@ export class SectionSnap {
     afterNextRender(() => {
       const win = this.document.defaultView;
       if (!win) return;
-      win.addEventListener('wheel', this.onWheel, { passive: false });
+      const releaseWheel = this.scroll.interceptWheel(this.onWheel);
       win.addEventListener('keydown', this.onKey);
       destroyRef.onDestroy(() => {
-        win.removeEventListener('wheel', this.onWheel);
+        releaseWheel();
         win.removeEventListener('keydown', this.onKey);
       });
     });
@@ -39,10 +40,11 @@ export class SectionSnap {
     return !!pointer?.matches && !this.scroll.reducedMotion();
   }
 
-  private readonly onWheel = (event: WheelEvent) => {
-    if (!this.enabled() || event.ctrlKey || Math.abs(event.deltaY) < 4) return;
+  /** true: Das Mausrad springt (oder ein Sprung läuft noch) und scrollt deshalb nicht */
+  private readonly onWheel = (event: WheelEvent): boolean => {
+    if (!this.enabled() || event.ctrlKey || Math.abs(event.deltaY) < 4) return false;
     // Während eines Sprungs schluckt das Mausrad weitere Ausschläge (Touchpad-Nachlauf)
-    if (this.scroll.isLocked() || this.jump(event.deltaY > 0 ? 1 : -1)) event.preventDefault();
+    return this.scroll.isLocked() || this.jump(event.deltaY > 0 ? 1 : -1);
   };
 
   private readonly onKey = (event: KeyboardEvent) => {
