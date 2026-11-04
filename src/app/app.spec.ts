@@ -53,6 +53,8 @@ describe('routes', () => {
     ['/de', HomePage],
     ['/imprint', LegalPage],
     ['/de/impressum', LegalPage],
+    ['/privacy', LegalPage],
+    ['/de/datenschutz', LegalPage],
     ['/404', NotFoundPage],
     ['/de/404', NotFoundPage],
     ['/does-not-exist', NotFoundPage],

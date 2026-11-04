@@ -6,6 +6,8 @@
     "homeDescription": "Stefan Gall, Solution Expert and Software Engineer. Transforming complex requirements into excellent products with TypeScript, Node and SQL.",
     "imprintTitle": "Imprint · Stefan Gall",
     "imprintDescription": "Legal notice for gall-stefan.de.",
+    "privacyTitle": "Privacy · Stefan Gall",
+    "privacyDescription": "Privacy policy for gall-stefan.de: no cookies, no tracking.",
     "notFoundTitle": "Page not found · Stefan Gall"
   },
   "header": {
@@ -120,6 +122,7 @@
   },
   "footer": {
     "imprint": "Imprint",
+    "privacy": "Privacy",
     "backToTop": "↑ back to top"
   },
   "post": {

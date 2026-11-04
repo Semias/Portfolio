@@ -1,15 +1,15 @@
 // URLs je Sprache. Englisch liegt unter /, Deutsch unter /de.
 
 export type Lang = 'en' | 'de';
-export type StaticPage = 'home' | 'imprint' | 'notFound';
+export type StaticPage = 'home' | 'imprint' | 'privacy' | 'notFound';
 export type PageKey = StaticPage | 'post';
 
 export const LANGS: readonly Lang[] = ['en', 'de'];
 export const DEFAULT_LANG: Lang = 'en';
 
 const STATIC_PATHS: Record<Lang, Record<StaticPage, string>> = {
-  en: { home: '/', imprint: '/imprint', notFound: '/404' },
-  de: { home: '/de', imprint: '/de/impressum', notFound: '/de/404' },
+  en: { home: '/', imprint: '/imprint', privacy: '/privacy', notFound: '/404' },
+  de: { home: '/de', imprint: '/de/impressum', privacy: '/de/datenschutz', notFound: '/de/404' },
 };
 
 export function isLang(value: unknown): value is Lang {

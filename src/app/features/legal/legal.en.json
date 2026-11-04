@@ -12,7 +12,80 @@
       },
       {
         "heading": "Responsible for the content according to § 18 (2) MStV",
-        "lines": ["Stefan Gall, address as above"]
+        "lines": ["Stefan Gall"]
+      }
+    ]
+  },
+  "privacy": {
+    "heading": "Privacy Policy",
+    "sections": [
+      {
+        "heading": "Controller",
+        "lines": ["Stefan Gall", "Germany", { "text": "{email}", "href": "mailto:{email}" }]
+      },
+      {
+        "heading": "In short",
+        "paragraphs": [
+          "This website is a private portfolio. It sets no cookies, uses no analytics or tracking services and embeds no content from other providers. Fonts and images are delivered with the website, no third-party servers are contacted for them.",
+          "Personal data is only processed when your browser requests the pages and when you send me an email. You are not obliged to provide any data, but without the technically required connection data the website cannot be displayed. There is no automated decision-making or profiling."
+        ]
+      },
+      {
+        "heading": "Hosting and server log files",
+        "paragraphs": [
+          "The website is hosted by Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA. When you open a page, your browser automatically transmits data that is technically required to deliver it: your IP address, the date and time of the request, the requested address, the previously visited page (referrer) and information about your browser and operating system.",
+          "Cloudflare processes this data to deliver the pages and to protect the website against attacks and overload. The legal basis is Art. 6(1)(f) GDPR, my legitimate interest being the secure and reliable provision of the website. The data is deleted as soon as it is no longer needed for these purposes. I do not analyse it to identify visitors and do not combine it with other data.",
+          "A data processing agreement under Art. 28 GDPR is in place with Cloudflare. Data may be transferred to the USA. Cloudflare is certified under the EU-US Data Privacy Framework, the transfer is based on the European Commission's adequacy decision (Art. 45 GDPR).",
+          {
+            "text": "Cloudflare privacy policy",
+            "href": "https://www.cloudflare.com/privacypolicy/"
+          }
+        ]
+      },
+      {
+        "heading": "Storage in your browser",
+        "paragraphs": [
+          "If you choose the light or dark theme or an accent colour, the website stores this choice in your browser's local storage so it is kept for your next visit. These entries stay on your device and are not transmitted to me. Nothing is stored unless you make a choice.",
+          "The legal basis is Section 25(2) no. 2 of the German TDDDG, as storing the choice is strictly necessary for the feature you requested. You can delete the entries at any time in your browser settings."
+        ]
+      },
+      {
+        "heading": "Contact by email",
+        "paragraphs": [
+          "If you send me an email, I process your email address, your name if you provide it, and the content of your message in order to reply. The legal basis is Art. 6(1)(f) GDPR. If your request concerns a possible assignment or collaboration, it is Art. 6(1)(b) GDPR. I delete the messages once the request has been dealt with, unless statutory retention obligations apply.",
+          "For email I use Gmail by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. Data may be transferred to the USA. Google is certified under the EU-US Data Privacy Framework.",
+          { "text": "Google privacy policy", "href": "https://policies.google.com/privacy" }
+        ]
+      },
+      {
+        "heading": "Links to other websites",
+        "paragraphs": [
+          "The website links to my profiles on GitHub and LinkedIn. These are plain links: no data is transmitted to these providers until you click a link. From then on, the respective provider's privacy policy applies."
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "paragraphs": [
+          "You have the following rights regarding your personal data. An informal email to {email} is enough."
+        ],
+        "list": [
+          "Access to the stored data (Art. 15 GDPR)",
+          "Rectification of inaccurate data (Art. 16 GDPR)",
+          "Erasure (Art. 17 GDPR)",
+          "Restriction of processing (Art. 18 GDPR)",
+          "Data portability (Art. 20 GDPR)",
+          "Objection to processing based on Art. 6(1)(f) GDPR (Art. 21 GDPR)"
+        ]
+      },
+      {
+        "heading": "Right to lodge a complaint",
+        "paragraphs": [
+          "You also have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR), in particular in the EU member state where you live or work or where the alleged infringement took place."
+        ]
+      },
+      {
+        "heading": "Last updated",
+        "lines": ["November 2026"]
       }
     ]
   }

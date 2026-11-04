@@ -27,9 +27,20 @@ h2 {
   font-weight: 400;
 }
 
-p {
+p,
+ul {
   margin: 0;
   color: var(--ink2);
   font-size: 16px;
   line-height: 1.7;
+  overflow-wrap: break-word;
+}
+
+p + p,
+p + ul {
+  margin-top: 12px;
+}
+
+ul {
+  padding-left: 20px;
 }

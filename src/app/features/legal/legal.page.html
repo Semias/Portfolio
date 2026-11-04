@@ -3,18 +3,27 @@
   @for (section of doc().sections; track section.heading) {
     <section>
       <h2>{{ section.heading }}</h2>
-      <p>
-        @for (line of section.lines; track $index) {
-          @if (isLink(line)) {
-            <a [href]="line.href">{{ line.text }}</a>
-          } @else {
-            {{ line }}
+      @for (paragraph of section.paragraphs; track $index) {
+        <p>
+          @for (line of paragraph; track $index) {
+            @if (isLink(line)) {
+              <a [href]="line.href">{{ line.text }}</a>
+            } @else {
+              {{ line }}
+            }
+            @if (!$last) {
+              <br />
+            }
           }
-          @if (!$last) {
-            <br />
+        </p>
+      }
+      @if (section.list.length) {
+        <ul>
+          @for (item of section.list; track $index) {
+            <li>{{ item }}</li>
           }
-        }
-      </p>
+        </ul>
+      }
     </section>
   }
 </article>

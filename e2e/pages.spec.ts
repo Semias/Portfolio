@@ -67,6 +67,25 @@ test.describe('Impressum', () => {
   });
 });
 
+test.describe('Datenschutz', () => {
+  test('ist über den Footer erreichbar, schlicht und ohne 3D', async ({ page }) => {
+    await page.goto('/de');
+    await page.getByRole('contentinfo').getByRole('link', { name: 'Datenschutz' }).click();
+    await expect(page).toHaveURL('/de/datenschutz');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Datenschutzerklärung');
+    await expect(page).toHaveTitle('Datenschutz · Stefan Gall');
+    await expect(page.locator('app-network-background, app-glass-card')).toHaveCount(0);
+  });
+
+  test('wechselt die Sprache auf die passende Seite', async ({ page }) => {
+    await page.goto('/privacy');
+    await page.getByRole('link', { name: 'DE, Deutsche Version' }).click();
+    await expect(page).toHaveURL('/de/datenschutz');
+    await page.getByRole('link', { name: 'EN, English version' }).click();
+    await expect(page).toHaveURL('/privacy');
+  });
+});
+
 test.describe('404', () => {
   for (const [path, heading] of [
     ['/gibt-es-nicht', 'Page not found.'],
@@ -104,6 +123,8 @@ test.describe('SEO', () => {
     const sitemap = await (await request.get('/sitemap.xml')).text();
     expect(sitemap).toContain('<loc>https://gall-stefan.de/</loc>');
     expect(sitemap).toContain('<loc>https://gall-stefan.de/de/impressum</loc>');
+    expect(sitemap).toContain('<loc>https://gall-stefan.de/privacy</loc>');
+    expect(sitemap).toContain('<loc>https://gall-stefan.de/de/datenschutz</loc>');
     expect(sitemap).not.toContain('404');
     const robots = await (await request.get('/robots.txt')).text();
     expect(robots).toContain('Sitemap: https://gall-stefan.de/sitemap.xml');
