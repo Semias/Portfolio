@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/Semias/Portfolio/compare/v2.0.0...v2.1.0) (2026-11-04)
+
+
+### Neue Funktionen
+
+* add some text changes ([#34](https://github.com/Semias/Portfolio/issues/34)) ([b620624](https://github.com/Semias/Portfolio/commit/b6206247cb9bb9d2e52ec1a725a3242773680518))
+
 ## [2.0.0](https://github.com/Semias/Portfolio/compare/v1.1.0...v2.0.0) (2026-11-04)
 
 
