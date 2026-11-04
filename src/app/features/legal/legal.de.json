@@ -12,7 +12,83 @@
       },
       {
         "heading": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
-        "lines": ["Stefan Gall, Anschrift wie oben"]
+        "lines": ["Stefan Gall"]
+      }
+    ]
+  },
+  "privacy": {
+    "heading": "Datenschutzerklärung",
+    "sections": [
+      {
+        "heading": "Verantwortlicher",
+        "lines": ["Stefan Gall", "Deutschland", { "text": "{email}", "href": "mailto:{email}" }]
+      },
+      {
+        "heading": "Das Wichtigste in Kürze",
+        "paragraphs": [
+          "Diese Website ist ein privates Portfolio. Sie setzt keine Cookies, nutzt keine Analyse- oder Tracking-Dienste und bindet keine Inhalte anderer Anbieter ein. Schriften und Bilder werden mit der Website ausgeliefert, dafür werden keine fremden Server angefragt.",
+          "Personenbezogene Daten fallen nur an, wenn Ihr Browser die Seiten abruft und wenn Sie mir eine E-Mail schreiben. Sie sind nicht verpflichtet, mir Daten zu geben, ohne die technisch nötigen Verbindungsdaten kann die Website aber nicht angezeigt werden. Eine automatisierte Entscheidungsfindung oder ein Profiling findet nicht statt."
+        ]
+      },
+      {
+        "heading": "Hosting und Server-Logfiles",
+        "paragraphs": [
+          "Die Website wird bei Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA gehostet. Beim Aufruf einer Seite überträgt Ihr Browser automatisch Daten, die technisch nötig sind, damit die Seite ausgeliefert werden kann: Ihre IP-Adresse, Datum und Uhrzeit des Abrufs, die aufgerufene Adresse, die zuvor besuchte Seite (Referrer) sowie Angaben zu Browser und Betriebssystem.",
+          "Cloudflare verarbeitet diese Daten, um die Seiten auszuliefern und die Website vor Angriffen und Überlastung zu schützen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, mein berechtigtes Interesse liegt in einer sicheren und zuverlässigen Bereitstellung der Website. Die Daten werden gelöscht, sobald sie dafür nicht mehr benötigt werden. Ich werte sie nicht aus, um Besucher zu erkennen, und führe sie nicht mit anderen Daten zusammen.",
+          "Mit Cloudflare besteht ein Vertrag über Auftragsverarbeitung nach Art. 28 DSGVO. Dabei können Daten in die USA übermittelt werden. Cloudflare ist nach dem EU-US Data Privacy Framework zertifiziert, die Übermittlung stützt sich auf den Angemessenheitsbeschluss der EU-Kommission (Art. 45 DSGVO).",
+          {
+            "text": "Datenschutzerklärung von Cloudflare",
+            "href": "https://www.cloudflare.com/privacypolicy/"
+          }
+        ]
+      },
+      {
+        "heading": "Speicherung im Browser",
+        "paragraphs": [
+          "Wenn Sie das helle oder dunkle Design oder eine Akzentfarbe wählen, speichert die Website diese Wahl im lokalen Speicher Ihres Browsers (Local Storage), damit sie beim nächsten Besuch erhalten bleibt. Die Einträge bleiben auf Ihrem Gerät und werden nicht an mich übertragen. Ohne eigene Wahl wird nichts gespeichert.",
+          "Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG, weil die Speicherung für die von Ihnen gewünschte Funktion unbedingt erforderlich ist. Sie können die Einträge jederzeit über die Einstellungen Ihres Browsers löschen."
+        ]
+      },
+      {
+        "heading": "Kontakt per E-Mail",
+        "paragraphs": [
+          "Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre E-Mail-Adresse, Ihren Namen, falls Sie ihn angeben, und den Inhalt Ihrer Nachricht, um Ihre Anfrage zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Geht es um einen möglichen Auftrag oder eine Zusammenarbeit, ist es Art. 6 Abs. 1 lit. b DSGVO. Ich lösche die Nachrichten, sobald die Anfrage erledigt ist, es sei denn, gesetzliche Aufbewahrungspflichten stehen dem entgegen.",
+          "Für E-Mails nutze ich Gmail von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Dabei können Daten in die USA übermittelt werden. Google ist nach dem EU-US Data Privacy Framework zertifiziert.",
+          {
+            "text": "Datenschutzerklärung von Google",
+            "href": "https://policies.google.com/privacy"
+          }
+        ]
+      },
+      {
+        "heading": "Links zu anderen Websites",
+        "paragraphs": [
+          "Die Website verlinkt auf meine Profile bei GitHub und LinkedIn. Das sind einfache Links: An diese Anbieter werden erst Daten übertragen, wenn Sie einen Link anklicken. Dort gilt dann die Datenschutzerklärung des jeweiligen Anbieters."
+        ]
+      },
+      {
+        "heading": "Ihre Rechte",
+        "paragraphs": [
+          "Sie haben mir gegenüber die folgenden Rechte an Ihren personenbezogenen Daten. Dafür genügt eine formlose E-Mail an {email}."
+        ],
+        "list": [
+          "Auskunft über die gespeicherten Daten (Art. 15 DSGVO)",
+          "Berichtigung unrichtiger Daten (Art. 16 DSGVO)",
+          "Löschung (Art. 17 DSGVO)",
+          "Einschränkung der Verarbeitung (Art. 18 DSGVO)",
+          "Datenübertragbarkeit (Art. 20 DSGVO)",
+          "Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (Art. 21 DSGVO)"
+        ]
+      },
+      {
+        "heading": "Beschwerderecht",
+        "paragraphs": [
+          "Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO), insbesondere in dem EU-Mitgliedstaat, in dem Sie leben oder arbeiten oder in dem der mutmaßliche Verstoß stattfand."
+        ]
+      },
+      {
+        "heading": "Stand",
+        "lines": ["November 2026"]
       }
     ]
   }

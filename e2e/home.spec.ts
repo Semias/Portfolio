@@ -263,7 +263,7 @@ test.describe('Mobil @mobile', () => {
   });
 
   test('passt ohne seitliches Scrollen auf den Bildschirm', async ({ page }) => {
-    for (const path of ['/', '/de/impressum']) {
+    for (const path of ['/', '/de/impressum', '/de/datenschutz']) {
       await page.goto(path);
       await settle(page);
       const overflow = await page.evaluate(

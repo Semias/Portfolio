@@ -27,6 +27,8 @@ export interface Messages {
     homeDescription: string;
     imprintTitle: string;
     imprintDescription: string;
+    privacyTitle: string;
+    privacyDescription: string;
     notFoundTitle: string;
   };
   header: {
@@ -92,6 +94,7 @@ export interface Messages {
   };
   footer: {
     imprint: string;
+    privacy: string;
     backToTop: string;
   };
   post: {

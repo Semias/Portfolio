@@ -9,6 +9,8 @@ describe('paths', () => {
     expect(pagePath('home', 'de')).toBe('/de');
     expect(pagePath('imprint', 'en')).toBe('/imprint');
     expect(pagePath('imprint', 'de')).toBe('/de/impressum');
+    expect(pagePath('privacy', 'en')).toBe('/privacy');
+    expect(pagePath('privacy', 'de')).toBe('/de/datenschutz');
     expect(postPath('some-post', 'en')).toBe('/blog/some-post');
     expect(postPath('some-post', 'de')).toBe('/de/blog/some-post');
   });

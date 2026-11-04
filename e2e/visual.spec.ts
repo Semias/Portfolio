@@ -8,6 +8,7 @@ const THEMES: Theme[] = ['dark', 'light'];
 const DESKTOP_PAGES = [
   ['startseite', '/'],
   ['impressum', '/de/impressum'],
+  ['datenschutz', '/de/datenschutz'],
   ['404', '/gibt-es-nicht'],
 ];
 

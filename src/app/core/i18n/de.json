@@ -6,6 +6,8 @@
     "homeDescription": "Stefan Gall, Solution Expert und Software Engineer. Ich verwandle komplexe Anforderungen in exzellente Produkte, mit TypeScript, Node und SQL.",
     "imprintTitle": "Impressum · Stefan Gall",
     "imprintDescription": "Impressum von gall-stefan.de.",
+    "privacyTitle": "Datenschutz · Stefan Gall",
+    "privacyDescription": "Datenschutzerklärung von gall-stefan.de: keine Cookies, kein Tracking.",
     "notFoundTitle": "Seite nicht gefunden · Stefan Gall"
   },
   "header": {
@@ -120,6 +122,7 @@
   },
   "footer": {
     "imprint": "Impressum",
+    "privacy": "Datenschutz",
     "backToTop": "↑ nach oben"
   },
   "post": {
