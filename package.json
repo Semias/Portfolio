@@ -59,7 +59,7 @@
     "stylelint": "^18.0.0",
     "stylelint-config-standard-scss": "^18.0.0",
     "typescript": "~6.0.2",
-    "typescript-eslint": "8.72.2",
+    "typescript-eslint": "8.73.0",
     "vitest": "^5.1.1",
     "wrangler": "4.162.0",
     "yaml": "^2.9.1"
